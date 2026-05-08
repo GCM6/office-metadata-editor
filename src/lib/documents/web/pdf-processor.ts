@@ -73,7 +73,7 @@ export async function replacePdf(
   doc.setTitle(metadata.documentProperties.title)
   doc.setSubject(metadata.documentProperties.description)
   doc.setAuthor(metadata.documentProperties.creator)
-  doc.setKeywords(metadata.documentProperties.keywords)
+  doc.setKeywords(metadata.documentProperties.keywords.split(", ").filter(Boolean))
 
   const pdfBytes = await doc.save()
 
@@ -98,7 +98,7 @@ export async function clearPdf(filePath: string, fileName: string): Promise<stri
   doc.setTitle("")
   doc.setSubject("")
   doc.setAuthor("")
-  doc.setKeywords("")
+  doc.setKeywords([])
 
   const pdfBytes = await doc.save()
   const blob = new Blob([pdfBytes])
