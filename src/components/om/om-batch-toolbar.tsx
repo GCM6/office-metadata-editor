@@ -1,0 +1,71 @@
+import React from "react"
+import { Button } from "@/components/ui/button"
+import { FolderOpen, Save, Trash2, X } from "lucide-react"
+
+export interface OmBatchToolbarProps {
+  hasFiles: boolean
+  isBusy?: boolean
+  busyText?: string
+  onAddFiles: () => Promise<void> | void
+  onBatchSave: () => Promise<void> | void
+  onBatchClearAndSave: () => Promise<void> | void
+  onClearAll: () => void
+}
+
+export const OmBatchToolbar: React.FC<OmBatchToolbarProps> = ({
+  hasFiles,
+  isBusy = false,
+  busyText,
+  onAddFiles,
+  onBatchSave,
+  onBatchClearAndSave,
+  onClearAll,
+}) => {
+  return (
+    <div className="flex items-center gap-2">
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => void onAddFiles()}
+        disabled={isBusy}
+        className="gap-2"
+      >
+        <FolderOpen className="h-4 w-4" />
+        <span>{isBusy ? "处理中..." : "添加文件"}</span>
+      </Button>
+      <Button
+        variant="default"
+        size="sm"
+        onClick={() => void onBatchSave()}
+        disabled={!hasFiles || isBusy}
+        className="gap-2"
+      >
+        <Save className="h-4 w-4" />
+        <span>一键保存</span>
+      </Button>
+      <Button
+        variant="secondary"
+        size="sm"
+        onClick={() => void onBatchClearAndSave()}
+        disabled={!hasFiles || isBusy}
+        className="gap-2"
+      >
+        <Trash2 className="h-4 w-4" />
+        <span>一键清空并保存</span>
+      </Button>
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={onClearAll}
+        disabled={!hasFiles || isBusy}
+        className="gap-2"
+      >
+        <X className="h-4 w-4" />
+        <span>清空列表</span>
+      </Button>
+      {busyText && <span className="text-xs text-muted-foreground">{busyText}</span>}
+    </div>
+  )
+}
+
+export default OmBatchToolbar
