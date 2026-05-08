@@ -1,12 +1,16 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from "react"
 import { open } from "@tauri-apps/plugin-dialog"
+import { isTauri } from "@tauri-apps/api/core"
 import { OPEN_FILE_DIALOG_FILTER } from "@/lib/documents/supported-formats"
+import { openWebFilePicker } from "@/lib/web-file-picker"
+import { clearFileStore, setFileData } from "@/lib/resources/file-store"
 
 export type FileStatus = "idle" | "reading" | "ready" | "processing" | "error"
 
 export interface FileEntry {
   id: string
   filePath: string
+  fileName: string
   status: FileStatus
   progressMessage: string
   error?: string
@@ -33,6 +37,42 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   const openFiles = useCallback(async (): Promise<number> => {
     setIsLoading(true)
     try {
+      if (!isTauri()) {
+        const entries = await openWebFilePicker()
+        if (entries.length === 0) return 0
+
+        const existingNameSet = new Set(files.map(item => item.fileName))
+        const addedFiles: FileEntry[] = []
+
+        for (const entry of entries) {
+          if (existingNameSet.has(entry.fileName)) continue
+          existingNameSet.add(entry.fileName)
+
+          const id = crypto.randomUUID()
+          const filePath = entry.fileName
+          setFileData(filePath, entry.data)
+
+          addedFiles.push({
+            id,
+            filePath,
+            fileName: entry.fileName,
+            status: "idle",
+            progressMessage: "待处理",
+          })
+        }
+
+        if (addedFiles.length === 0) {
+          if (!activeFileId && files[0]) {
+            setActiveFileId(files[0].id)
+          }
+          return 0
+        }
+
+        setFiles(prev => [...prev, ...addedFiles])
+        setActiveFileId(prev => prev ?? addedFiles[0]?.id ?? null)
+        return addedFiles.length
+      }
+
       const selected = await open({
         multiple: true,
         filters: [OPEN_FILE_DIALOG_FILTER],
@@ -54,6 +94,7 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
       const addedFiles: FileEntry[] = pathsToLoad.map(filePath => ({
         id: crypto.randomUUID(),
         filePath,
+        fileName: filePath.split(/[\\/]/).filter(Boolean).pop() ?? filePath,
         status: "idle",
         progressMessage: "待处理",
       }))
@@ -92,6 +133,9 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   }, [])
 
   const clearFiles = useCallback(() => {
+    if (!isTauri()) {
+      clearFileStore()
+    }
     setFiles([])
     setActiveFileId(null)
   }, [])

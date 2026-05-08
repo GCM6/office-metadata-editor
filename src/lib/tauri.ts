@@ -4,6 +4,10 @@ import { invoke, isTauri, type InvokeArgs } from "@tauri-apps/api/core"
 import { emitDebugEvent, serializeDebugValue, serializeError } from "./debug-events"
 
 export async function trackedInvoke<T>(command: string, args?: InvokeArgs) {
+  if (!isTauri()) {
+    throw new Error(`Web mode: invoke unavailable for command "${command}"`)
+  }
+
   const startedAt = performance.now()
 
   try {
@@ -38,6 +42,11 @@ export async function trackedInvoke<T>(command: string, args?: InvokeArgs) {
 }
 
 export async function trackedEmit<T>(event: string, payload?: T) {
+  if (!isTauri()) {
+    console.debug(`[trackedEmit] Web mode: skipped event "${event}"`, payload)
+    return
+  }
+
   await emit(event, payload)
 
   emitDebugEvent({
