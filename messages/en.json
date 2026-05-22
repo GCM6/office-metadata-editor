@@ -7,7 +7,9 @@
     "light": "Light",
     "dark": "Dark",
     "systemFollow": "System",
-    "dragArea": "Window drag area"
+    "dragArea": "Window drag area",
+    "langZh": "中",
+    "langEn": "EN"
   },
   "home": {
     "enterWorkState": "Ready in a second",
@@ -73,7 +75,8 @@
     "encodingError": "Text encoding error, please re-enter this field",
     "invalidInput": "Invalid input",
     "invalidBcp47": "Please enter a valid BCP 47 language code, e.g., zh-CN or en-US",
-    "placeholderLang": "Enter or filter language code, e.g., zh-CN / en-US"
+    "placeholderLang": "Enter or filter language code, e.g., zh-CN / en-US",
+    "placeholderInput": "Enter "
   },
   "error": {
     "somethingWentWrong": "Something went wrong",

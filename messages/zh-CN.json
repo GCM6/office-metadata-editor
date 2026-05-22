@@ -7,7 +7,9 @@
     "light": "白天",
     "dark": "暗黑",
     "systemFollow": "跟随系统",
-    "dragArea": "窗口拖拽区"
+    "dragArea": "窗口拖拽区",
+    "langZh": "中",
+    "langEn": "EN"
   },
   "home": {
     "enterWorkState": "一秒进入工作状态",
@@ -73,7 +75,8 @@
     "encodingError": "文本编码异常，请重新输入该字段",
     "invalidInput": "输入无效",
     "invalidBcp47": "请输入有效的 BCP 47 语言代码，如 zh-CN 或 en-US",
-    "placeholderLang": "输入或筛选语言代码，例如 zh-CN / en-US"
+    "placeholderLang": "输入或筛选语言代码，例如 zh-CN / en-US",
+    "placeholderInput": "输入"
   },
   "error": {
     "somethingWentWrong": "出了点问题",
