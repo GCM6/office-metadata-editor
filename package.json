@@ -15,7 +15,9 @@
     "start": "next start",
     "lint": "eslint \"src/**/*.{ts,tsx}\" \"app/**/*.{ts,tsx}\"",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "seo:check": "npx tsx src/seo/validate-seo.ts",
+    "prebuild": "pnpm seo:check"
   },
   "packageManager": "pnpm@10.33.4",
   "pnpm": {
@@ -74,6 +76,7 @@
     "globals": "^17.6.0",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
+    "tsx": "^4.22.3",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.59.2"
   }
