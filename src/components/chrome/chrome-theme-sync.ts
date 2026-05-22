@@ -1,13 +1,15 @@
 
+"use client"
+
 import { useEffect } from "react"
-import { useLocation } from "react-router-dom"
+import { usePathname } from "next/navigation"
 import { getCurrentWindow } from "@tauri-apps/api/window"
 
 import { useTheme } from "@/components/theme-provider"
 import { isTauri } from "@/lib/tauri"
 
 export function ChromeThemeSync() {
-  const location = useLocation()
+  const pathname = usePathname()
   const { resolvedTheme } = useTheme()
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export function ChromeThemeSync() {
     })
 
     return () => void window.cancelAnimationFrame(rafId)
-  }, [location.pathname, resolvedTheme])
+    }, [pathname, resolvedTheme])
 
   return null
 }

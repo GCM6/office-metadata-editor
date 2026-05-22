@@ -77,7 +77,7 @@ export async function replacePdf(
 
   const pdfBytes = await doc.save()
 
-  const blob = new Blob([pdfBytes])
+  const blob = new Blob([new Uint8Array(pdfBytes)])
   const url = URL.createObjectURL(blob)
   const a = document.createElement("a")
   a.href = url
@@ -101,7 +101,7 @@ export async function clearPdf(filePath: string, fileName: string): Promise<stri
   doc.setKeywords([])
 
   const pdfBytes = await doc.save()
-  const blob = new Blob([pdfBytes])
+  const blob = new Blob([new Uint8Array(pdfBytes)])
   const url = URL.createObjectURL(blob)
   const a = document.createElement("a")
   a.href = url

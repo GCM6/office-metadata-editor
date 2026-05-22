@@ -1,0 +1,23 @@
+"use client"
+
+import React from "react"
+import { ThemeProvider } from "@/components/theme-provider"
+import { TooltipProvider } from "@/components/ui/tooltip"
+import { FileProvider } from "@/contexts/file-context"
+import { MetadataProvider } from "@/contexts/metadata-context"
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <ThemeProvider>
+      <TooltipProvider>
+        <FileProvider>
+          <MetadataProvider>
+            <main className="chrome-window-shell" data-ui-scroll-container>
+              {children}
+            </main>
+          </MetadataProvider>
+        </FileProvider>
+      </TooltipProvider>
+    </ThemeProvider>
+  )
+}

@@ -1,5 +1,7 @@
+"use client"
+
 import React from "react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { ArrowLeft, PanelLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
@@ -20,7 +22,7 @@ export const PageLayout: React.FC<React.PropsWithChildren<PageLayoutProps>> = ({
   actions,
   showSidebarTrigger = false,
 }) => {
-  const navigate = useNavigate()
+  const router = useRouter()
 
   return (
     <BlankLayout
@@ -36,7 +38,7 @@ export const PageLayout: React.FC<React.PropsWithChildren<PageLayoutProps>> = ({
               <Button
                 variant="ghost"
                 size="icon-sm"
-                onClick={() => navigate(backTo)}
+                onClick={() => router.push(backTo)}
                 className="rounded-lg"
               >
                 <ArrowLeft className="h-4 w-4" />
