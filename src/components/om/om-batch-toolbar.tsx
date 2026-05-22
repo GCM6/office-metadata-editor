@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react"
+import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import { FolderOpen, Save, Trash2, X } from "lucide-react"
 
@@ -21,6 +24,8 @@ export const OmBatchToolbar: React.FC<OmBatchToolbarProps> = ({
   onBatchClearAndSave,
   onClearAll,
 }) => {
+  const t = useTranslations("batch")
+
   return (
     <div className="flex items-center gap-2">
       <Button
@@ -31,7 +36,7 @@ export const OmBatchToolbar: React.FC<OmBatchToolbarProps> = ({
         className="gap-2"
       >
         <FolderOpen className="h-4 w-4" />
-        <span>{isBusy ? "处理中..." : "添加文件"}</span>
+        <span>{isBusy ? t("processing") : t("addFile")}</span>
       </Button>
       <Button
         variant="default"
@@ -41,7 +46,7 @@ export const OmBatchToolbar: React.FC<OmBatchToolbarProps> = ({
         className="gap-2"
       >
         <Save className="h-4 w-4" />
-        <span>一键保存</span>
+        <span>{t("saveAll")}</span>
       </Button>
       <Button
         variant="secondary"
@@ -51,7 +56,7 @@ export const OmBatchToolbar: React.FC<OmBatchToolbarProps> = ({
         className="gap-2"
       >
         <Trash2 className="h-4 w-4" />
-        <span>一键清空并保存</span>
+        <span>{t("clearAndSaveAll")}</span>
       </Button>
       <Button
         variant="ghost"
@@ -61,7 +66,7 @@ export const OmBatchToolbar: React.FC<OmBatchToolbarProps> = ({
         className="gap-2"
       >
         <X className="h-4 w-4" />
-        <span>清空列表</span>
+        <span>{t("clearList")}</span>
       </Button>
       {busyText && <span className="text-xs text-muted-foreground">{busyText}</span>}
     </div>

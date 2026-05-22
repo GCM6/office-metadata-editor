@@ -11,10 +11,11 @@ export const OmMetadataFieldList: React.FC<React.PropsWithChildren> = ({ childre
 
 export interface OmMetadataFieldItemProps {
   field: MetadataField
+  locale?: string
   onChange(key: string, value: string): void
 }
 
-export const OmMetadataFieldItem: React.FC<OmMetadataFieldItemProps> = ({ field, onChange }) => {
+export const OmMetadataFieldItem: React.FC<OmMetadataFieldItemProps> = ({ field, locale = "zh-CN", onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (field.editable) {
       onChange(field.key, e.target.value)
@@ -25,7 +26,7 @@ export const OmMetadataFieldItem: React.FC<OmMetadataFieldItemProps> = ({ field,
     if (!value) return "-"
     const date = new Date(value)
     if (Number.isNaN(date.getTime())) return value
-    return date.toLocaleString("zh-CN", {
+    return date.toLocaleString(locale, {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",

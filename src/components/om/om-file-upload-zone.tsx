@@ -1,5 +1,8 @@
+"use client"
+
 import React from "react"
 import { useState, useCallback } from "react"
+import { useTranslations } from "next-intl"
 import { Upload, FileText } from "lucide-react"
 import { Spinner } from "@/components/ui/spinner"
 import { SUPPORTED_FILE_EXTENSIONS } from "@/lib/documents/supported-formats"
@@ -11,6 +14,7 @@ export interface OmFileUploadZoneProps {
 
 export const OmFileUploadZone: React.FC<OmFileUploadZoneProps> = ({ onOpenFiles, isLoading }) => {
   const [isDragOver, setIsDragOver] = useState(false)
+  const t = useTranslations("upload")
   const formatText = SUPPORTED_FILE_EXTENSIONS.map(ext => `.${ext}`).join(" / ")
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -57,7 +61,7 @@ export const OmFileUploadZone: React.FC<OmFileUploadZoneProps> = ({ onOpenFiles,
       {isLoading ? (
         <div className="flex flex-col items-center gap-3">
           <Spinner className="h-10 w-10 text-primary" />
-          <span className="text-sm text-muted-foreground">正在解析文件...</span>
+          <span className="text-sm text-muted-foreground">{t("parsingFile")}</span>
         </div>
       ) : (
         <>
@@ -74,9 +78,9 @@ export const OmFileUploadZone: React.FC<OmFileUploadZoneProps> = ({ onOpenFiles,
           </div>
           <div className="flex flex-col items-center gap-1">
             <span className="text-sm font-medium text-foreground">
-              {isDragOver ? "释放以选择文件" : "点击或拖拽文件到此处"}
+              {isDragOver ? t("dropToSelect") : t("clickOrDrag")}
             </span>
-            <span className="text-xs text-muted-foreground">支持 {formatText}，支持多文件</span>
+            <span className="text-xs text-muted-foreground">{t("supportedFormats", { formats: formatText })}</span>
           </div>
         </>
       )}

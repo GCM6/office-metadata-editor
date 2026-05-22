@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react"
+import { useTranslations } from "next-intl"
 import { useMetadata } from "@/contexts/metadata-context"
 import { OmFileTypeIcon } from "@/components/om/om-file-type-icon"
 import { SidebarProvider } from "@/components/ui/sidebar"
@@ -14,6 +17,7 @@ export const EditorLayout: React.FC<React.PropsWithChildren<EditorLayoutProps>> 
   actions,
 }) => {
   const { metadata, hasChanges } = useMetadata()
+  const t = useTranslations("editor")
   const resolvedMetadata = metadata!
 
   const {fileType} = resolvedMetadata
@@ -33,7 +37,7 @@ export const EditorLayout: React.FC<React.PropsWithChildren<EditorLayoutProps>> 
             </div>
             {hasChanges && (
               <span className="rounded-md border border-primary/20 bg-primary/10 px-1.5 py-0.5 text-[11px] font-medium text-primary">
-                未保持
+                {t("unsavedBadge")}
               </span>
             )}
           </div>

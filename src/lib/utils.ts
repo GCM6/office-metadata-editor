@@ -5,10 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(dateString: string): string {
+export function formatDate(dateString: string, locale = "zh-CN"): string {
   if (!dateString) return "-"
   try {
-    return new Date(dateString).toLocaleDateString("zh-CN", {
+    return new Date(dateString).toLocaleDateString(locale, {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -18,11 +18,11 @@ export function formatDate(dateString: string): string {
   }
 }
 
-export function formatRelativeTime(dateString: string): string {
-  if (!dateString) return "时间未知"
+export function formatRelativeTime(dateString: string, locale = "zh-CN"): string {
+  if (!dateString) return "-"
 
   const date = new Date(dateString)
-  if (Number.isNaN(date.getTime())) return "时间未知"
+  if (Number.isNaN(date.getTime())) return "-"
 
   const now = Date.now()
   const diffMs = date.getTime() - now
@@ -35,9 +35,9 @@ export function formatRelativeTime(dateString: string): string {
   const month = 30 * day
   const year = 365 * day
 
-  const rtf = new Intl.RelativeTimeFormat("zh-CN", { numeric: "auto" })
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" })
 
-  if (absMs < minute) return "刚刚"
+  if (absMs < minute) return rtf.format(0, "minute")
   if (absMs < hour) return rtf.format(Math.round(diffMs / minute), "minute")
   if (absMs < day) return rtf.format(Math.round(diffMs / hour), "hour")
   if (absMs < week) return rtf.format(Math.round(diffMs / day), "day")
@@ -46,8 +46,8 @@ export function formatRelativeTime(dateString: string): string {
   return rtf.format(Math.round(diffMs / year), "year")
 }
 
-export function formatNumber(num: number): string {
-  return num.toLocaleString("zh-CN")
+export function formatNumber(num: number, locale = "zh-CN"): string {
+  return num.toLocaleString(locale)
 }
 
 export function formatFileSize(bytes: number): string {

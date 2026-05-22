@@ -1,0 +1,98 @@
+{
+  "common": {
+    "appName": "office-metadata-editor",
+    "appTitle": "Office 元数据编辑器",
+    "appLogo": "应用 Logo",
+    "theme": "主题",
+    "light": "白天",
+    "dark": "暗黑",
+    "systemFollow": "跟随系统",
+    "dragArea": "窗口拖拽区"
+  },
+  "home": {
+    "enterWorkState": "一秒进入工作状态",
+    "description": "读取、编辑、清理、批处理全部本地完成，支持多格式文档的元数据处理。",
+    "featureLocal": "全程本地",
+    "featureDragDrop": "拖拽即用",
+    "featureBatch": "批量提速",
+    "openBatchWorkspace": "打开批量处理工作台",
+    "startEditing": "直接开始编辑",
+    "moreComing": "更多高级能力正在路上，敬请期待。",
+    "dragUploadStart": "拖拽上传并开始",
+    "singleOrBatchDesc": "单文件编辑或多文件批处理都可从这里进入",
+    "supportedFileTypes": "支持的文件类型"
+  },
+  "batch": {
+    "title": "批量处理",
+    "fileName": "文件名",
+    "author": "作者",
+    "modified": "修改时间",
+    "status": "状态",
+    "actions": "操作",
+    "noFiles": "暂无待处理文件，请先点击「添加文件」。",
+    "pending": "待处理",
+    "synced": "已同步",
+    "remove": "移除",
+    "clearAndSave": "清空并保存",
+    "save": "保存",
+    "savingFile": "正在保存文件...",
+    "clearingAndSaving": "正在清理并保存...",
+    "batchSaving": "批量保存中...",
+    "batchClearingAndSaving": "批量清理并保存中...",
+    "processing": "后台处理中...",
+    "path": "路径",
+    "type": "类型",
+    "size": "大小",
+    "addFile": "添加文件",
+    "saveAll": "一键保存",
+    "clearAndSaveAll": "一键清空并保存",
+    "clearList": "清空列表"
+  },
+  "upload": {
+    "parsingFile": "正在解析文件...",
+    "dropToSelect": "释放以选择文件",
+    "clickOrDrag": "点击或拖拽文件到此处",
+    "supportedFormats": "支持 {formats}，支持多文件"
+  },
+  "editor": {
+    "save": "保存",
+    "saveAs": "另存为",
+    "clearMetadata": "清理元数据",
+    "resetToOriginal": "重置为原始",
+    "unsavedBadge": "未保持",
+    "addFile": "添加文件",
+    "fileList": "文件列表",
+    "unsavedChanges": "有未保存修改",
+    "removeFile": "移除 {fileName}",
+    "notSupported": "当前文件暂不支持编辑",
+    "fileType": "文件类型"
+  },
+  "validation": {
+    "maxLength": "字段长度不能超过 4000 个字符",
+    "invisibleChars": "包含不可见控制字符",
+    "encodingError": "文本编码异常，请重新输入该字段",
+    "invalidInput": "输入无效",
+    "invalidBcp47": "请输入有效的 BCP 47 语言代码，如 zh-CN 或 en-US",
+    "placeholderLang": "输入或筛选语言代码，例如 zh-CN / en-US"
+  },
+  "error": {
+    "somethingWentWrong": "出了点问题",
+    "retry": "重试"
+  },
+  "progress": {
+    "pending": "待处理",
+    "reading": "读取中...",
+    "ready": "已就绪",
+    "readFailed": "读取失败",
+    "saving": "保存中...",
+    "synced": "已同步",
+    "clearingAndSaving": "清理并保存中...",
+    "batchClearingAndSaving": "批量清理并保存中...",
+    "batchSaving": "批量保存中...",
+    "processFailed": "处理失败"
+  },
+  "utils": {
+    "unknownTime": "时间未知",
+    "justNow": "刚刚"
+  }
+}

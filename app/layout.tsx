@@ -1,14 +1,19 @@
 import type { Metadata } from "next"
-import { APP_NAME, APP_WINDOW_TITLE } from "@/lib/app-config"
+import { getLocale, getMessages, getTranslations } from "next-intl/server"
+import { NextIntlClientProvider } from "next-intl"
+import { APP_NAME } from "@/lib/app-config"
 import "@/style/base.css"
 import "@/style/chrome.css"
 import { ClientLayout } from "./client-layout"
 
 export const dynamic = "force-dynamic"
 
-export const metadata: Metadata = {
-  title: APP_WINDOW_TITLE,
-  description: APP_NAME,
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("common")
+  return {
+    title: t("appTitle"),
+    description: APP_NAME,
+  }
 }
 
 declare module "react" {
@@ -17,14 +22,19 @@ declare module "react" {
   }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = await getLocale()
+  const messages = await getMessages()
+
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/svg+xml" href="/logo.svg" />
       </head>
       <body className="font-sans antialiased">
-        <ClientLayout>{children}</ClientLayout>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ClientLayout>{children}</ClientLayout>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

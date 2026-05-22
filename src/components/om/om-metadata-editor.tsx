@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react"
 import { z } from "zod"
+import { useLocale, useTranslations } from "next-intl"
 import { useMetadata } from "@/contexts/metadata-context"
 import { OmMetadataSection } from "@/components/om/om-metadata-section"
 import { OmMetadataFieldList } from "@/components/om/om-metadata-field"
@@ -33,42 +34,21 @@ const COMMON_LOCALE_CODES = [
   "nl-NL",
 ] as const
 
-const languageDisplay = new Intl.DisplayNames(["zh-CN"], { type: "language" })
-
-function getLanguageOptionLabel(localeCode: string): string {
-  const normalized = localeCode.trim()
-  if (!normalized) {
-    return ""
-  }
-
-  const languageCode = normalized.split("-")[0] ?? normalized
-  const languageName = languageDisplay.of(languageCode) ?? "未知语言"
-  return `${normalized} · ${languageName}`
-}
-
-function isLanguageField(field: { key: string; editable: boolean; type: string }) {
-  if (!field.editable || field.type !== "text") {
-    return false
-  }
-
-  return field.key === "language" || field.key === "dcLanguage"
-}
-
 const textFieldSchema = z
   .string()
-  .max(4000, "字段长度不能超过 4000 个字符")
+  .max(4000, "MAX_LENGTH")
   .refine(value => !/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/.test(value), {
-    message: "包含不可见控制字符",
+    message: "INVISIBLE_CHARS",
   })
   .refine(value => !value.includes("\uFFFD"), {
-    message: "文本编码异常，请重新输入该字段",
+    message: "ENCODING_ERROR",
   })
 
-function formatDateValue(value: string): string {
+function formatDateValue(value: string, locale: string): string {
   if (!value) return "-"
   const date = new Date(value)
   if (Number.isNaN(date.getTime())) return value
-  return date.toLocaleString("zh-CN", {
+  return date.toLocaleString(locale, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -81,18 +61,37 @@ function toFieldPath(category: string, key: string): string {
   return `${category}.${key}`
 }
 
+const ERROR_KEY_MAP: Record<string, string> = {
+  MAX_LENGTH: "validation.maxLength",
+  INVISIBLE_CHARS: "validation.invisibleChars",
+  ENCODING_ERROR: "validation.encodingError",
+  INVALID_BCP47: "validation.invalidBcp47",
+  INVALID_INPUT: "validation.invalidInput",
+}
+
 export interface OmMetadataEditorProps {
   fileType: DocumentFileType
 }
 
 export const OmMetadataEditor: React.FC<OmMetadataEditorProps> = ({ fileType }) => {
   const { metadata, updateField } = useMetadata()
+  const locale = useLocale()
+  const tv = useTranslations("validation")
   const [fieldErrors, setFieldErrors] = useState<Record<string, string | null>>({})
 
   const resolvedMetadata = metadata!
   const sections = useMemo(
     () => resolveMetadataSections(fileType, resolvedMetadata),
     [fileType, resolvedMetadata],
+  )
+
+  const translateError = useCallback(
+    (errorKey: string): string => {
+      const messageKey = ERROR_KEY_MAP[errorKey]
+      if (messageKey) return tv(messageKey)
+      return errorKey
+    },
+    [tv],
   )
 
   const handleFieldChange = useCallback(
@@ -112,7 +111,7 @@ export const OmMetadataEditor: React.FC<OmMetadataEditorProps> = ({ fileType }) 
             result = {
               success: false,
               error: {
-                issues: [{ message: "请输入有效的 BCP 47 语言代码，如 zh-CN 或 en-US" }],
+                issues: [{ message: "INVALID_BCP47" }],
               },
             } as typeof result
           }
@@ -120,12 +119,14 @@ export const OmMetadataEditor: React.FC<OmMetadataEditorProps> = ({ fileType }) 
 
         setFieldErrors(prev => ({
           ...prev,
-          [fieldPath]: result.success ? null : (result.error.issues[0]?.message ?? "输入无效"),
+          [fieldPath]: result.success
+            ? null
+            : translateError(result.error.issues[0]?.message ?? "INVALID_INPUT"),
         }))
 
         updateField(category, field, value)
       },
-    [updateField],
+    [updateField, translateError],
   )
 
   return (
@@ -168,13 +169,17 @@ export const OmMetadataEditor: React.FC<OmMetadataEditorProps> = ({ fileType }) 
                             onChange={e => {
                               handleFieldChange(section.category, field.key, true)(e.target.value)
                             }}
-                            placeholder="输入或筛选语言代码，例如 zh-CN / en-US"
+                            placeholder={tv("placeholderLang")}
                             className="h-8 rounded-md border border-border/70 bg-background px-2 text-sm"
                           />
                           <datalist id={languageInputListId}>
                             {COMMON_LOCALE_CODES.map(code => (
-                              <option key={code} value={code} label={getLanguageOptionLabel(code)}>
-                                {getLanguageOptionLabel(code)}
+                              <option
+                                key={code}
+                                value={code}
+                                label={getLanguageOptionLabel(code, locale)}
+                              >
+                                {getLanguageOptionLabel(code, locale)}
                               </option>
                             ))}
                           </datalist>
@@ -204,7 +209,7 @@ export const OmMetadataEditor: React.FC<OmMetadataEditorProps> = ({ fileType }) 
                     ) : (
                       <div className="flex h-8 w-full items-center px-0">
                         <span className="text-sm text-foreground/90">
-                          {field.type === "date" ? formatDateValue(value) : value || "-"}
+                          {field.type === "date" ? formatDateValue(value, locale) : value || "-"}
                         </span>
                       </div>
                     )}
@@ -220,6 +225,31 @@ export const OmMetadataEditor: React.FC<OmMetadataEditorProps> = ({ fileType }) 
       ))}
     </div>
   )
+}
+
+function getLanguageOptionLabel(localeCode: string, locale: string): string {
+  const normalized = localeCode.trim()
+  if (!normalized) {
+    return ""
+  }
+
+  const languageCode = normalized.split("-")[0] ?? normalized
+  let languageName: string
+  try {
+    languageName =
+      new Intl.DisplayNames([locale], { type: "language" }).of(languageCode) ?? normalized
+  } catch {
+    languageName = normalized
+  }
+  return `${normalized} · ${languageName}`
+}
+
+function isLanguageField(field: { key: string; editable: boolean; type: string }) {
+  if (!field.editable || field.type !== "text") {
+    return false
+  }
+
+  return field.key === "language" || field.key === "dcLanguage"
 }
 
 export default OmMetadataEditor

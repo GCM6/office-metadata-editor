@@ -3,6 +3,8 @@
 import "@/style/base.css"
 import "@/style/chrome.css"
 
+export const dynamic = "force-dynamic"
+
 export default function GlobalError({
   error,
   reset,
