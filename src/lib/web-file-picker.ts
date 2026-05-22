@@ -12,7 +12,7 @@ export async function openWebFilePicker(): Promise<WebFileEntry[]> {
     input.accept = ".docx,.doc,.xlsx,.pdf"
 
     input.onchange = async () => {
-      const files = input.files
+      const {files} = input
       if (!files || files.length === 0) {
         resolve([])
         return

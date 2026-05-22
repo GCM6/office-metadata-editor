@@ -7,27 +7,23 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { FileProvider } from "@/contexts/file-context"
 import { MetadataProvider } from "@/contexts/metadata-context"
 
-function ClientSideContent({ children }: { children: React.ReactNode }) {
+export function ClientLayout({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  if (!mounted) {
-    return (
-      <main className="chrome-window-shell" data-ui-scroll-container>
-        {children}
-      </main>
-    )
-  }
-
   return (
     <ThemeProvider>
       <TooltipProvider>
         <FileProvider>
           <MetadataProvider>
-            <main className="chrome-window-shell" data-ui-scroll-container>
+            <main
+              className="chrome-window-shell"
+              data-ui-scroll-container
+              data-mounted={mounted ? "true" : undefined}
+            >
               {children}
             </main>
           </MetadataProvider>
@@ -35,8 +31,4 @@ function ClientSideContent({ children }: { children: React.ReactNode }) {
       </TooltipProvider>
     </ThemeProvider>
   )
-}
-
-export function ClientLayout({ children }: { children: React.ReactNode }) {
-  return <ClientSideContent>{children}</ClientSideContent>
 }

@@ -89,21 +89,21 @@ export interface MetadataContextValue {
   metadata: DocumentMetadata
   isLoading: boolean
   hasChanges: boolean
-  setMetadata: (metadata: DocumentMetadata) => void
-  selectDocument: (documentId: string) => void
-  removeDocument: (documentId: string) => void
-  clearDocuments: () => void
-  updateField: (category: MetadataSection["category"], field: string, value: string | number) => void
-  openFiles: () => Promise<number>
-  clearMetadata: () => void
-  resetToOriginal: () => void
-  saveCurrent: () => Promise<void>
-  saveCurrentAs: () => Promise<void>
-  saveDocument: (documentId: string) => Promise<void>
-  clearAndSaveDocument: (documentId: string) => Promise<void>
-  batchClearAndSave: () => Promise<void>
-  batchSaveAll: () => Promise<void>
-  downloadFile: () => Promise<void>
+  setMetadata(metadata: DocumentMetadata): void
+  selectDocument(documentId: string): void
+  removeDocument(documentId: string): void
+  clearDocuments(): void
+  updateField(category: MetadataSection["category"], field: string, value: string | number): void
+  openFiles(): Promise<number>
+  clearMetadata(): void
+  resetToOriginal(): void
+  saveCurrent(): Promise<void>
+  saveCurrentAs(): Promise<void>
+  saveDocument(documentId: string): Promise<void>
+  clearAndSaveDocument(documentId: string): Promise<void>
+  batchClearAndSave(): Promise<void>
+  batchSaveAll(): Promise<void>
+  downloadFile(): Promise<void>
 }
 
 const MetadataContext = createContext<MetadataContextValue | null>(null)

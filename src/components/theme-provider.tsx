@@ -1,4 +1,5 @@
-/* eslint-disable react-refresh/only-export-components */
+"use client"
+
 import * as React from "react"
 import { isTauri, trackedInvoke } from "@/lib/tauri"
 
@@ -15,7 +16,7 @@ type ThemeProviderProps = {
 type ThemeProviderState = {
   theme: Theme
   resolvedTheme: ResolvedTheme
-  setTheme: (theme: Theme) => void
+  setTheme(theme: Theme): void
 }
 
 const COLOR_SCHEME_QUERY = "(prefers-color-scheme: dark)"
@@ -27,15 +28,13 @@ function isTheme(value: string | null): value is Theme {
   if (value === null) {
     return false
   }
-
   return THEME_VALUES.includes(value as Theme)
 }
 
 function getSystemTheme(): ResolvedTheme {
-  if (window.matchMedia(COLOR_SCHEME_QUERY).matches) {
+  if (typeof window !== "undefined" && window.matchMedia(COLOR_SCHEME_QUERY).matches) {
     return "dark"
   }
-
   return "light"
 }
 
@@ -43,11 +42,24 @@ function resolveTheme(theme: Theme): ResolvedTheme {
   return theme === "system" ? getSystemTheme() : theme
 }
 
-async function syncWindowTheme(theme: Theme) {
-  if (!isTauri()) {
-    return
-  }
+function getStoredTheme(storageKey: string): Theme | null {
+  if (typeof window === "undefined") return null
+  try {
+    const stored = localStorage.getItem(storageKey)
+    if (isTheme(stored)) return stored
+  } catch {}
+  return null
+}
 
+function setStoredTheme(storageKey: string, theme: Theme) {
+  if (typeof window === "undefined") return
+  try {
+    localStorage.setItem(storageKey, theme)
+  } catch {}
+}
+
+async function syncWindowTheme(theme: Theme) {
+  if (!isTauri()) return
   try {
     await trackedInvoke("set_window_theme", { theme })
   } catch (error) {
@@ -75,19 +87,10 @@ function disableTransitionsTemporarily() {
 }
 
 function isEditableTarget(target: EventTarget | null) {
-  if (!(target instanceof HTMLElement)) {
-    return false
-  }
-
-  if (target.isContentEditable) {
-    return true
-  }
-
+  if (!(target instanceof HTMLElement)) return false
+  if (target.isContentEditable) return true
   const editableParent = target.closest("input, textarea, select, [contenteditable='true']")
-  if (editableParent) {
-    return true
-  }
-
+  if (editableParent) return true
   return false
 }
 
@@ -99,18 +102,17 @@ export function ThemeProvider({
   ...props
 }: ThemeProviderProps) {
   const [theme, setThemeState] = React.useState<Theme>(() => {
-    const storedTheme = localStorage.getItem(storageKey)
-    if (isTheme(storedTheme)) {
-      return storedTheme
-    }
-
-    return defaultTheme
+    return getStoredTheme(storageKey) ?? defaultTheme
   })
-  const [resolvedTheme, setResolvedTheme] = React.useState<ResolvedTheme>(() => resolveTheme(theme))
+  const [resolvedTheme, setResolvedTheme] = React.useState<ResolvedTheme>("light")
+
+  React.useEffect(() => {
+    setResolvedTheme(resolveTheme(theme))
+  }, [theme])
 
   const setTheme = React.useCallback(
     (nextTheme: Theme) => {
-      localStorage.setItem(storageKey, nextTheme)
+      setStoredTheme(storageKey, nextTheme)
       setThemeState(nextTheme)
     },
     [storageKey],
@@ -139,9 +141,7 @@ export function ThemeProvider({
     setResolvedTheme(nextResolvedTheme)
     void syncWindowTheme(theme)
 
-    if (theme !== "system") {
-      return undefined
-    }
+    if (theme !== "system") return
 
     const mediaQuery = window.matchMedia(COLOR_SCHEME_QUERY)
     const handleChange = () => {
@@ -150,7 +150,6 @@ export function ThemeProvider({
     }
 
     mediaQuery.addEventListener("change", handleChange)
-
     return () => {
       mediaQuery.removeEventListener("change", handleChange)
     }
@@ -158,21 +157,10 @@ export function ThemeProvider({
 
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.repeat) {
-        return
-      }
-
-      if (event.metaKey || event.ctrlKey || event.altKey) {
-        return
-      }
-
-      if (isEditableTarget(event.target)) {
-        return
-      }
-
-      if (event.key.toLowerCase() !== "d") {
-        return
-      }
+      if (event.repeat) return
+      if (event.metaKey || event.ctrlKey || event.altKey) return
+      if (isEditableTarget(event.target)) return
+      if (event.key.toLowerCase() !== "d") return
 
       setThemeState(currentTheme => {
         const nextTheme =
@@ -184,13 +172,12 @@ export function ThemeProvider({
                 ? "light"
                 : "dark"
 
-        localStorage.setItem(storageKey, nextTheme)
+        setStoredTheme(storageKey, nextTheme)
         return nextTheme
       })
     }
 
     window.addEventListener("keydown", handleKeyDown)
-
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
@@ -198,35 +185,23 @@ export function ThemeProvider({
 
   React.useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
-      if (event.storageArea !== localStorage) {
-        return
-      }
-
-      if (event.key !== storageKey) {
-        return
-      }
-
+      if (event.storageArea !== localStorage) return
+      if (event.key !== storageKey) return
       if (isTheme(event.newValue)) {
         setThemeState(event.newValue)
         return
       }
-
       setThemeState(defaultTheme)
     }
 
     window.addEventListener("storage", handleStorageChange)
-
     return () => {
       window.removeEventListener("storage", handleStorageChange)
     }
   }, [defaultTheme, storageKey])
 
   const value = React.useMemo(
-    () => ({
-      theme,
-      resolvedTheme,
-      setTheme,
-    }),
+    () => ({ theme, resolvedTheme, setTheme }),
     [theme, resolvedTheme, setTheme],
   )
 
@@ -239,10 +214,8 @@ export function ThemeProvider({
 
 export const useTheme = () => {
   const context = React.useContext(ThemeProviderContext)
-
   if (context === undefined) {
     throw new Error("useTheme must be used within a ThemeProvider")
   }
-
   return context
 }

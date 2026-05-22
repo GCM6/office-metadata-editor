@@ -16,9 +16,9 @@ export const EditorLayout: React.FC<React.PropsWithChildren<EditorLayoutProps>> 
   const { metadata, hasChanges } = useMetadata()
   const resolvedMetadata = metadata!
 
-  const fileType = resolvedMetadata.fileType
-  const fileName = resolvedMetadata.fileName
-  const fileSize = resolvedMetadata.fileSize
+  const {fileType} = resolvedMetadata
+  const {fileName} = resolvedMetadata
+  const {fileSize} = resolvedMetadata
 
   return (
     <SidebarProvider className="h-screen" defaultOpen>
