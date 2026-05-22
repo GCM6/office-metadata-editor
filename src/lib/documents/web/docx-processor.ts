@@ -44,7 +44,7 @@ export async function clearDocx(filePath: string, fileName: string): Promise<str
 
   const clearedMetadata = createEmptyOoxmlMetadata()
   const updated = await writeOoxmlMetadata(data, clearedMetadata)
-  const blob = new Blob([updated])
+  const blob = new Blob([new Uint8Array(updated)])
   const url = URL.createObjectURL(blob)
   const a = document.createElement("a")
   a.href = url
@@ -56,7 +56,7 @@ export async function clearDocx(filePath: string, fileName: string): Promise<str
 }
 
 function triggerDownload(data: Uint8Array, fileName: string): void {
-  const blob = new Blob([data])
+  const blob = new Blob([new Uint8Array(data)])
   const url = URL.createObjectURL(blob)
   const a = document.createElement("a")
   a.href = url

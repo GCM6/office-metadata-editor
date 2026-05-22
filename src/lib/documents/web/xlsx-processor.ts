@@ -31,7 +31,7 @@ export async function replaceXlsx(
   }
 
   const updated = await writeOoxmlMetadata(data, metadata)
-  const blob = new Blob([updated])
+  const blob = new Blob([new Uint8Array(updated)])
   const url = URL.createObjectURL(blob)
   const a = document.createElement("a")
   a.href = url
@@ -50,7 +50,7 @@ export async function clearXlsx(filePath: string, fileName: string): Promise<str
 
   const clearedMetadata = createEmptyOoxmlMetadata()
   const updated = await writeOoxmlMetadata(data, clearedMetadata)
-  const blob = new Blob([updated])
+  const blob = new Blob([new Uint8Array(updated)])
   const url = URL.createObjectURL(blob)
   const a = document.createElement("a")
   a.href = url

@@ -1,6 +1,6 @@
 import React from "react"
 import { OmMetadataEditView } from "@/components/om/om-metadata-edit-view"
-import { EditorPageUnsupportedStatus } from "@/pages/editor-page/components/editor-page-status"
+import { EditorPageUnsupportedStatus } from "@/page-components/editor-page/components/editor-page-status"
 import type { DocumentFileType, MetadataPreviewGroup } from "@/types/metadata"
 
 export interface EditorPageFormProps {

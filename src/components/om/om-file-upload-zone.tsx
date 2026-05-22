@@ -5,7 +5,7 @@ import { Spinner } from "@/components/ui/spinner"
 import { SUPPORTED_FILE_EXTENSIONS } from "@/lib/documents/supported-formats"
 
 export interface OmFileUploadZoneProps {
-  onOpenFiles: () => void
+  onOpenFiles(): void
   isLoading: boolean
 }
 

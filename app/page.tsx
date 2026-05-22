@@ -1,5 +1,9 @@
+"use client"
+
+export const dynamic = "force-dynamic"
+
 import React, { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { useFileContext } from "@/contexts/file-context"
 import { useTheme } from "@/components/theme-provider"
 import { OmFileUploadZone } from "@/components/om/om-file-upload-zone"
@@ -28,8 +32,8 @@ import { SUPPORTED_FILE_EXTENSIONS } from "@/lib/documents/supported-formats"
 import { APP_NAME } from "@/lib/app-config"
 import BlankLayout from "@/layouts/blank-layout"
 
-export const HomePage: React.FC = () => {
-  const navigate = useNavigate()
+export default function HomePage() {
+  const router = useRouter()
   const { openFiles, isLoading, clearFiles } = useFileContext()
   const { theme, resolvedTheme, setTheme } = useTheme()
 
@@ -41,13 +45,12 @@ export const HomePage: React.FC = () => {
     const added = await openFiles()
     if (added === 0) return
 
-    navigate("/editor")
+    router.push("/editor")
   }
 
   return (
     <BlankLayout>
       <div className="relative h-full w-full overflow-hidden">
-        {/* 背景装饰层，z-index:0，拖拽区始终在顶层 */}
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_14%_12%,oklch(0.9_0.11_245/0.18),transparent_48%),radial-gradient(circle_at_86%_78%,oklch(0.88_0.1_162/0.16),transparent_46%)] dark:bg-[radial-gradient(circle_at_14%_12%,oklch(0.4_0.11_245/0.24),transparent_48%),radial-gradient(circle_at_86%_78%,oklch(0.4_0.08_162/0.22),transparent_46%)]" />
 
         <div className="relative flex h-full flex-col px-5 py-6 sm:px-8 sm:py-8">
@@ -108,7 +111,7 @@ export const HomePage: React.FC = () => {
               <div className="mt-7 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
                 <button
                   type="button"
-                  onClick={() => navigate("/batch")}
+                  onClick={() => router.push("/batch")}
                   className="group flex items-center justify-between rounded-2xl border border-primary/25 bg-primary/12 px-4 py-3 text-left transition-colors hover:bg-primary/18"
                 >
                   <span className="flex items-center gap-2 text-sm font-semibold text-primary">

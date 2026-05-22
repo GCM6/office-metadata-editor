@@ -20,11 +20,11 @@ export interface FileContextValue {
   files: FileEntry[]
   activeFileId: string | null
   isLoading: boolean
-  openFiles: () => Promise<number>
-  selectFile: (fileId: string) => void
-  removeFile: (fileId: string) => void
-  clearFiles: () => void
-  updateFileStatus: (fileId: string, patch: Partial<Omit<FileEntry, "id" | "filePath">>) => void
+  openFiles(): Promise<number>
+  selectFile(fileId: string): void
+  removeFile(fileId: string): void
+  clearFiles(): void
+  updateFileStatus(fileId: string, patch: Partial<Omit<FileEntry, "id" | "filePath">>): void
 }
 
 const FileContext = createContext<FileContextValue | null>(null)

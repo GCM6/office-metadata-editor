@@ -11,6 +11,8 @@ node_modules
 dist
 dist-web
 dist-ssr
+.next
+next-env.d.ts
 *.local
 
 pnpm-lock.yaml

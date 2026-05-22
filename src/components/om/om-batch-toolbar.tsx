@@ -6,10 +6,10 @@ export interface OmBatchToolbarProps {
   hasFiles: boolean
   isBusy?: boolean
   busyText?: string
-  onAddFiles: () => Promise<void> | void
-  onBatchSave: () => Promise<void> | void
-  onBatchClearAndSave: () => Promise<void> | void
-  onClearAll: () => void
+  onAddFiles(): Promise<void> | void
+  onBatchSave(): Promise<void> | void
+  onBatchClearAndSave(): Promise<void> | void
+  onClearAll(): void
 }
 
 export const OmBatchToolbar: React.FC<OmBatchToolbarProps> = ({

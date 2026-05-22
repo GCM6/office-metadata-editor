@@ -11,7 +11,7 @@ export const OmMetadataFieldList: React.FC<React.PropsWithChildren> = ({ childre
 
 export interface OmMetadataFieldItemProps {
   field: MetadataField
-  onChange: (key: string, value: string) => void
+  onChange(key: string, value: string): void
 }
 
 export const OmMetadataFieldItem: React.FC<OmMetadataFieldItemProps> = ({ field, onChange }) => {

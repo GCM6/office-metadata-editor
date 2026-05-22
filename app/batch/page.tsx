@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
@@ -15,7 +17,7 @@ import { type FileStatus, useFileContext } from "@/contexts/file-context"
 import { useMetadata } from "@/contexts/metadata-context"
 import { formatFileSize } from "@/lib/utils"
 
-export const BatchPage: React.FC = () => {
+export default function BatchPage() {
   const { files, openFiles, removeFile, clearFiles } = useFileContext()
   const { documents, saveDocument, clearAndSaveDocument, batchSaveAll, batchClearAndSave } =
     useMetadata()
@@ -158,7 +160,7 @@ export const BatchPage: React.FC = () => {
             {rows.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={5} className="py-10 text-center text-sm text-muted-foreground">
-                  暂无待处理文件，请先点击“添加文件”。
+                  暂无待处理文件，请先点击"添加文件"。
                 </TableCell>
               </TableRow>
             ) : (
@@ -232,5 +234,3 @@ export const BatchPage: React.FC = () => {
     </PageLayout>
   )
 }
-
-export default BatchPage

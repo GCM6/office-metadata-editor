@@ -1,18 +1,20 @@
+"use client"
+
 import React, { useEffect, useMemo } from "react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { useMetadata } from "@/contexts/metadata-context"
 import { useFileContext } from "@/contexts/file-context"
 import { OmEditorToolbar } from "@/components/om/om-editor-toolbar"
 import { normalizeDocumentFileType } from "@/lib/documents/file-type"
 import { EditorLayout } from "@/layouts/editor-layout"
 import { SidebarInset } from "@/components/ui/sidebar"
-import { EditorPageSidebar } from "@/pages/editor-page/components/editor-page-sidebar"
-import { EditorPageForm } from "@/pages/editor-page/components/editor-page-form"
-import { EditorPageSkeleton } from "@/pages/editor-page/components/editor-page-skeleton"
+import { EditorPageSidebar } from "@/page-components/editor-page/components/editor-page-sidebar"
+import { EditorPageForm } from "@/page-components/editor-page/components/editor-page-form"
+import { EditorPageSkeleton } from "@/page-components/editor-page/components/editor-page-skeleton"
 import { resolveMetadataPreviewGroups } from "@/lib/documents/metadata"
 
-export const EditorPage: React.FC = () => {
-  const navigate = useNavigate()
+export default function EditorPage() {
+  const router = useRouter()
 
   const { metadata, documents } = useMetadata()
   const { files, activeFileId, selectFile, removeFile, openFiles, isLoading } = useFileContext()
@@ -36,9 +38,9 @@ export const EditorPage: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading && files.length === 0) {
-      navigate("/")
+      router.push("/")
     }
-  }, [files.length, isLoading, navigate])
+  }, [files.length, isLoading, router])
 
   return (
     <EditorLayout actions={<OmEditorToolbar />}>

@@ -22,9 +22,9 @@ export interface EditorPageSidebarProps {
   files: FileEntry[]
   documents: LoadedDocument[]
   activeFileId: string | null
-  onOpenFiles: () => void
-  onSelectFile: (fileId: string) => void
-  onRemoveFile: (fileId: string) => void
+  onOpenFiles(): void
+  onSelectFile(fileId: string): void
+  onRemoveFile(fileId: string): void
 }
 
 export const EditorPageSidebar: React.FC<EditorPageSidebarProps> = ({
@@ -64,10 +64,10 @@ export const EditorPageSidebar: React.FC<EditorPageSidebarProps> = ({
               {files.map(item => {
                 const doc = documentMap.get(item.id)
                 if (!doc) return null
-                const fileName = doc.metadata.fileName
-                const hasChanges = doc.hasChanges
-                const modified = doc.metadata.documentProperties.modified
-                const created = doc.metadata.documentProperties.created
+                const {fileName} = doc.metadata
+                const {hasChanges} = doc
+                const {modified} = doc.metadata.documentProperties
+                const {created} = doc.metadata.documentProperties
                 const displayTime = formatRelativeTime(modified || created)
 
                 return (

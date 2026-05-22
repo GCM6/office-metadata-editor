@@ -57,7 +57,7 @@ export async function replaceDoc(
   sidecarLink.click()
   URL.revokeObjectURL(sidecarUrl)
 
-  const origBlob = new Blob([data])
+  const origBlob = new Blob([new Uint8Array(data)])
   const origUrl = URL.createObjectURL(origBlob)
   const origLink = document.createElement("a")
   origLink.href = origUrl
@@ -97,7 +97,7 @@ export async function clearDoc(filePath: string, fileName: string): Promise<stri
   sidecarLink.click()
   URL.revokeObjectURL(sidecarUrl)
 
-  const origBlob = new Blob([data])
+  const origBlob = new Blob([new Uint8Array(data)])
   const origUrl = URL.createObjectURL(origBlob)
   const origLink = document.createElement("a")
   origLink.href = origUrl

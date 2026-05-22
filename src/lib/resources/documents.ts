@@ -17,11 +17,11 @@ export interface BatchSaveRequestItem {
 }
 
 type DocumentResourceApi = {
-  show: (filePath: string) => Promise<DocumentMetadata>
-  replace: (filePath: string, metadata: DocumentMetadata) => Promise<string>
-  createSavedCopy: (filePath: string, metadata: DocumentMetadata) => Promise<string | null>
-  replaceMany: (items: BatchSaveRequestItem[]) => Promise<BatchSaveResultItem[]>
-  destroyMetadataMany: (filePaths: string[]) => Promise<BatchSaveResultItem[]>
+  show(filePath: string): Promise<DocumentMetadata>
+  replace(filePath: string, metadata: DocumentMetadata): Promise<string>
+  createSavedCopy(filePath: string, metadata: DocumentMetadata): Promise<string | null>
+  replaceMany(items: BatchSaveRequestItem[]): Promise<BatchSaveResultItem[]>
+  destroyMetadataMany(filePaths: string[]): Promise<BatchSaveResultItem[]>
 }
 
 const tauriDocumentsResource = {

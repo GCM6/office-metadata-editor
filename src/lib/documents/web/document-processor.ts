@@ -5,10 +5,10 @@ import { showPdf, replacePdf, clearPdf } from "./pdf-processor"
 import { showDoc, replaceDoc, clearDoc } from "./doc-processor"
 
 export interface WebDocumentResourceApi {
-  show: (fileId: string, fileName: string) => Promise<DocumentMetadata>
-  replace: (fileId: string, fileName: string, metadata: DocumentMetadata) => Promise<string>
-  createSavedCopy: (fileId: string, fileName: string, metadata: DocumentMetadata) => Promise<string | null>
-  clear: (filePath: string, fileName: string) => Promise<string>
+  show(fileId: string, fileName: string): Promise<DocumentMetadata>
+  replace(fileId: string, fileName: string, metadata: DocumentMetadata): Promise<string>
+  createSavedCopy(fileId: string, fileName: string, metadata: DocumentMetadata): Promise<string | null>
+  clear(filePath: string, fileName: string): Promise<string>
 }
 
 function getWebProcessor(fileType: string): WebDocumentResourceApi | null {
