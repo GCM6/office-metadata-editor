@@ -30,3 +30,9 @@ yarn.lock
 *.njsproj
 *.sln
 *.sw?
+
+# Build artifacts
+*.tsbuildinfo
+
+# Test artifacts
+test-results/
