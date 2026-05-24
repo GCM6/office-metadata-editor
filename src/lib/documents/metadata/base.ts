@@ -93,7 +93,7 @@ function readSourceValue(
   return metadata.appProperties[field as keyof DocumentMetadata["appProperties"]] ?? ""
 }
 
-function formatPreviewValue(raw: string | number, schema: MetadataPreviewPropertySchema): string {
+function formatPreviewValue(raw: string | number, schema: MetadataPreviewPropertySchema, locale: string): string {
   if (schema.format === "minutes") {
     const text = String(raw ?? "").trim()
     return text ? `${text} 分钟` : ""
@@ -103,7 +103,7 @@ function formatPreviewValue(raw: string | number, schema: MetadataPreviewPropert
     const value = typeof raw === "number" ? raw : Number(raw)
     if (!Number.isFinite(value)) return ""
     if (schema.onlyPositive && value <= 0) return ""
-    return formatNumber(value)
+    return formatNumber(value, locale)
   }
 
   return normalizeTextValue(String(raw ?? ""))
@@ -129,6 +129,7 @@ export function buildMetadataSections(schema: MetadataSchema, metadata: Document
 export function buildMetadataPreviewGroups(
   schema: MetadataSchema,
   metadata: DocumentMetadata,
+  locale = "zh-CN",
 ): MetadataPreviewGroup[] {
   return schema.previewGroups
     .map(group => ({
@@ -137,7 +138,7 @@ export function buildMetadataPreviewGroups(
       properties: group.properties
         .map(property => {
           const raw = readSourceValue(metadata, property.source.category, property.source.field)
-          const value = formatPreviewValue(raw, property)
+          const value = formatPreviewValue(raw, property, locale)
           return {
             label: property.label,
             value,

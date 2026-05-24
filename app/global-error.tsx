@@ -1,9 +1,9 @@
 "use client"
 
+export const dynamic = "force-dynamic"
+
 import "@/style/base.css"
 import "@/style/chrome.css"
-
-export const dynamic = "force-dynamic"
 
 interface Messages {
   error: { somethingWentWrong: string; retry: string }

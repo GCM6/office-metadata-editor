@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useMemo } from "react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import type { FileEntry } from "@/contexts/file-context"
 import type { LoadedDocument } from "@/contexts/metadata-context"
 import {
@@ -39,6 +39,7 @@ export const EditorPageSidebar: React.FC<EditorPageSidebarProps> = ({
   onRemoveFile,
 }) => {
   const t = useTranslations("editor")
+  const locale = useLocale()
   const documentMap = useMemo(() => {
     return new Map(documents.map(item => [item.id, item]))
   }, [documents])
@@ -72,7 +73,7 @@ export const EditorPageSidebar: React.FC<EditorPageSidebarProps> = ({
                 const {hasChanges} = doc
                 const {modified} = doc.metadata.documentProperties
                 const {created} = doc.metadata.documentProperties
-                const displayTime = formatRelativeTime(modified || created)
+                const displayTime = formatRelativeTime(modified || created, locale)
 
                 return (
                   <SidebarMenuItem key={item.id}>
