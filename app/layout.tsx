@@ -9,10 +9,19 @@ import { ClientLayout } from "./client-layout"
 export const dynamic = "force-dynamic"
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("common")
-  return {
-    title: t("appTitle"),
-    description: APP_NAME,
+  try {
+    const t = await getTranslations("common")
+    return {
+      title: t("appTitle"),
+      description: APP_NAME,
+      icons: { icon: "/logo.svg" },
+    }
+  } catch {
+    return {
+      title: APP_NAME,
+      description: APP_NAME,
+      icons: { icon: "/logo.svg" },
+    }
   }
 }
 
@@ -23,14 +32,17 @@ declare module "react" {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale()
-  const messages = await getMessages()
+  let locale = "zh-CN"
+  let messages: Record<string, unknown> = {}
+  try {
+    locale = await getLocale()
+    messages = (await getMessages()) as Record<string, unknown>
+  } catch {
+    // fallback during static generation (e.g. _global-error)
+  }
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head>
-        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-      </head>
       <body className="font-sans antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ClientLayout>{children}</ClientLayout>
