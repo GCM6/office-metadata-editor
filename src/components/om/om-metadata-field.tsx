@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react"
+import { useTranslations } from "next-intl"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -11,10 +14,12 @@ export const OmMetadataFieldList: React.FC<React.PropsWithChildren> = ({ childre
 
 export interface OmMetadataFieldItemProps {
   field: MetadataField
+  locale?: string
   onChange(key: string, value: string): void
 }
 
-export const OmMetadataFieldItem: React.FC<OmMetadataFieldItemProps> = ({ field, onChange }) => {
+export const OmMetadataFieldItem: React.FC<OmMetadataFieldItemProps> = ({ field, locale = "zh-CN", onChange }) => {
+  const tv = useTranslations("validation")
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (field.editable) {
       onChange(field.key, e.target.value)
@@ -25,7 +30,7 @@ export const OmMetadataFieldItem: React.FC<OmMetadataFieldItemProps> = ({ field,
     if (!value) return "-"
     const date = new Date(value)
     if (Number.isNaN(date.getTime())) return value
-    return date.toLocaleString("zh-CN", {
+    return date.toLocaleString(locale, {
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
@@ -56,7 +61,7 @@ export const OmMetadataFieldItem: React.FC<OmMetadataFieldItemProps> = ({ field,
               id={field.key}
               value={field.value}
               onChange={handleChange}
-              placeholder={`输入${field.label}`}
+              placeholder={`${tv("placeholderInput")}${field.label}`}
               className="min-h-16 rounded-none border-0 border-b border-border/55 bg-transparent px-0 py-1 text-sm leading-6 shadow-none focus-visible:border-primary/40 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:outline-none"
             />
           ) : (
@@ -65,7 +70,7 @@ export const OmMetadataFieldItem: React.FC<OmMetadataFieldItemProps> = ({ field,
               type="text"
               value={field.value}
               onChange={handleChange}
-              placeholder={`输入${field.label}`}
+              placeholder={`${tv("placeholderInput")}${field.label}`}
               className="h-8 rounded-none border-0 border-b border-border/55 bg-transparent px-0 text-sm shadow-none focus-visible:border-primary/40 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:outline-none"
             />
           )

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo } from "react"
 import { useRouter } from "next/navigation"
+import { useLocale } from "next-intl"
 import { useMetadata } from "@/contexts/metadata-context"
 import { useFileContext } from "@/contexts/file-context"
 import { OmEditorToolbar } from "@/components/om/om-editor-toolbar"
@@ -18,6 +19,7 @@ export default function EditorPage() {
 
   const { metadata, documents } = useMetadata()
   const { files, activeFileId, selectFile, removeFile, openFiles, isLoading } = useFileContext()
+  const locale = useLocale()
 
   const activeFile = useMemo(() => {
     if (files.length === 0) return null
@@ -33,8 +35,8 @@ export default function EditorPage() {
 
   const previewGroups = useMemo(() => {
     if (!metadata) return []
-    return resolveMetadataPreviewGroups(activeFileType, metadata)
-  }, [activeFileType, metadata])
+    return resolveMetadataPreviewGroups(activeFileType, metadata, locale)
+  }, [activeFileType, metadata, locale])
 
   useEffect(() => {
     if (!isLoading && files.length === 0) {

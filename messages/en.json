@@ -1,0 +1,101 @@
+{
+  "common": {
+    "appName": "office-metadata-editor",
+    "appTitle": "Office Metadata Editor",
+    "appLogo": "App Logo",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "systemFollow": "System",
+    "dragArea": "Window drag area",
+    "langZh": "中",
+    "langEn": "EN"
+  },
+  "home": {
+    "enterWorkState": "Ready in a second",
+    "description": "Read, edit, clean, and batch process all locally. Supports metadata editing for multiple document formats.",
+    "featureLocal": "100% Local",
+    "featureDragDrop": "Drag && Drop",
+    "featureBatch": "Batch Boost",
+    "openBatchWorkspace": "Open Batch Workspace",
+    "startEditing": "Start Editing",
+    "moreComing": "More advanced features are on the way, stay tuned.",
+    "dragUploadStart": "Drag && Drop to Upload",
+    "singleOrBatchDesc": "Edit single files or batch process multiple files from here",
+    "supportedFileTypes": "Supported File Types"
+  },
+  "batch": {
+    "title": "Batch Processing",
+    "fileName": "File Name",
+    "author": "Author",
+    "modified": "Modified",
+    "status": "Status",
+    "actions": "Actions",
+    "noFiles": "No files yet. Click \"Add File\" to get started.",
+    "pending": "Pending",
+    "synced": "Synced",
+    "remove": "Remove",
+    "clearAndSave": "Clear && Save",
+    "save": "Save",
+    "savingFile": "Saving file...",
+    "clearingAndSaving": "Clearing && saving...",
+    "batchSaving": "Batch saving...",
+    "batchClearingAndSaving": "Batch clearing && saving...",
+    "processing": "Processing...",
+    "path": "Path",
+    "type": "Type",
+    "size": "Size",
+    "addFile": "Add File",
+    "saveAll": "Save All",
+    "clearAndSaveAll": "Clear && Save All",
+    "clearList": "Clear List"
+  },
+  "upload": {
+    "parsingFile": "Parsing file...",
+    "dropToSelect": "Release to select files",
+    "clickOrDrag": "Click or drag files here",
+    "supportedFormats": "Supports {formats}, multiple files allowed"
+  },
+  "editor": {
+    "save": "Save",
+    "saveAs": "Save As",
+    "clearMetadata": "Clear Metadata",
+    "resetToOriginal": "Reset to Original",
+    "unsavedBadge": "Unsaved",
+    "addFile": "Add File",
+    "fileList": "File List",
+    "unsavedChanges": "Unsaved Changes",
+    "removeFile": "Remove {fileName}",
+    "notSupported": "This file type is not yet supported for editing",
+    "fileType": "File Type"
+  },
+  "validation": {
+    "maxLength": "Field length must not exceed 4000 characters",
+    "invisibleChars": "Contains invisible control characters",
+    "encodingError": "Text encoding error, please re-enter this field",
+    "invalidInput": "Invalid input",
+    "invalidBcp47": "Please enter a valid BCP 47 language code, e.g., zh-CN or en-US",
+    "placeholderLang": "Enter or filter language code, e.g., zh-CN / en-US",
+    "placeholderInput": "Enter "
+  },
+  "error": {
+    "somethingWentWrong": "Something went wrong",
+    "retry": "Retry"
+  },
+  "progress": {
+    "pending": "Pending",
+    "reading": "Reading...",
+    "ready": "Ready",
+    "readFailed": "Read failed",
+    "saving": "Saving...",
+    "synced": "Synced",
+    "clearingAndSaving": "Clearing && saving...",
+    "batchClearingAndSaving": "Batch clearing && saving...",
+    "batchSaving": "Batch saving...",
+    "processFailed": "Process failed"
+  },
+  "utils": {
+    "unknownTime": "Unknown time",
+    "justNow": "Just now"
+  }
+}

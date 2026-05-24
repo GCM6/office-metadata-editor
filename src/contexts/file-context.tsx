@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from "react"
+import { useTranslations } from "next-intl"
 import { open } from "@tauri-apps/plugin-dialog"
 import { isTauri } from "@tauri-apps/api/core"
 import { OPEN_FILE_DIALOG_FILTER } from "@/lib/documents/supported-formats"
@@ -33,6 +34,7 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   const [files, setFiles] = useState<FileEntry[]>([])
   const [activeFileId, setActiveFileId] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const tp = useTranslations("progress")
 
   const openFiles = useCallback(async (): Promise<number> => {
     setIsLoading(true)
@@ -57,7 +59,7 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
             filePath,
             fileName: entry.fileName,
             status: "idle",
-            progressMessage: "待处理",
+            progressMessage: tp("pending"),
           })
         }
 
@@ -96,7 +98,7 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
         filePath,
         fileName: filePath.split(/[\\/]/).filter(Boolean).pop() ?? filePath,
         status: "idle",
-        progressMessage: "待处理",
+        progressMessage: tp("pending"),
       }))
 
       setFiles(prev => [...prev, ...addedFiles])
@@ -108,7 +110,7 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
     } finally {
       setIsLoading(false)
     }
-  }, [activeFileId, files])
+  }, [activeFileId, files, tp])
 
   const selectFile = useCallback((fileId: string) => {
     setActiveFileId(fileId)

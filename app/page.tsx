@@ -5,6 +5,8 @@ export const dynamic = "force-dynamic"
 import React, { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
+import { LanguageSwitcher } from "@/i18n/language-switcher"
 import { useFileContext } from "@/contexts/file-context"
 import { useTheme } from "@/components/theme-provider"
 import { OmFileUploadZone } from "@/components/om/om-file-upload-zone"
@@ -40,6 +42,8 @@ export default function HomePage() {
   const router = useRouter()
   const { openFiles, isLoading, clearFiles } = useFileContext()
   const { theme, resolvedTheme, setTheme } = useTheme()
+  const t = useTranslations("home")
+  const tc = useTranslations("common")
 
   useEffect(() => {
     clearFiles()
@@ -62,6 +66,8 @@ export default function HomePage() {
             <div className="rounded-full border border-border/70 bg-card/75 px-3 py-1 text-xs text-muted-foreground backdrop-blur-sm select-none">
               {APP_NAME}
             </div>
+            <div className="flex items-center gap-2">
+              <LanguageSwitcher />
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -79,18 +85,19 @@ export default function HomePage() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-44">
-                <DropdownMenuLabel>主题</DropdownMenuLabel>
+                <DropdownMenuLabel>{tc("theme")}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuRadioGroup
                   value={theme}
                   onValueChange={value => setTheme(value as "dark" | "light" | "system")}
                 >
-                  <DropdownMenuRadioItem value="light">白天</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="dark">暗黑</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="system">跟随系统</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="light">{tc("light")}</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="dark">{tc("dark")}</DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem value="system">{tc("systemFollow")}</DropdownMenuRadioItem>
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
+          </div>
           </div>
 
           <div className="mx-auto w-full max-w-6xl">
@@ -98,19 +105,19 @@ export default function HomePage() {
               <section className="rounded-xl border border-border/70 bg-card/72 p-6 shadow-xl backdrop-blur-sm sm:p-9">
                 <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary select-none">
                   <Sparkles className="h-3.5 w-3.5" />
-                  一秒进入工作状态
+                  {t("enterWorkState")}
                 </p>
                 <h1 className="text-3xl leading-tight font-semibold tracking-tight text-foreground sm:text-4xl select-none">
-                  Office 元数据在线编辑器
+                  {tc("appTitle")}
                 </h1>
                 <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground sm:text-base select-none">
-                  在线修改Word(.docx)、Excel(.xlsx)、PDF文档属性，无需上传服务器，全程本地处理，保护您的文档隐私。支持批量清除、一键替换作者信息等隐藏元数据。
+                  {t("description")}
                 </p>
 
                 <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
-                  <OmFeatureItem icon={ShieldCheck} text="全程本地" />
-                  <OmFeatureItem icon={Upload} text="拖拽即用" />
-                  <OmFeatureItem icon={Zap} text="批量提速" />
+                  <OmFeatureItem icon={ShieldCheck} text={t("featureLocal")} />
+                  <OmFeatureItem icon={Upload} text={t("featureDragDrop")} />
+                  <OmFeatureItem icon={Zap} text={t("featureBatch")} />
                 </div>
 
                 <div className="mt-7 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
@@ -121,7 +128,7 @@ export default function HomePage() {
                   >
                     <span className="flex items-center gap-2 text-sm font-semibold text-primary">
                       <Layers3 className="h-4 w-4" />
-                      打开批量处理工作台
+                      {t("openBatchWorkspace")}
                     </span>
                     <ArrowRight className="h-4 w-4 text-primary transition-transform group-hover:translate-x-0.5" />
                   </button>
@@ -130,19 +137,19 @@ export default function HomePage() {
                     className="rounded-xl"
                     onClick={() => void handleOpenFiles()}
                   >
-                    直接开始编辑
+                    {t("startEditing")}
                   </Button>
                 </div>
 
-                <p className="mt-4 text-xs text-muted-foreground select-none">更多高级能力正在路上，敬请期待。</p>
+                <p className="mt-4 text-xs text-muted-foreground select-none">{t("moreComing")}</p>
               </section>
 
               <section className="mx-auto w-full max-w-125 rounded-xl border border-border/70 bg-card/82 p-5 shadow-xl backdrop-blur-sm sm:p-6">
                 <div className="mb-4 flex items-center justify-between gap-3 select-none">
                   <div>
-                    <p className="text-sm font-semibold text-foreground">拖拽上传并开始</p>
+                    <p className="text-sm font-semibold text-foreground">{t("dragUploadStart")}</p>
                     <p className="text-xs text-muted-foreground">
-                      单文件编辑或多文件批处理都可从这里进入
+                      {t("singleOrBatchDesc")}
                     </p>
                   </div>
                 </div>
@@ -150,7 +157,7 @@ export default function HomePage() {
                 <OmFileUploadZone onOpenFiles={handleOpenFiles} isLoading={isLoading} />
 
                 <div className="mt-8">
-                  <p className="mb-2 text-xs font-medium text-muted-foreground select-none">支持的文件类型</p>
+                  <p className="mb-2 text-xs font-medium text-muted-foreground select-none">{t("supportedFileTypes")}</p>
                   <div className="flex flex-wrap gap-2">
                     {SUPPORTED_FILE_EXTENSIONS.map(type => (
                       <OmFileTypeBadge key={type} type={type} supported />

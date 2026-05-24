@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next"
+import { getLocale, getMessages, getTranslations } from "next-intl/server"
+import { NextIntlClientProvider } from "next-intl"
 import { APP_NAME } from "@/lib/app-config"
 import "@/style/base.css"
 import "@/style/chrome.css"
@@ -18,85 +20,97 @@ export const viewport: Viewport = {
   ],
 }
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default: "Office元数据在线编辑器 - 免费修改Word/Excel/PDF文档属性 | 全程本地处理",
-    template: "%s | Office元数据编辑器",
-  },
-  description:
-    "专业的在线Office元数据编辑器，支持Word(.docx)、Excel(.xlsx)、PDF文件，无需上传服务器，全程本地处理，保护您的文档隐私。可批量修改作者、创建时间等元数据属性。",
-  keywords: [
-    "Office元数据编辑器",
-    "修改文档属性",
-    "在线清除元数据",
-    "Word作者修改",
-    "PDF属性编辑",
-    "Excel元数据清除",
-    "DOCX元数据编辑器",
-    "免费在线元数据工具",
-  ],
-  authors: [{ name: APP_NAME }],
-  creator: APP_NAME,
-  publisher: APP_NAME,
+export async function generateMetadata(): Promise<Metadata> {
+  let title = "Office元数据在线编辑器 - 免费修改Word/Excel/PDF文档属性 | 全程本地处理"
+  try {
+    const t = await getTranslations("common")
+    title = t("appTitle")
+  } catch {
+    // fallback during static generation
+  }
 
-  alternates: {
-    canonical: SITE_URL,
-  },
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: {
+      default: title,
+      template: "%s | Office元数据编辑器",
+    },
+    description:
+      "专业的在线Office元数据编辑器，支持Word(.docx)、Excel(.xlsx)、PDF文件，无需上传服务器，全程本地处理，保护您的文档隐私。可批量修改作者、创建时间等元数据属性。",
+    keywords: [
+      "Office元数据编辑器",
+      "修改文档属性",
+      "在线清除元数据",
+      "Word作者修改",
+      "PDF属性编辑",
+      "Excel元数据清除",
+      "DOCX元数据编辑器",
+      "免费在线元数据工具",
+    ],
+    authors: [{ name: APP_NAME }],
+    creator: APP_NAME,
+    publisher: APP_NAME,
 
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    alternates: {
+      canonical: SITE_URL,
+    },
+
+    robots: {
       index: true,
       follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-
-  openGraph: {
-    type: "website",
-    locale: "zh_CN",
-    url: SITE_URL,
-    siteName: "Office元数据编辑器",
-    title: "Office元数据在线编辑器 - 免费修改Word/Excel/PDF文档属性",
-    description:
-      "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
-    images: [
-      {
-        url: "/og-default.png",
-        width: 1200,
-        height: 630,
-        alt: "Office元数据编辑器",
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
-    ],
-  },
+    },
 
-  twitter: {
-    card: "summary_large_image",
-    title: "Office元数据在线编辑器 - 免费修改文档属性，全程本地处理",
-    description:
-      "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
-    images: ["/og-default.png"],
-  },
+    openGraph: {
+      type: "website",
+      locale: "zh_CN",
+      url: SITE_URL,
+      siteName: "Office元数据编辑器",
+      title: "Office元数据在线编辑器 - 免费修改Word/Excel/PDF文档属性",
+      description:
+        "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
+      images: [
+        {
+          url: "/og-default.png",
+          width: 1200,
+          height: 630,
+          alt: "Office元数据编辑器",
+        },
+      ],
+    },
 
-  verification: {
-    // Placeholder for Google/Bing/Baidu verification codes
-    // google: "",
-    // yandex: "",
-    // other: { "baidu-site-verification": "" },
-  },
+    twitter: {
+      card: "summary_large_image",
+      title: "Office元数据在线编辑器 - 免费修改文档属性，全程本地处理",
+      description:
+        "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
+      images: ["/og-default.png"],
+    },
 
-  appleWebApp: {
-    capable: true,
-    title: "Office元数据编辑器",
-    statusBarStyle: "default",
-  },
+    verification: {
+      // Placeholder for Google/Bing/Baidu verification codes
+      // google: "",
+      // yandex: "",
+      // other: { "baidu-site-verification": "" },
+    },
 
-  formatDetection: {
-    telephone: false,
-  },
+    appleWebApp: {
+      capable: true,
+      title: "Office元数据编辑器",
+      statusBarStyle: "default",
+    },
+
+    formatDetection: {
+      telephone: false,
+    },
+
+    icons: { icon: "/logo.svg" },
+  }
 }
 
 declare module "react" {
@@ -105,9 +119,18 @@ declare module "react" {
   }
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  let locale = "zh-CN"
+  let messages: Record<string, unknown> = {}
+  try {
+    locale = await getLocale()
+    messages = (await getMessages()) as Record<string, unknown>
+  } catch {
+    // fallback during static generation (e.g. _global-error)
+  }
+
   return (
-    <html lang="zh-CN" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="icon" type="image/svg+xml" href="/logo.svg" />
         <link rel="apple-touch-icon" href="/logo.svg" />
@@ -143,7 +166,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans antialiased">
-        <ClientLayout>{children}</ClientLayout>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ClientLayout>{children}</ClientLayout>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

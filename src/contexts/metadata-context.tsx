@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react"
+import { useTranslations } from "next-intl"
 import type { DocumentMetadata, MetadataSection } from "@/types/metadata"
 import { useFileContext } from "@/contexts/file-context"
 import {
@@ -120,6 +121,8 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
     updateFileStatus,
   } = useFileContext()
 
+  const tp = useTranslations("progress")
+
   const [documentsById, setDocumentsById] = useState<Record<string, DocumentState>>({})
   const loadingIdsRef = useRef<Set<string>>(new Set())
 
@@ -144,7 +147,7 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
       loadingIdsRef.current.add(file.id)
       updateFileStatus(file.id, {
         status: "reading",
-        progressMessage: "读取中...",
+        progressMessage: tp("reading"),
         error: undefined,
       })
 
@@ -164,7 +167,7 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
           }))
           updateFileStatus(file.id, {
             status: "ready",
-            progressMessage: "已就绪",
+            progressMessage: tp("ready"),
             error: undefined,
           })
         })
@@ -172,7 +175,7 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
           console.error("解析文件失败:", error)
           updateFileStatus(file.id, {
             status: "error",
-            progressMessage: "读取失败",
+            progressMessage: tp("readFailed"),
             error: String(error),
           })
         })
@@ -180,7 +183,7 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
           loadingIdsRef.current.delete(file.id)
         })
     })
-  }, [files, documentsById, updateFileStatus])
+  }, [files, documentsById, updateFileStatus, tp])
 
   const documents = useMemo<LoadedDocument[]>(() => {
     const loaded = files.map<LoadedDocument>(file => {
@@ -205,7 +208,7 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
     ? (documents.find(item => item.id === activeFileId) ?? documents[0] ?? null)
     : (documents[0] ?? null)
   const activeDocumentId = activeDocument?.id ?? null
-  const metadata = activeDocument?.metadata ?? createPlaceholderMetadata("未选择文件")
+  const metadata = activeDocument?.metadata ?? createPlaceholderMetadata("")
   const hasChanges = activeDocument?.hasChanges ?? false
   const isLoading = isFileLoading || loadingIdsRef.current.size > 0
 
@@ -320,7 +323,7 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
       const target = documents.find(item => item.id === documentId)
       if (!target) return
 
-      updateFileStatus(documentId, { status: "processing", progressMessage: "保存中..." })
+      updateFileStatus(documentId, { status: "processing", progressMessage: tp("saving") })
 
       const resource = getDocumentResourceByPath(target.filePath)
       await resource.replace(target.filePath, target.metadata)
@@ -340,11 +343,11 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
 
       updateFileStatus(documentId, {
         status: "ready",
-        progressMessage: "已同步",
+        progressMessage: tp("synced"),
         error: undefined,
       })
     },
-    [documents, updateFileStatus],
+    [documents, updateFileStatus, tp],
   )
 
   const saveCurrent = useCallback(async () => {
@@ -359,14 +362,14 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
 
       updateFileStatus(documentId, {
         status: "processing",
-        progressMessage: "清理并保存中...",
+        progressMessage: tp("clearingAndSaving"),
       })
 
       const resource = getDocumentResourceByPath(target.filePath)
       const results = await resource.destroyMetadataMany([target.filePath])
 
       if (!results[0]?.success) {
-        updateFileStatus(documentId, { status: "error", progressMessage: "处理失败" })
+        updateFileStatus(documentId, { status: "error", progressMessage: tp("processFailed") })
         return
       }
 
@@ -384,11 +387,11 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
 
       updateFileStatus(documentId, {
         status: "ready",
-        progressMessage: "已同步",
+        progressMessage: tp("synced"),
         error: undefined,
       })
     },
-    [documents, updateFileStatus],
+    [documents, updateFileStatus, tp],
   )
 
   const saveCurrentAs = useCallback(async () => {
@@ -422,7 +425,7 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
     documents.forEach(item => {
       updateFileStatus(item.id, {
         status: "processing",
-        progressMessage: "批量清理并保存中...",
+        progressMessage: tp("batchClearingAndSaving"),
       })
     })
 
@@ -471,9 +474,9 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
     })
 
     refreshed.forEach(item => {
-      updateFileStatus(item.id, { status: "ready", progressMessage: "已同步", error: undefined })
+      updateFileStatus(item.id, { status: "ready", progressMessage: tp("synced"), error: undefined })
     })
-  }, [documents, updateFileStatus])
+  }, [documents, updateFileStatus, tp])
 
   const batchSaveAll = useCallback(async () => {
     const items: BatchSaveRequestItem[] = documents
@@ -484,7 +487,7 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
 
     documents.forEach(item => {
       if (item.hasChanges) {
-        updateFileStatus(item.id, { status: "processing", progressMessage: "批量保存中..." })
+        updateFileStatus(item.id, { status: "processing", progressMessage: tp("batchSaving") })
       }
     })
 
@@ -523,10 +526,10 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
 
     documents.forEach(item => {
       if (successPathSet.has(item.filePath)) {
-        updateFileStatus(item.id, { status: "ready", progressMessage: "已同步", error: undefined })
+        updateFileStatus(item.id, { status: "ready", progressMessage: tp("synced"), error: undefined })
       }
     })
-  }, [documents, updateFileStatus])
+  }, [documents, updateFileStatus, tp])
 
   const downloadFile = useCallback(async () => {
     await saveCurrentAs()

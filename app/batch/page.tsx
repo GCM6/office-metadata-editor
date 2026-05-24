@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useMemo, useState } from "react"
+import { useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import {
   Table,
@@ -21,6 +22,8 @@ export default function BatchPage() {
   const { files, openFiles, removeFile, clearFiles } = useFileContext()
   const { documents, saveDocument, clearAndSaveDocument, batchSaveAll, batchClearAndSave } =
     useMetadata()
+  const t = useTranslations("batch")
+  const tp = useTranslations("progress")
 
   const [actionStatus, setActionStatus] = useState<string | null>(null)
 
@@ -90,13 +93,13 @@ export default function BatchPage() {
   }
 
   const handleSaveOne = async (id: string) => {
-    await runAction("正在保存文件...", async () => {
+    await runAction(t("savingFile"), async () => {
       await saveDocument(id)
     })
   }
 
   const handleClearAndSaveOne = async (id: string) => {
-    await runAction("正在清理并保存...", async () => {
+    await runAction(t("clearingAndSaving"), async () => {
       await clearAndSaveDocument(id)
     })
   }
@@ -104,7 +107,7 @@ export default function BatchPage() {
   const handleBatchSave = async () => {
     if (rows.length === 0) return
 
-    await runAction("批量保存中...", async () => {
+    await runAction(t("batchSaving"), async () => {
       await batchSaveAll()
     })
   }
@@ -112,7 +115,7 @@ export default function BatchPage() {
   const handleBatchClearAndSave = async () => {
     if (rows.length === 0) return
 
-    await runAction("批量清理并保存中...", async () => {
+    await runAction(t("batchClearingAndSaving"), async () => {
       await batchClearAndSave()
     })
   }
@@ -130,14 +133,14 @@ export default function BatchPage() {
       backTo="/"
       header={
         <div className="flex flex-col leading-tight select-none">
-          <span className="text-sm font-medium text-foreground">批量处理</span>
+          <span className="text-sm font-medium text-foreground">{t("title")}</span>
         </div>
       }
       actions={
         <OmBatchToolbar
           hasFiles={rows.length > 0}
           isBusy={isBusy}
-          busyText={actionStatus ?? (isBusy ? "后台处理中..." : undefined)}
+          busyText={actionStatus ?? (isBusy ? t("processing") : undefined)}
           onAddFiles={handleOpenFiles}
           onBatchSave={handleBatchSave}
           onBatchClearAndSave={handleBatchClearAndSave}
@@ -149,24 +152,24 @@ export default function BatchPage() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>文件名</TableHead>
-              <TableHead>作者</TableHead>
-              <TableHead>修改时间</TableHead>
-              <TableHead>状态</TableHead>
-              <TableHead className="text-right">操作</TableHead>
+              <TableHead>{t("fileName")}</TableHead>
+              <TableHead>{t("author")}</TableHead>
+              <TableHead>{t("modified")}</TableHead>
+              <TableHead>{t("status")}</TableHead>
+              <TableHead className="text-right">{t("actions")}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {rows.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={5} className="py-10 text-center text-sm text-muted-foreground">
-                  暂无待处理文件，请先点击"添加文件"。
+                  {t("noFiles")}
                 </TableCell>
               </TableRow>
             ) : (
               rows.map(row => {
                 const statusMessage =
-                  row.error || row.progressMessage || (row.hasChanges ? "待处理" : "已同步")
+                  row.error || row.progressMessage || (row.hasChanges ? tp("pending") : tp("synced"))
                 const disableActions =
                   isBusy || row.status === "processing" || row.status === "reading"
 
@@ -181,11 +184,11 @@ export default function BatchPage() {
                         </TooltipTrigger>
                         <TooltipContent side="top" align="start" className="max-w-xs">
                           <div className="space-y-1 text-xs">
-                            <div>路径：{row.filePath}</div>
-                            <div>类型：{row.fileType}</div>
-                            <div>大小：{formatFileSize(row.fileSize)}</div>
-                            <div>作者：{row.author}</div>
-                            <div>修改时间：{row.modified}</div>
+                            <div>{t("path")}：{row.filePath}</div>
+                            <div>{t("type")}：{row.fileType}</div>
+                            <div>{t("size")}：{formatFileSize(row.fileSize)}</div>
+                            <div>{t("author")}：{row.author}</div>
+                            <div>{t("modified")}：{row.modified}</div>
                           </div>
                         </TooltipContent>
                       </Tooltip>
@@ -205,7 +208,7 @@ export default function BatchPage() {
                           disabled={disableActions}
                           onClick={() => handleRemoveFile(row.id)}
                         >
-                          移除
+                          {t("remove")}
                         </Button>
                         <Button
                           size="sm"
@@ -213,14 +216,14 @@ export default function BatchPage() {
                           disabled={disableActions}
                           onClick={() => void handleClearAndSaveOne(row.id)}
                         >
-                          清空并保存
+                          {t("clearAndSave")}
                         </Button>
                         <Button
                           size="sm"
                           disabled={disableActions}
                           onClick={() => void handleSaveOne(row.id)}
                         >
-                          保存
+                          {t("save")}
                         </Button>
                       </div>
                     </TableCell>

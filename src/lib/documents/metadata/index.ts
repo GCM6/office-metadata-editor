@@ -39,9 +39,10 @@ export function resolveMetadataSections(
 export function resolveMetadataPreviewGroups(
   fileType: DocumentFileType,
   metadata: DocumentMetadata,
+  locale = "zh-CN",
 ): MetadataPreviewGroup[] {
   const schema = resolveMetadataSchema(fileType)
-  return buildMetadataPreviewGroups(schema, metadata)
+  return buildMetadataPreviewGroups(schema, metadata, locale)
 }
 
 export function applyMetadataFieldUpdate(

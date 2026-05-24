@@ -1,4 +1,7 @@
+"use client"
+
 import React, { useMemo } from "react"
+import { useLocale, useTranslations } from "next-intl"
 import type { FileEntry } from "@/contexts/file-context"
 import type { LoadedDocument } from "@/contexts/metadata-context"
 import {
@@ -35,6 +38,8 @@ export const EditorPageSidebar: React.FC<EditorPageSidebarProps> = ({
   onSelectFile,
   onRemoveFile,
 }) => {
+  const t = useTranslations("editor")
+  const locale = useLocale()
   const documentMap = useMemo(() => {
     return new Map(documents.map(item => [item.id, item]))
   }, [documents])
@@ -52,13 +57,13 @@ export const EditorPageSidebar: React.FC<EditorPageSidebarProps> = ({
           onClick={onOpenFiles}
         >
           <FilePlus2 className="h-4 w-4 shrink-0" />
-          <span className="group-data-[collapsible=icon]:hidden">添加文件</span>
+          <span className="group-data-[collapsible=icon]:hidden">{t("addFile")}</span>
         </Button>
       </SidebarHeader>
       <SidebarSeparator className="m-0" />
       <SidebarContent>
         <SidebarGroup className="px-2 py-1.5">
-          <SidebarGroupLabel>文件列表</SidebarGroupLabel>
+          <SidebarGroupLabel>{t("fileList")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {files.map(item => {
@@ -68,7 +73,7 @@ export const EditorPageSidebar: React.FC<EditorPageSidebarProps> = ({
                 const {hasChanges} = doc
                 const {modified} = doc.metadata.documentProperties
                 const {created} = doc.metadata.documentProperties
-                const displayTime = formatRelativeTime(modified || created)
+                const displayTime = formatRelativeTime(modified || created, locale)
 
                 return (
                   <SidebarMenuItem key={item.id}>
@@ -82,7 +87,7 @@ export const EditorPageSidebar: React.FC<EditorPageSidebarProps> = ({
                       <div className="min-w-0 flex-1 group-data-[collapsible=icon]:hidden">
                         <div className="truncate pr-1 text-sm font-medium">{fileName}</div>
                         {hasChanges ? (
-                          <div className="truncate pr-1 text-xs text-primary">有未保存修改</div>
+                          <div className="truncate pr-1 text-xs text-primary">{t("unsavedChanges")}</div>
                         ) : (
                           <div className="truncate pr-1 text-xs text-muted-foreground">
                             {displayTime}
@@ -96,7 +101,7 @@ export const EditorPageSidebar: React.FC<EditorPageSidebarProps> = ({
                       </div>
                     </SidebarMenuButton>
                     <SidebarMenuAction
-                      aria-label={`移除 ${fileName}`}
+                      aria-label={t("removeFile", { fileName })}
                       className="top-1.5 right-1.5 rounded-md text-muted-foreground peer-data-active/menu-button:text-muted-foreground hover:bg-destructive/12 hover:text-destructive"
                       onClick={event => {
                         event.stopPropagation()
