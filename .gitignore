@@ -36,3 +36,7 @@ yarn.lock
 
 # Test artifacts
 test-results/
+
+# Routa auto-generated
+AGENTS.md
+CLAUDE.md
