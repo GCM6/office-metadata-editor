@@ -2,21 +2,19 @@
 
 import React, { useTransition } from "react"
 import { useLocale, useTranslations } from "next-intl"
-import { usePathname, useRouter } from "./navigation"
 import { Button } from "@/components/ui/button"
 import { Languages } from "lucide-react"
 
 export function LanguageSwitcher() {
   const locale = useLocale()
-  const router = useRouter()
-  const pathname = usePathname()
   const t = useTranslations("common")
   const [isPending, startTransition] = useTransition()
 
   const handleToggle = () => {
     const nextLocale = locale === "zh-CN" ? "en" : "zh-CN"
     startTransition(() => {
-      router.replace(pathname, { locale: nextLocale })
+      document.cookie = `NEXT_LOCALE=${nextLocale}; path=/; max-age=31536000; SameSite=Lax`
+      window.location.reload()
     })
   }
 
