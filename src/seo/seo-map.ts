@@ -1,0 +1,241 @@
+import type { SeoPageContract } from "./seo-types"
+
+export const seoMap: Record<string, SeoPageContract> = {
+  home: {
+    pageCode: "home",
+    path: "/",
+    level: 1,
+    pageType: "home",
+    primaryKeyword: "Office元数据在线编辑器",
+    secondaryKeywords: [
+      "在线修改Office文档属性",
+      "清除文档元数据",
+      "Word作者信息修改",
+      "PDF属性编辑",
+      "Excel元数据清除",
+      "DOCX元数据编辑器",
+      "免费在线元数据工具",
+      "隐私保护文档工具",
+      "批量处理Office元数据",
+    ],
+    intent: "mixed",
+    serpPageType: "home",
+    indexable: true,
+    title: "Office元数据在线编辑器 - 免费修改Word/Excel/PDF文档属性 | 全程本地处理",
+    description:
+      "专业的在线Office元数据编辑器，支持Word(.docx)、Excel(.xlsx)、PDF文件，无需上传服务器，全程本地处理，保护您的文档隐私。可批量修改作者、创建时间等元数据属性。",
+    keywords: [
+      "Office元数据编辑器",
+      "修改文档属性",
+      "在线清除元数据",
+      "Word作者修改",
+      "PDF属性编辑",
+    ],
+    h1: "Office 元数据在线编辑器",
+    canonical: "/",
+    alternates: {
+      en: "/en",
+    },
+    og: {
+      title: "Office元数据在线编辑器 - 免费修改文档属性，全程本地处理",
+      description:
+        "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
+      image: "/og-default.png",
+    },
+    schemaTypes: ["Organization", "WebSite"],
+    internalLinksTo: [],
+    paaQuestions: [
+      "如何在线修改Word文档的作者信息？",
+      "Office文档元数据包含哪些信息？",
+      "PDF文件的属性信息可以修改吗？",
+      "如何批量清除多个文档的元数据？",
+      "在线修改文档元数据安全吗？",
+    ],
+    status: "published",
+  },
+
+  "tool.word": {
+    pageCode: "tool.word",
+    path: "/tools/word",
+    level: 2,
+    pageType: "tool-detail",
+    primaryKeyword: "在线修改Word文档属性",
+    secondaryKeywords: [
+      "修改DOCX作者",
+      "清除Word元数据",
+      "Word文档隐私保护",
+      "docx属性编辑器在线",
+    ],
+    intent: "transactional",
+    serpPageType: "tool-detail",
+    indexable: false,
+    parentPageCode: "home",
+    title: "在线修改Word文档属性 - 修改作者、清除元数据 | Office元数据编辑器",
+    description:
+      "免费在线修改Word(.docx)文档属性，轻松删除原始作者、公司名称、修改日期等隐藏信息。无需安装软件，全程本地处理，保护文档隐私。",
+    h1: "Word 文档元数据在线编辑器",
+    canonical: "/tools/word",
+    internalLinksTo: ["home", "tool.pdf", "tool.excel"],
+    paaQuestions: [
+      "Word文档的元数据在哪里查看？",
+      "修改Word文档属性后对方能发现吗？",
+      "如何彻底删除Word文档中的个人隐私信息？",
+      "DOCX和DOC的元数据有什么区别？",
+    ],
+    status: "draft",
+  },
+
+  "tool.excel": {
+    pageCode: "tool.excel",
+    path: "/tools/excel",
+    level: 2,
+    pageType: "tool-detail",
+    primaryKeyword: "在线修改Excel文档属性",
+    secondaryKeywords: ["修改XLSX属性", "清除Excel元数据", "Excel工作簿信息修改"],
+    intent: "transactional",
+    serpPageType: "tool-detail",
+    indexable: false,
+    parentPageCode: "home",
+    title: "在线修改Excel文档属性 - 清除工作簿元数据 | Office元数据编辑器",
+    description:
+      "免费在线修改Excel(.xlsx)文档属性，编辑作者、标题、公司等工作簿信息。全程本地处理，无需上传文件，保障数据安全。",
+    h1: "Excel 工作簿元数据在线编辑器",
+    canonical: "/tools/excel",
+    internalLinksTo: ["home", "tool.word", "tool.pdf"],
+    paaQuestions: [
+      "Excel工作簿的元数据包含哪些信息？",
+      "如何批量修改多个Excel文件的属性？",
+      "Excel属性修改后会影响公式和图表吗？",
+    ],
+    status: "draft",
+  },
+
+  "tool.pdf": {
+    pageCode: "tool.pdf",
+    path: "/tools/pdf",
+    level: 2,
+    pageType: "tool-detail",
+    primaryKeyword: "在线修改PDF文档属性",
+    secondaryKeywords: ["修改PDF元数据", "清除PDF属性信息", "PDF作者修改", "PDF信息编辑"],
+    intent: "transactional",
+    serpPageType: "tool-detail",
+    indexable: false,
+    parentPageCode: "home",
+    title: "在线修改PDF文档属性 - 编辑PDF元数据信息 | Office元数据编辑器",
+    description:
+      "免费在线编辑PDF文档属性，修改作者、标题、主题等元数据信息。无需安装Adobe Acrobat，全程本地处理，安全便捷。",
+    h1: "PDF 文档元数据在线编辑器",
+    canonical: "/tools/pdf",
+    internalLinksTo: ["home", "tool.word", "tool.excel"],
+    paaQuestions: [
+      "PDF文件的元数据存储在什么地方？",
+      "将Word转为PDF后元数据会保留吗？",
+      "如何彻底清除PDF中的所有隐藏信息？",
+      "在线修改PDF属性需要上传文件吗？",
+    ],
+    status: "draft",
+  },
+
+  editor: {
+    pageCode: "editor",
+    path: "/editor",
+    level: 1,
+    pageType: "tool-detail",
+    primaryKeyword: "Office元数据在线编辑",
+    secondaryKeywords: [
+      "文档元数据编辑器",
+      "在线查看修改文档属性",
+      "docx属性编辑",
+      "xlsx元数据修改",
+    ],
+    intent: "transactional",
+    serpPageType: "tool-detail",
+    indexable: false,
+    parentPageCode: "home",
+    title: "Office元数据在线编辑 | Office元数据编辑器",
+    description:
+      "在线编辑Office文档元数据，支持Word、Excel、PDF文件。直接在浏览器中修改文档属性，全程本地处理，安全高效。",
+    h1: "Office 文档元数据编辑",
+    canonical: "/editor",
+    internalLinksTo: ["home"],
+    status: "published",
+  },
+
+  batch: {
+    pageCode: "batch",
+    path: "/batch",
+    level: 1,
+    pageType: "tool-detail",
+    primaryKeyword: "Office元数据批量处理",
+    secondaryKeywords: ["批量修改文档属性", "批量清除元数据", "批量处理Office文件"],
+    intent: "transactional",
+    serpPageType: "tool-detail",
+    indexable: false,
+    parentPageCode: "home",
+    title: "Office元数据批量处理 - 一键修改多个文档属性 | Office元数据编辑器",
+    description:
+      "批量处理Office文档元数据，支持同时修改多个Word、Excel、PDF文件的属性。一键清除或批量替换，大幅提升工作效率。",
+    h1: "批量处理 Office 文档元数据",
+    canonical: "/batch",
+    internalLinksTo: ["home"],
+    status: "published",
+  },
+
+  blog: {
+    pageCode: "blog",
+    path: "/blog",
+    level: 2,
+    pageType: "blog-hub",
+    primaryKeyword: "Office文档元数据知识",
+    secondaryKeywords: ["文档隐私保护指南", "元数据修改技巧", "Office安全使用"],
+    intent: "informational",
+    serpPageType: "blog-hub",
+    indexable: false,
+    parentPageCode: "home",
+    title: "Office文档元数据知识 - 隐私保护与编辑技巧 | Office元数据编辑器",
+    description:
+      "学习Office文档元数据相关知识，了解如何保护文档隐私、修改文档属性、清除隐藏信息。专业实用的Office文档安全使用指南。",
+    h1: "Office 文档元数据知识库",
+    canonical: "/blog",
+    internalLinksTo: ["home", "tool.word", "tool.excel", "tool.pdf"],
+    status: "draft",
+  },
+
+  "blog.remove-author-docx": {
+    pageCode: "blog.remove-author-docx",
+    path: "/blog/remove-original-author-docx",
+    level: 3,
+    pageType: "blog-post",
+    primaryKeyword: "如何删除Word文档中的原始作者信息",
+    secondaryKeywords: [
+      "彻底清除docx个人隐私",
+      "Word文档作者怎么修改",
+      "删除文档属性信息",
+      "Office文档安全检查",
+    ],
+    intent: "informational",
+    serpPageType: "blog-post",
+    indexable: false,
+    parentPageCode: "blog",
+    title: "如何彻底删除Word文档中的原始作者信息？完整指南 | Office元数据编辑器",
+    description:
+      "教你如何彻底删除Word(.docx)文档中的原始作者、公司名称、修订记录等隐藏元数据。保护文档隐私，避免敏感信息泄露的专业指南。",
+    h1: "如何彻底删除 Word 文档中的原始作者信息",
+    canonical: "/blog/remove-original-author-docx",
+    internalLinksTo: ["tool.word", "home"],
+    paaQuestions: [
+      "Word文档中有哪些隐藏的元数据？",
+      "删除文档属性后对方还能看到吗？",
+      "如何批量删除多个Word文档的隐私信息？",
+    ],
+    status: "draft",
+  },
+}
+
+export function getPublishedPages(): SeoPageContract[] {
+  return Object.values(seoMap).filter((page) => page.status === "published" && page.indexable)
+}
+
+export function getIndexablePages(): SeoPageContract[] {
+  return Object.values(seoMap).filter((page) => page.indexable)
+}
