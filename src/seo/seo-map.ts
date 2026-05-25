@@ -76,13 +76,14 @@ export const seoMap: Record<string, SeoPageContract> = {
     h1: "Word 文档元数据在线编辑器",
     canonical: "/tools/word",
     internalLinksTo: ["home", "tool.pdf", "tool.excel"],
+    schemaTypes: ["FAQPage"],
     paaQuestions: [
       "Word文档的元数据在哪里查看？",
       "修改Word文档属性后对方能发现吗？",
       "如何彻底删除Word文档中的个人隐私信息？",
       "DOCX和DOC的元数据有什么区别？",
     ],
-    status: "draft",
+    status: "published",
   },
 
   "tool.excel": {
@@ -102,12 +103,13 @@ export const seoMap: Record<string, SeoPageContract> = {
     h1: "Excel 工作簿元数据在线编辑器",
     canonical: "/tools/excel",
     internalLinksTo: ["home", "tool.word", "tool.pdf"],
+    schemaTypes: ["FAQPage"],
     paaQuestions: [
       "Excel工作簿的元数据包含哪些信息？",
       "如何批量修改多个Excel文件的属性？",
       "Excel属性修改后会影响公式和图表吗？",
     ],
-    status: "draft",
+    status: "published",
   },
 
   "tool.pdf": {
@@ -127,13 +129,14 @@ export const seoMap: Record<string, SeoPageContract> = {
     h1: "PDF 文档元数据在线编辑器",
     canonical: "/tools/pdf",
     internalLinksTo: ["home", "tool.word", "tool.excel"],
+    schemaTypes: ["FAQPage"],
     paaQuestions: [
       "PDF文件的元数据存储在什么地方？",
       "将Word转为PDF后元数据会保留吗？",
       "如何彻底清除PDF中的所有隐藏信息？",
       "在线修改PDF属性需要上传文件吗？",
     ],
-    status: "draft",
+    status: "published",
   },
 
   editor: {
@@ -198,7 +201,8 @@ export const seoMap: Record<string, SeoPageContract> = {
     h1: "Office 文档元数据知识库",
     canonical: "/blog",
     internalLinksTo: ["home", "tool.word", "tool.excel", "tool.pdf"],
-    status: "draft",
+    schemaTypes: ["ItemList"],
+    status: "published",
   },
 
   "blog.remove-author-docx": {
@@ -223,12 +227,13 @@ export const seoMap: Record<string, SeoPageContract> = {
     h1: "如何彻底删除 Word 文档中的原始作者信息",
     canonical: "/blog/remove-original-author-docx",
     internalLinksTo: ["tool.word", "home"],
+    schemaTypes: ["Article", "BreadcrumbList"],
     paaQuestions: [
       "Word文档中有哪些隐藏的元数据？",
       "删除文档属性后对方还能看到吗？",
       "如何批量删除多个Word文档的隐私信息？",
     ],
-    status: "draft",
+    status: "published",
   },
 }
 
