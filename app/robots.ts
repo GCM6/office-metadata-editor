@@ -8,12 +8,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: [],
       },
       {
         userAgent: "Baiduspider",
         allow: "/",
-        disallow: ["/api/", "/_next/"],
+        disallow: [],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
