@@ -62,6 +62,8 @@ export async function generateMetadata(): Promise<Metadata> {
       "Word author editor",
       "PDF properties editor",
       "Excel metadata cleaner",
+      "DOCX metadata editor",
+      "free online metadata tool",
     ],
     authors: [{ name: APP_NAME }],
     creator: APP_NAME,
