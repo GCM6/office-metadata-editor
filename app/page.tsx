@@ -2,7 +2,7 @@
 
 export const dynamic = "force-dynamic"
 
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
@@ -44,8 +44,10 @@ export default function HomePage() {
   const { theme, resolvedTheme, setTheme } = useTheme()
   const t = useTranslations("home")
   const tc = useTranslations("common")
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     clearFiles()
   }, [clearFiles])
 
@@ -75,7 +77,9 @@ export default function HomePage() {
                   size="sm"
                   className="gap-2 rounded-full bg-card/75 backdrop-blur-sm"
                 >
-                  {theme === "system" ? (
+                  {!mounted ? (
+                    <Sun className="h-4 w-4" />
+                  ) : theme === "system" ? (
                     <CloudSun className="h-4 w-4" />
                   ) : resolvedTheme === "dark" ? (
                     <Moon className="h-4 w-4" />

@@ -24,7 +24,6 @@
     "rsplit",
     "tauri",
     "vaul",
-    "zhengxs"
   ],
   "allowCompoundWords": true,
   "overrides": []

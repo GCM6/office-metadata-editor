@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Office 元数据编辑器",
   "type": "module",
-  "author": "zhengxs2018",
+  "author": "m",
   "license": "SEE LICENSE IN LICENSE FILE",
   "engines": {
     "node": ">=24.14.0"
