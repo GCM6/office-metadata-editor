@@ -1,8 +1,13 @@
+"use client"
+
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 import { seoMap } from "../seo-map"
 
 export function RelatedLinks({ currentPageCode }: { currentPageCode: string }) {
   const currentSeo = seoMap[currentPageCode]
+  const t = useTranslations("seo")
+
   if (!currentSeo || !currentSeo.internalLinksTo.length) return null
 
   const targets = currentSeo.internalLinksTo
@@ -17,7 +22,7 @@ export function RelatedLinks({ currentPageCode }: { currentPageCode: string }) {
 
   return (
     <div className="related-links rounded-lg border border-border/60 bg-muted/40 p-6">
-      <h4 className="text-sm font-semibold text-foreground mb-3">相关工具推荐</h4>
+      <h4 className="text-sm font-semibold text-foreground mb-3">{t("relatedToolsTitle")}</h4>
       <div className="flex flex-wrap gap-3">
         {targets.map((target) => (
           <Link

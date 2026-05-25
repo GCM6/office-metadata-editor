@@ -2,23 +2,13 @@
 
 import "@/style/base.css"
 import "@/style/chrome.css"
+import zhCN from "../messages/zh-CN.json"
+import en from "../messages/en.json"
 
-interface Messages {
-  error: { somethingWentWrong: string; retry: string }
-}
-
-const zhCN: Messages = {
-  error: { somethingWentWrong: "出了点问题", retry: "重试" },
-}
-
-const en: Messages = {
-  error: { somethingWentWrong: "Something went wrong", retry: "Retry" },
-}
-
-function getMessages(): Messages {
-  if (typeof document === "undefined") return zhCN
+function getLocale(): string {
+  if (typeof document === "undefined") return "zh-CN"
   const match = document.cookie.match(/(?:^|;\s*)NEXT_LOCALE=([^;]*)/)
-  return match?.[1] === "en" ? en : zhCN
+  return match?.[1] === "en" ? "en" : "zh-CN"
 }
 
 export default function GlobalError({
@@ -28,10 +18,11 @@ export default function GlobalError({
   error: Error & { digest?: string }
   reset(): void
 }) {
-  const msgs = getMessages()
+  const locale = getLocale()
+  const msgs = locale === "en" ? en : zhCN
 
   return (
-    <html lang={typeof document !== "undefined" && getMessages() === en ? "en" : "zh-CN"}>
+    <html lang={locale}>
       <body className="flex min-h-screen items-center justify-center bg-background font-sans antialiased">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-foreground">{msgs.error.somethingWentWrong}</h1>
