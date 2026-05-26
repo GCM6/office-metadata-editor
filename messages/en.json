@@ -9,7 +9,33 @@
     "systemFollow": "System",
     "dragArea": "Window drag area",
     "langZh": "中",
-    "langEn": "EN"
+    "langEn": "EN",
+    "notFoundTitle": "Page Not Found | Office Metadata Editor",
+    "notFoundHeading": "Page Not Found",
+    "notFoundDescription": "The page you requested does not exist. It may have been removed or the address may be incorrect.",
+    "notFoundBackHome": "Back to Home",
+    "footerCopyright": "© {year} zhengxs2018",
+    "layoutDescription": "A professional online Office metadata editor supporting Word (.docx), Excel (.xlsx), and PDF files. No server upload required — all processing happens locally to protect your document privacy. Edit author, creation time, and other metadata properties in batch.",
+    "layoutKeywords": [
+      "Office metadata editor",
+      "edit document properties",
+      "remove metadata online",
+      "Word author editor",
+      "PDF properties editor",
+      "Excel metadata cleaner",
+      "DOCX metadata editor",
+      "free online metadata tool"
+    ],
+    "layoutOgTitle": "Office Metadata Editor — Edit Word/Excel/PDF Properties Online for Free",
+    "layoutOgDescription": "Edit Word, Excel, and PDF metadata online — no server upload, protecting document privacy. Supports batch processing and one-click removal of sensitive information.",
+    "layoutOgImageAlt": "Office Metadata Editor",
+    "layoutTwitterTitle": "Office Metadata Editor — Edit Document Properties Online, 100% Local",
+    "layoutTwitterDescription": "Edit Word, Excel, and PDF metadata online — no server upload, protecting document privacy. Supports batch processing and one-click removal of sensitive information.",
+    "layoutJsonLdOrgName": "Office Metadata Editor",
+    "layoutJsonLdOrgDesc": "A professional online Office metadata editor supporting Word, Excel, and PDF file metadata editing and removal. All processing is local to protect document privacy.",
+    "layoutJsonLdWebSiteName": "Office Metadata Editor",
+    "layoutAppleWebAppTitle": "Office Metadata Editor",
+    "layoutTitleTemplate": "%s | Office Metadata Editor"
   },
   "home": {
     "enterWorkState": "Ready in a second",
@@ -22,7 +48,51 @@
     "moreComing": "More advanced features are on the way, stay tuned.",
     "dragUploadStart": "Drag && Drop to Upload",
     "singleOrBatchDesc": "Edit single files or batch process multiple files from here",
-    "supportedFileTypes": "Supported File Types"
+    "supportedFileTypes": "Supported File Types",
+    "seoSectionTitle": "One-Stop Office Document Metadata Processing",
+    "seoSectionDesc": "Office Metadata Editor is a professional online Office document property management tool. Whether you need to <strong>edit Word document author information</strong>, <strong>remove hidden properties from PDF files</strong>, or <strong>batch process Excel workbook metadata</strong>, it can all be done in one place right in your browser. All processing is performed locally — your files never leave your device, fully ensuring data security and document privacy.",
+    "featureWordTitle": "Word Document Metadata",
+    "featureWordDesc": "Edit DOCX document properties such as author, title, company, and creation time online. Supports removing sensitive metadata like revision history and hidden information to protect your document privacy from leaks.",
+    "featureExcelTitle": "Excel Workbook Properties",
+    "featureExcelDesc": "Edit XLSX workbook author, title, tags, notes, and more. Batch clear metadata from multiple Excel files — ideal for enterprise document compliance checks and information security management.",
+    "featurePdfTitle": "PDF Properties Editor",
+    "featurePdfDesc": "Edit PDF file title, author, subject, keywords, and other metadata online. No need to install Adobe Acrobat — operate directly in your browser, safe and efficient.",
+    "faqTitle": "Frequently Asked Questions",
+    "faqItems": [
+      {
+        "q": "How to edit the author information of a Word document online?",
+        "a": "Open the Office Metadata Editor, upload your Word document, locate the author field in the editor interface, modify it, and save. The entire process is done locally in your browser — your document is never uploaded to any server."
+      },
+      {
+        "q": "What information is included in Office document metadata?",
+        "a": "Metadata includes author name, creation time, modification time, company name, title, subject, tags, notes, and more. This information may inadvertently leak your personal or company privacy."
+      },
+      {
+        "q": "Can PDF file properties be edited?",
+        "a": "Yes. Upload a PDF file through the online Office Metadata Editor to edit properties such as title, author, and subject. All processing is done locally in your browser, safe and convenient."
+      },
+      {
+        "q": "How to batch clear metadata from multiple documents?",
+        "a": "Open the Batch Workspace, add multiple files, and use the batch clear feature to remove metadata from all files in one click. Supports mixed batch processing of Word, Excel, and PDF files."
+      },
+      {
+        "q": "Is it safe to edit document metadata online?",
+        "a": "It is very safe. This tool processes everything locally in your browser. Your files are never uploaded to any server — all operations are completed on your device, fully protecting your data privacy."
+      },
+      {
+        "q": "Can others tell if Word document properties have been modified?",
+        "a": "No. Once you use this editor to modify or clear metadata fields (such as original author, creation date, revision history), the original information is permanently overwritten or deleted, and the file appears as if newly created."
+      }
+    ],
+    "quickEntry": "Quick Links",
+    "quickLinks": [
+      { "label": "Edit Word Document Properties Online", "href": "/editor" },
+      { "label": "Modify DOCX Author Information", "href": "/editor" },
+      { "label": "Clear Office Document Metadata", "href": "/editor" },
+      { "label": "Batch Edit Document Properties", "href": "/batch" },
+      { "label": "Edit PDF Properties Online", "href": "/editor" },
+      { "label": "Batch Clear Excel Metadata", "href": "/batch" }
+    ]
   },
   "batch": {
     "title": "Batch Processing",
@@ -97,5 +167,29 @@
   "utils": {
     "unknownTime": "Unknown time",
     "justNow": "Just now"
+  },
+  "seo": {
+    "faqTitle": "Frequently Asked Questions",
+    "faqAnswers": {
+      "edit-word-author": "Open the Office Metadata Editor, upload your Word document, locate the author field in the editor interface, modify it, and save. The entire process is done locally in your browser — your document is never uploaded to any server.",
+      "office-metadata-info": "Metadata includes author name, creation time, modification time, company name, title, subject, tags, notes, and more. This information may inadvertently leak your personal or company privacy.",
+      "edit-pdf-properties": "Yes. Upload a PDF file through the online Office Metadata Editor to edit properties such as title, author, and subject. All processing is done locally in your browser, safe and convenient.",
+      "batch-clear-metadata": "Open the Batch Workspace, add multiple files, and use the batch clear feature to remove metadata from all files in one click. Supports mixed batch processing of Word, Excel, and PDF files.",
+      "online-metadata-security": "It is very safe. This tool processes everything locally in your browser. Your files are never uploaded to any server — all operations are completed on your device, fully protecting your data privacy.",
+      "view-word-metadata": "In Word, go to File → Info → Properties → Advanced Properties to view complete metadata, including author, revision count, editing time, and other hidden data.",
+      "modify-word-detectable": "No. Once you use this editor to modify or clear metadata fields (such as original author, creation date, revision history), the original information is permanently overwritten or deleted, and the file appears as if newly created.",
+      "remove-word-privacy": "Upload your Word document to the editor, clear all personal fields (author, company, notes, etc.) in the metadata editing area, save, and download. It is also recommended to check custom properties in the document properties panel.",
+      "excel-metadata-info": "Excel workbook metadata includes author, creation date, modification date, company name, title, subject, category, and more. This information travels with the file and may leak sensitive information.",
+      "pdf-metadata-location": "PDF metadata is stored in the document information dictionary (Info Dictionary) in the PDF header, including standard fields such as title, author, subject, keywords, creation date, and modification date.",
+      "word-to-pdf-metadata": "Possibly. When converting DOCX to PDF, some metadata (such as original creator and company name) may be transferred to the PDF property fields. It is recommended to clear sensitive information before conversion or use the PDF metadata editor.",
+      "word-hidden-metadata": "In addition to document properties like author and title, Word documents may also contain revision marks, comment history, hidden text, document version information, printer paths, and other less obvious metadata.",
+      "delete-properties-visible": "After thorough removal with this tool, others cannot see the information. The tool removes the relevant fields from the document's internal XML structure rather than simply hiding them in the UI, ensuring the information is permanently deleted.",
+      "batch-delete-word-privacy": "Use the Batch Workspace to add multiple Word documents at once, select the batch clear metadata feature, and process all files simultaneously in one click, greatly improving efficiency.",
+      "batch-edit-excel-properties": "Through the batch processing feature, import multiple Excel files at once and edit or clear property information uniformly. Supports batch setting of common fields such as author and company.",
+      "excel-formula-impact": "No. Metadata editing only affects document property information (such as author, title, etc.) and does not touch the data, formulas, charts, or formatting within the workbook.",
+      "clear-pdf-hidden-info": "Upload your PDF file, clear all property fields in the editor, save and download. The tool uses the pdf-lib library to directly manipulate the PDF structure, ensuring information is completely removed.",
+      "online-pdf-upload": "No upload to any server is required. This tool runs locally in your browser, using web technologies to process PDF files directly on the client — your files remain on your device at all times."
+    },
+    "relatedToolsTitle": "Related Tools"
   }
 }

@@ -21,31 +21,49 @@ export const viewport: Viewport = {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  let title = "Office元数据在线编辑器 - 免费修改Word/Excel/PDF文档属性 | 全程本地处理"
+  let title = "Office Metadata Editor"
+  let description = "A professional online Office metadata editor supporting Word, Excel, and PDF files."
+  let ogTitle = "Office Metadata Editor"
+  let ogDescription = description
+  let ogImageAlt = "Office Metadata Editor"
+  let twitterTitle = ogTitle
+  let twitterDescription = ogDescription
+  let appleWebAppTitle = "Office Metadata Editor"
+  let titleTemplate = "%s | Office Metadata Editor"
+
   try {
     const t = await getTranslations("common")
     title = t("appTitle")
+    description = t("layoutDescription")
+    ogTitle = t("layoutOgTitle")
+    ogDescription = t("layoutOgDescription")
+    ogImageAlt = t("layoutOgImageAlt")
+    twitterTitle = t("layoutTwitterTitle")
+    twitterDescription = t("layoutTwitterDescription")
+    appleWebAppTitle = t("layoutAppleWebAppTitle")
+    titleTemplate = t("layoutTitleTemplate")
   } catch {
     // fallback during static generation
   }
+
+  const locale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE === "en" ? "en_US" : "zh_CN"
 
   return {
     metadataBase: new URL(SITE_URL),
     title: {
       default: title,
-      template: "%s | Office元数据编辑器",
+      template: titleTemplate,
     },
-    description:
-      "专业的在线Office元数据编辑器，支持Word(.docx)、Excel(.xlsx)、PDF文件，无需上传服务器，全程本地处理，保护您的文档隐私。可批量修改作者、创建时间等元数据属性。",
+    description,
     keywords: [
-      "Office元数据编辑器",
-      "修改文档属性",
-      "在线清除元数据",
-      "Word作者修改",
-      "PDF属性编辑",
-      "Excel元数据清除",
-      "DOCX元数据编辑器",
-      "免费在线元数据工具",
+      "Office metadata editor",
+      "edit document properties",
+      "remove metadata online",
+      "Word author editor",
+      "PDF properties editor",
+      "Excel metadata cleaner",
+      "DOCX metadata editor",
+      "free online metadata tool",
     ],
     authors: [{ name: APP_NAME }],
     creator: APP_NAME,
@@ -68,27 +86,25 @@ export async function generateMetadata(): Promise<Metadata> {
 
     openGraph: {
       type: "website",
-      locale: "zh_CN",
+      locale,
       url: SITE_URL,
-      siteName: "Office元数据编辑器",
-      title: "Office元数据在线编辑器 - 免费修改Word/Excel/PDF文档属性",
-      description:
-        "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
+      siteName: ogTitle,
+      title: ogTitle,
+      description: ogDescription,
       images: [
         {
           url: "/og-default.png",
           width: 1200,
           height: 630,
-          alt: "Office元数据编辑器",
+          alt: ogImageAlt,
         },
       ],
     },
 
     twitter: {
       card: "summary_large_image",
-      title: "Office元数据在线编辑器 - 免费修改文档属性，全程本地处理",
-      description:
-        "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
+      title: twitterTitle,
+      description: twitterDescription,
       images: ["/og-default.png"],
     },
 
@@ -101,7 +117,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
     appleWebApp: {
       capable: true,
-      title: "Office元数据编辑器",
+      title: appleWebAppTitle,
       statusBarStyle: "default",
     },
 
@@ -122,9 +138,17 @@ declare module "react" {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   let locale = "zh-CN"
   let messages: Record<string, unknown> = {}
+  let jsonLdOrgName = "Office Metadata Editor"
+  let jsonLdOrgDesc = "A professional online Office metadata editor."
+  let jsonLdWebSiteName = "Office Metadata Editor"
+
   try {
     locale = await getLocale()
     messages = (await getMessages()) as Record<string, unknown>
+    const t = await getTranslations("common")
+    jsonLdOrgName = t("layoutJsonLdOrgName")
+    jsonLdOrgDesc = t("layoutJsonLdOrgDesc")
+    jsonLdWebSiteName = t("layoutJsonLdWebSiteName")
   } catch {
     // fallback during static generation (e.g. _global-error)
   }
@@ -141,10 +165,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Office元数据编辑器",
+              name: jsonLdOrgName,
               url: SITE_URL,
-              description:
-                "专业的在线Office元数据编辑器，支持Word、Excel、PDF文件元数据修改与清除，全程本地处理，保护文档隐私。",
+              description: jsonLdOrgDesc,
             }),
           }}
         />
@@ -154,7 +177,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "Office元数据编辑器",
+              name: jsonLdWebSiteName,
               url: SITE_URL,
               potentialAction: {
                 "@type": "SearchAction",
