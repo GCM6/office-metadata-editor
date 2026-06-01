@@ -5,7 +5,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { APP_NAME } from "@/lib/app-config"
 import "@/style/base.css"
 import "@/style/chrome.css"
-import { ClientLayout } from "./client-layout"
+import { ClientLayout } from "../client-layout"
 
 export const dynamic = "force-dynamic"
 
@@ -136,8 +136,14 @@ declare module "react" {
   }
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  let locale = "zh-CN"
+interface RootLayoutProps {
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
+}
+
+export default async function RootLayout({ children, params }: RootLayoutProps) {
+  const resolvedParams = await params
+  let locale = resolvedParams.locale || "zh-CN"
   let messages: Record<string, unknown> = {}
   let jsonLdOrgName = "Office Metadata Editor"
   let jsonLdOrgDesc = "A professional online Office metadata editor."
@@ -146,7 +152,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   try {
     const cookieStore = await cookies()
     const cookieLocale = cookieStore.get("NEXT_LOCALE")?.value
-    locale = cookieLocale || (await getLocale())
+    locale = cookieLocale || locale || (await getLocale())
     messages = (await getMessages()) as Record<string, unknown>
     const t = await getTranslations("common")
     jsonLdOrgName = t("layoutJsonLdOrgName")

@@ -5,14 +5,18 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts")
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  images: {
-    unoptimized: true,
-  },
-  typescript: {
-    ignoreBuildErrors: false,
-  },
-  turbopack: {
-    resolveExtensions: [".tsx", ".ts", ".jsx", ".js", ".mjs", ".json"],
+  async headers() {
+    return [
+      {
+        source: "/:path*{/}?",
+        headers: [
+          {
+            key: "X-Accel-Buffering",
+            value: "no",
+          },
+        ],
+      },
+    ];
   },
 }
 
