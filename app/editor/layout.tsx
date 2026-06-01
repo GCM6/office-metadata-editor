@@ -1,7 +1,11 @@
 import type { Metadata } from "next"
+import { getLocale } from "next-intl/server"
 import { generateSeoMetadata } from "@/seo/generate-seo-metadata"
 
-export const metadata: Metadata = generateSeoMetadata("editor")
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
+  return generateSeoMetadata("editor", locale)
+}
 
 export default function EditorLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>

@@ -1,19 +1,25 @@
 import React from "react"
+import { useTranslations } from "next-intl"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { OmPropertyPreviewList, OmPropertyPreviewItem } from "@/components/om/om-property-preview-item"
 
 export type OmProperty = {
+  key?: string
   label: string
   value: string
   span?: 1 | 2
 }
 
 export type OmPropertyPreviewProps = {
+  id?: string
   title: string
   properties: OmProperty[]
 }
 
-export const OmPropertyPreview: React.FC<OmPropertyPreviewProps> = ({ title, properties }) => {
+export const OmPropertyPreview: React.FC<OmPropertyPreviewProps> = ({ id, title, properties }) => {
+  const tf = useTranslations("fields")
+  const translatedTitle = id ? tf(`sections.${id}.title`, { defaultValue: title }) : title
+
   return (
     <Card
       size="sm"
@@ -21,19 +27,22 @@ export const OmPropertyPreview: React.FC<OmPropertyPreviewProps> = ({ title, pro
     >
       <CardHeader className="pb-1.5">
         <CardTitle className="text-xs font-semibold tracking-[0.08em] text-muted-foreground">
-          {title}
+          {translatedTitle}
         </CardTitle>
       </CardHeader>
       <CardContent className="h-40 pt-0 pr-1">
         <OmPropertyPreviewList>
-          {properties.map(item => (
-            <OmPropertyPreviewItem
-              key={item.label}
-              label={item.label}
-              value={item.value}
-              span={item.span}
-            />
-          ))}
+          {properties.map(item => {
+            const translatedLabel = item.key ? tf(`labels.${item.key}`, { defaultValue: item.label }) : item.label
+            return (
+              <OmPropertyPreviewItem
+                key={item.key || item.label}
+                label={translatedLabel}
+                value={item.value}
+                span={item.span}
+              />
+            )
+          })}
         </OmPropertyPreviewList>
       </CardContent>
     </Card>

@@ -96,7 +96,8 @@ function readSourceValue(
 function formatPreviewValue(raw: string | number, schema: MetadataPreviewPropertySchema, locale: string): string {
   if (schema.format === "minutes") {
     const text = String(raw ?? "").trim()
-    return text ? `${text} 分钟` : ""
+    if (!text) return ""
+    return locale === "en" ? `${text} minutes` : `${text} 分钟`
   }
 
   if (schema.format === "number") {
@@ -140,6 +141,7 @@ export function buildMetadataPreviewGroups(
           const raw = readSourceValue(metadata, property.source.category, property.source.field)
           const value = formatPreviewValue(raw, property, locale)
           return {
+            key: property.source.field,
             label: property.label,
             value,
             ...(property.span ? { span: property.span } : {}),

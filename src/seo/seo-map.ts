@@ -52,6 +52,26 @@ export const seoMap: Record<string, SeoPageContract> = {
       "在线修改文档元数据安全吗？",
     ],
     status: "published",
+    en: {
+      title: "Office Metadata Editor Online - Free Edit Word/Excel/PDF Properties | 100% Local",
+      description: "Professional online Office metadata editor supporting Word (.docx), Excel (.xlsx), and PDF files. No server upload required — all processing is 100% local to protect your privacy.",
+      h1: "Office Metadata Editor Online",
+      keywords: [
+        "Office metadata editor",
+        "Edit document properties",
+        "Remove metadata online",
+        "Word author editor",
+        "PDF properties editor",
+        "Excel metadata cleaner",
+        "DOCX metadata editor",
+        "Free online metadata tool"
+      ],
+      og: {
+        title: "Office Metadata Editor Online - Free Edit Document Properties, 100% Local",
+        description: "Edit Word, Excel, and PDF metadata online. No server upload, protecting your privacy. Supports batch processing and one-click removal.",
+        image: "/og-default.png"
+      }
+    },
   },
 
   "tool.word": {
@@ -84,6 +104,17 @@ export const seoMap: Record<string, SeoPageContract> = {
       "DOCX和DOC的元数据有什么区别？",
     ],
     status: "published",
+    en: {
+      title: "Edit Word Document Properties Online - Modify Author & Clear Metadata | Office Metadata Editor",
+      description: "Free online Word (.docx) document properties editor. Easily delete original author, company name, modification dates, and other hidden metadata. 100% local, safe and private.",
+      h1: "Word Document Metadata Online Editor",
+      paaQuestions: [
+        "What hidden metadata is in a Word document?",
+        "Can others still see the properties after deleting them?",
+        "How to batch delete privacy information from multiple Word documents?",
+        "Will metadata be preserved after converting Word to PDF?"
+      ]
+    }
   },
 
   "tool.excel": {
@@ -110,6 +141,16 @@ export const seoMap: Record<string, SeoPageContract> = {
       "Excel属性修改后会影响公式和图表吗？",
     ],
     status: "published",
+    en: {
+      title: "Edit Excel Document Properties Online - Clear Workbook Metadata | Office Metadata Editor",
+      description: "Free online Excel (.xlsx) workbook properties editor. Edit author, title, company, and other properties. 100% local, protecting your business data privacy.",
+      h1: "Excel Workbook Metadata Online Editor",
+      paaQuestions: [
+        "What information is included in Excel workbook metadata?",
+        "How to batch edit the properties of multiple Excel files?",
+        "Will Excel formulas and charts be affected after modifying properties?"
+      ]
+    }
   },
 
   "tool.pdf": {
@@ -137,6 +178,17 @@ export const seoMap: Record<string, SeoPageContract> = {
       "在线修改PDF属性需要上传文件吗？",
     ],
     status: "published",
+    en: {
+      title: "Edit PDF Document Properties Online - Modify PDF Metadata | Office Metadata Editor",
+      description: "Free online PDF document properties editor. Modify PDF author, title, subject, and other metadata. No Adobe Acrobat required. 100% local, safe and convenient.",
+      h1: "PDF Document Metadata Online Editor",
+      paaQuestions: [
+        "Where is PDF file metadata stored?",
+        "Will metadata be preserved after converting Word to PDF?",
+        "How to completely clear all hidden information in a PDF?",
+        "Do I need to upload files to edit PDF properties online?"
+      ]
+    }
   },
 
   editor: {
@@ -162,6 +214,11 @@ export const seoMap: Record<string, SeoPageContract> = {
     canonical: "/editor",
     internalLinksTo: ["home"],
     status: "published",
+    en: {
+      title: "Office Metadata Online Editor | Office Metadata Editor",
+      description: "Edit Office document metadata online. Support Word, Excel, and PDF files. Directly modify document properties in your browser. 100% local and efficient.",
+      h1: "Office Document Metadata Editor"
+    }
   },
 
   batch: {
@@ -182,6 +239,11 @@ export const seoMap: Record<string, SeoPageContract> = {
     canonical: "/batch",
     internalLinksTo: ["home"],
     status: "published",
+    en: {
+      title: "Batch Office Metadata Processing - Edit Multiple Document Properties | Office Metadata Editor",
+      description: "Batch process Office document metadata. Support modifying properties of multiple Word, Excel, and PDF files simultaneously. Clear or replace in one click.",
+      h1: "Batch Office Document Metadata Processing"
+    }
   },
 
   blog: {
@@ -203,6 +265,11 @@ export const seoMap: Record<string, SeoPageContract> = {
     internalLinksTo: ["home", "tool.word", "tool.excel", "tool.pdf"],
     schemaTypes: ["ItemList"],
     status: "published",
+    en: {
+      title: "Office Document Metadata Knowledge - Privacy Protection & Editing Tips | Office Metadata Editor",
+      description: "Learn about Office document metadata, how to protect document privacy, modify properties, and clear hidden information. Professional guide for safe Office usage.",
+      h1: "Office Document Metadata Knowledge Hub"
+    }
   },
 
   "blog.remove-author-docx": {
@@ -234,6 +301,16 @@ export const seoMap: Record<string, SeoPageContract> = {
       "如何批量删除多个Word文档的隐私信息？",
     ],
     status: "published",
+    en: {
+      title: "How to Completely Delete Original Author Information in Word? Guide | Office Metadata Editor",
+      description: "Learn how to completely delete original author, company name, revision history, and other hidden metadata in Word (.docx) documents. Avoid privacy leakage.",
+      h1: "How to Completely Delete Original Author Information in Word",
+      paaQuestions: [
+        "What hidden metadata is in a Word document?",
+        "Can others still see the properties after deleting them?",
+        "How to batch delete privacy information from multiple Word documents?"
+      ]
+    }
   },
 }
 

@@ -72,4 +72,5 @@ export interface SeoPageContract {
   paaQuestions?: string[]
 
   status: "draft" | "ready" | "published"
+  en?: Partial<Pick<SeoPageContract, "title" | "description" | "keywords" | "h1" | "og" | "paaQuestions">>
 }

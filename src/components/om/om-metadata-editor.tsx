@@ -62,11 +62,11 @@ function toFieldPath(category: string, key: string): string {
 }
 
 const ERROR_KEY_MAP: Record<string, string> = {
-  MAX_LENGTH: "validation.maxLength",
-  INVISIBLE_CHARS: "validation.invisibleChars",
-  ENCODING_ERROR: "validation.encodingError",
-  INVALID_BCP47: "validation.invalidBcp47",
-  INVALID_INPUT: "validation.invalidInput",
+  MAX_LENGTH: "maxLength",
+  INVISIBLE_CHARS: "invisibleChars",
+  ENCODING_ERROR: "encodingError",
+  INVALID_BCP47: "invalidBcp47",
+  INVALID_INPUT: "invalidInput",
 }
 
 export interface OmMetadataEditorProps {
@@ -77,6 +77,7 @@ export const OmMetadataEditor: React.FC<OmMetadataEditorProps> = ({ fileType }) 
   const { metadata, updateField } = useMetadata()
   const locale = useLocale()
   const tv = useTranslations("validation")
+  const tf = useTranslations("fields")
   const [fieldErrors, setFieldErrors] = useState<Record<string, string | null>>({})
 
   const resolvedMetadata = metadata!
@@ -131,98 +132,114 @@ export const OmMetadataEditor: React.FC<OmMetadataEditorProps> = ({ fileType }) 
 
   return (
     <div className="flex flex-col gap-3">
-      {sections.map(section => (
-        <OmMetadataSection
-          key={section.id}
-          title={section.title}
-          description={section.description}
-        >
-          <OmMetadataFieldList>
-            {section.fields.map(field => {
-              const fieldPath = toFieldPath(section.category, field.key)
-              const value = String(field.value ?? "")
-              const errorText = fieldErrors[fieldPath] ?? null
-              const languageInputListId = `${fieldPath}-language-options`
+      {sections.map(section => {
+        let sectionKey: string = section.category
+        if (section.id.startsWith("pdf-")) {
+          if (section.category === "documentProperties") sectionKey = "pdfDocumentProperties"
+          if (section.category === "coreProperties") sectionKey = "pdfCoreProperties"
+        } else if (section.id.startsWith("xlsx-")) {
+          if (section.category === "documentProperties") sectionKey = "xlsxDocumentProperties"
+          if (section.category === "coreProperties") sectionKey = "xlsxCoreProperties"
+          if (section.category === "appProperties") sectionKey = "xlsxAppProperties"
+        }
+        
+        const translatedTitle = tf(`sections.${sectionKey}.title`, { defaultValue: section.title })
+        const translatedDesc = tf(`sections.${sectionKey}.desc`, { defaultValue: section.description })
 
-              return (
-                <div
-                  key={`${section.id}-${field.key}`}
-                  className={`grid items-start gap-1 ${field.span === 2 ? "md:col-span-2" : "md:col-span-1"}`}
-                >
-                  <div className="flex min-h-6 items-center gap-1.5">
-                    <Label
-                      htmlFor={fieldPath}
-                      className="text-[11px] font-medium tracking-wide text-muted-foreground"
-                    >
-                      {field.label}
-                    </Label>
-                    {!field.editable && <Lock className="h-3 w-3 text-muted-foreground/50" />}
-                  </div>
-                  <div className="flex items-center">
-                    {field.editable ? (
-                      isLanguageField(field) ? (
-                        <div className="w-full">
-                          <Input
+        return (
+          <OmMetadataSection
+            key={section.id}
+            title={translatedTitle}
+            description={translatedDesc}
+          >
+            <OmMetadataFieldList>
+              {section.fields.map(field => {
+                const fieldPath = toFieldPath(section.category, field.key)
+                const value = String(field.value ?? "")
+                const errorText = fieldErrors[fieldPath] ?? null
+                const languageInputListId = `${fieldPath}-language-options`
+                const translatedFieldLabel = tf(`labels.${field.key}`, { defaultValue: field.label })
+
+                return (
+                  <div
+                    key={`${section.id}-${field.key}`}
+                    className={`grid items-start gap-1 ${field.span === 2 ? "md:col-span-2" : "md:col-span-1"}`}
+                  >
+                    <div className="flex min-h-6 items-center gap-1.5">
+                      <Label
+                        htmlFor={fieldPath}
+                        className="text-[11px] font-medium tracking-wide text-muted-foreground"
+                      >
+                        {translatedFieldLabel}
+                      </Label>
+                      {!field.editable && <Lock className="h-3 w-3 text-muted-foreground/50" />}
+                    </div>
+                    <div className="flex items-center">
+                      {field.editable ? (
+                        isLanguageField(field) ? (
+                          <div className="w-full">
+                            <Input
+                              id={fieldPath}
+                              value={value}
+                              list={languageInputListId}
+                              onChange={e => {
+                                handleFieldChange(section.category, field.key, true)(e.target.value)
+                              }}
+                              placeholder={tv("placeholderLang")}
+                              className="h-8 rounded-md border border-border/70 bg-background px-2 text-sm"
+                            />
+                            <datalist id={languageInputListId}>
+                              {COMMON_LOCALE_CODES.map(code => (
+                                <option
+                                  key={code}
+                                  value={code}
+                                  label={getLanguageOptionLabel(code, locale)}
+                                >
+                                  {getLanguageOptionLabel(code, locale)}
+                                </option>
+                              ))}
+                            </datalist>
+                          </div>
+                        ) : field.type === "textarea" ? (
+                          <Textarea
                             id={fieldPath}
                             value={value}
-                            list={languageInputListId}
                             onChange={e => {
-                              handleFieldChange(section.category, field.key, true)(e.target.value)
+                              handleFieldChange(section.category, field.key)(e.target.value)
                             }}
-                            placeholder={tv("placeholderLang")}
-                            className="h-8 rounded-md border border-border/70 bg-background px-2 text-sm"
+                            placeholder={`${tv("placeholderInput")}${translatedFieldLabel}`}
+                            className="min-h-16 rounded-none border-0 border-b border-border/55 bg-transparent px-0 py-1 text-sm leading-6 shadow-none focus-visible:border-primary/40 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:outline-none"
                           />
-                          <datalist id={languageInputListId}>
-                            {COMMON_LOCALE_CODES.map(code => (
-                              <option
-                                key={code}
-                                value={code}
-                                label={getLanguageOptionLabel(code, locale)}
-                              >
-                                {getLanguageOptionLabel(code, locale)}
-                              </option>
-                            ))}
-                          </datalist>
-                        </div>
-                      ) : field.type === "textarea" ? (
-                        <Textarea
-                          id={fieldPath}
-                          value={value}
-                          onChange={e => {
-                            handleFieldChange(section.category, field.key)(e.target.value)
-                          }}
-                          placeholder={`${tv("placeholderInput")}${field.label}`}
-                          className="min-h-16 rounded-none border-0 border-b border-border/55 bg-transparent px-0 py-1 text-sm leading-6 shadow-none focus-visible:border-primary/40 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:outline-none"
-                        />
+                        ) : (
+                          <Input
+                            id={fieldPath}
+                            type="text"
+                            value={value}
+                            onChange={e => {
+                              handleFieldChange(section.category, field.key)(e.target.value)
+                            }}
+                            placeholder={`${tv("placeholderInput")}${translatedFieldLabel}`}
+                            className="h-8 rounded-none border-0 border-b border-border/55 bg-transparent px-0 text-sm shadow-none focus-visible:border-primary/40 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:outline-none"
+                          />
+                        )
                       ) : (
-                        <Input
-                          id={fieldPath}
-                          type="text"
-                          value={value}
-                          onChange={e => {
-                            handleFieldChange(section.category, field.key)(e.target.value)
-                          }}
-                          placeholder={`${tv("placeholderInput")}${field.label}`}
-                          className="h-8 rounded-none border-0 border-b border-border/55 bg-transparent px-0 text-sm shadow-none focus-visible:border-primary/40 focus-visible:ring-0 focus-visible:ring-transparent focus-visible:outline-none"
-                        />
-                      )
-                    ) : (
-                      <div className="flex h-8 w-full items-center px-0">
-                        <span className="text-sm text-foreground/90">
-                          {field.type === "date" ? formatDateValue(value, locale) : value || "-"}
-                        </span>
-                      </div>
-                    )}
+                        <div className="flex h-8 w-full items-center px-0">
+                          <span className="text-sm text-foreground/90">
+                            {field.type === "date" ? formatDateValue(value, locale) : value || "-"}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    {errorText && field.editable ? (
+                      <p className="text-[11px] text-destructive">{errorText}</p>
+                    ) : null}
                   </div>
-                  {errorText && field.editable ? (
-                    <p className="text-[11px] text-destructive">{errorText}</p>
-                  ) : null}
-                </div>
-              )
-            })}
-          </OmMetadataFieldList>
-        </OmMetadataSection>
-      ))}
+                )
+              })}
+            </OmMetadataFieldList>
+          </OmMetadataSection>
+        )
+      })}
     </div>
   )
 }

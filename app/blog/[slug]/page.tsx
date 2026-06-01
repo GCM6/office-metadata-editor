@@ -6,6 +6,8 @@ import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 import { SeoContent } from "@/seo/components/SeoContent"
 
+import { getLocale } from "next-intl/server"
+
 const slugToPageCode: Record<string, string> = {
   "remove-original-author-docx": "blog.remove-author-docx",
 }
@@ -19,8 +21,9 @@ export async function generateMetadata(props: {
 }): Promise<Metadata> {
   const { slug } = await props.params
   const pageCode = slugToPageCode[slug]
-  if (!pageCode) return { title: "文章未找到" }
-  return generateSeoMetadata(pageCode)
+  const locale = await getLocale()
+  if (!pageCode) return { title: locale === "en" ? "Article Not Found" : "文章未找到" }
+  return generateSeoMetadata(pageCode, locale)
 }
 
 export default async function BlogPostPage(props: {
@@ -28,7 +31,10 @@ export default async function BlogPostPage(props: {
 }) {
   const { slug } = await props.params
   const pageCode = slugToPageCode[slug]
+  const locale = await getLocale()
+  const isEn = locale === "en"
   const seo = pageCode ? seoMap[pageCode] : undefined
+  const h1 = isEn ? (seo?.en?.h1 ?? seo?.h1) : seo?.h1
   const jsonLdData = pageCode ? generateJsonLd(pageCode) : []
 
   return (
@@ -36,7 +42,7 @@ export default async function BlogPostPage(props: {
       <JsonLd data={jsonLdData} />
 
       <article className="prose prose-neutral max-w-none dark:prose-invert">
-        <h1>{seo?.h1 ?? "文章未找到"}</h1>
+        <h1>{h1 ?? (isEn ? "Article Not Found" : "文章未找到")}</h1>
 
         <p className="lead">
           Word 文档在日常办公中无处不在，但很多人不知道的是，每个 Word

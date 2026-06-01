@@ -26,11 +26,6 @@ export function SeoContent({ pageCode, additionalContent }: SeoContentProps) {
 
   const faqAnswers = t.raw("faqAnswers") as Record<string, string>
 
-  function getFAQAnswer(question: string): string {
-    const key = questionToKey(question)
-    return faqAnswers[key] ?? faqAnswers["online-metadata-security"]
-  }
-
   return (
     <div className="seo-content space-y-10">
       {additionalContent}
@@ -39,14 +34,19 @@ export function SeoContent({ pageCode, additionalContent }: SeoContentProps) {
         <section className="faq-section">
           <h2 className="mb-6 text-2xl font-bold text-foreground">{t("faqTitle")}</h2>
           <div className="space-y-5">
-            {seo.paaQuestions!.map((question, index) => (
-              <div key={index} className="faq-item">
-                <h3 className="text-base font-semibold text-foreground/90">{question}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {getFAQAnswer(question)}
-                </p>
-              </div>
-            ))}
+            {seo.paaQuestions!.map((question, index) => {
+              const key = questionToKey(question)
+              return (
+                <div key={index} className="faq-item">
+                  <h3 className="text-base font-semibold text-foreground/90">
+                    {t(`faqQuestions.${key}`)}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {faqAnswers[key] ?? faqAnswers["online-metadata-security"]}
+                  </p>
+                </div>
+              )
+            })}
           </div>
         </section>
       )}

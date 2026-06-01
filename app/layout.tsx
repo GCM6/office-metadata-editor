@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next"
+import { cookies } from "next/headers"
 import { getLocale, getMessages, getTranslations } from "next-intl/server"
 import { NextIntlClientProvider } from "next-intl"
 import { APP_NAME } from "@/lib/app-config"
@@ -143,7 +144,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   let jsonLdWebSiteName = "Office Metadata Editor"
 
   try {
-    locale = await getLocale()
+    const cookieStore = await cookies()
+    const cookieLocale = cookieStore.get("NEXT_LOCALE")?.value
+    locale = cookieLocale || (await getLocale())
     messages = (await getMessages()) as Record<string, unknown>
     const t = await getTranslations("common")
     jsonLdOrgName = t("layoutJsonLdOrgName")

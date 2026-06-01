@@ -13,6 +13,7 @@ import { EditorPageSidebar } from "@/page-components/editor-page/components/edit
 import { EditorPageForm } from "@/page-components/editor-page/components/editor-page-form"
 import { EditorPageSkeleton } from "@/page-components/editor-page/components/editor-page-skeleton"
 import { resolveMetadataPreviewGroups } from "@/lib/documents/metadata"
+import { seoMap } from "@/seo/seo-map"
 
 export default function EditorPage() {
   const router = useRouter()
@@ -20,6 +21,9 @@ export default function EditorPage() {
   const { metadata, documents } = useMetadata()
   const { files, activeFileId, selectFile, removeFile, openFiles, isLoading } = useFileContext()
   const locale = useLocale()
+
+  const isEn = locale === "en"
+  const h1Text = isEn ? (seoMap.editor.en?.h1 || seoMap.editor.h1) : seoMap.editor.h1
 
   const activeFile = useMemo(() => {
     if (files.length === 0) return null
@@ -55,6 +59,7 @@ export default function EditorPage() {
         onRemoveFile={removeFile}
       />
       <SidebarInset className="min-h-0">
+        <h1 className="sr-only">{h1Text}</h1>
         {activeFile?.status === "ready" ? (
           <EditorPageForm fileType={activeFileType} previewGroups={previewGroups} />
         ) : (
@@ -64,3 +69,4 @@ export default function EditorPage() {
     </EditorLayout>
   )
 }
+

@@ -17,7 +17,7 @@ export const OmMetadataEditView: React.FC<OmMetadataEditViewProps> = ({ fileType
       </ScrollArea>
       <div className="flex w-60 shrink-0 flex-col gap-4 overflow-hidden">
         {previewGroups.map(group => (
-          <OmPropertyPreview key={group.id} title={group.title} properties={group.properties} />
+          <OmPropertyPreview key={group.id} id={group.id} title={group.title} properties={group.properties as any} />
         ))}
       </div>
     </div>

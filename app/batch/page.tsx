@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useMemo, useState } from "react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 import { Button } from "@/components/ui/button"
 import {
   Table,
@@ -17,6 +17,7 @@ import { OmBatchToolbar } from "@/components/om/om-batch-toolbar"
 import { type FileStatus, useFileContext } from "@/contexts/file-context"
 import { useMetadata } from "@/contexts/metadata-context"
 import { formatFileSize } from "@/lib/utils"
+import { seoMap } from "@/seo/seo-map"
 
 export default function BatchPage() {
   const { files, openFiles, removeFile, clearFiles } = useFileContext()
@@ -24,8 +25,13 @@ export default function BatchPage() {
     useMetadata()
   const t = useTranslations("batch")
   const tp = useTranslations("progress")
+  const locale = useLocale()
+
+  const isEn = locale === "en"
+  const h1Text = isEn ? (seoMap.batch.en?.h1 || seoMap.batch.h1) : seoMap.batch.h1
 
   const [actionStatus, setActionStatus] = useState<string | null>(null)
+
 
   useEffect(() => {
     clearFiles()
@@ -149,6 +155,7 @@ export default function BatchPage() {
       }
     >
       <div className="flex h-full w-full flex-col gap-4 p-4">
+        <h1 className="sr-only">{h1Text}</h1>
         <Table>
           <TableHeader>
             <TableRow>

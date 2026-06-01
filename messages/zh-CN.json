@@ -14,7 +14,7 @@
     "notFoundHeading": "页面未找到",
     "notFoundDescription": "您请求的页面不存在，可能已被移除或地址输入有误。",
     "notFoundBackHome": "返回首页",
-    "footerCopyright": "© {year} zhengxs2018",
+    "footerCopyright": "© {year} m-office",
     "layoutDescription": "专业的在线Office元数据编辑器，支持Word(.docx)、Excel(.xlsx)、PDF文件，无需上传服务器，全程本地处理，保护您的文档隐私。可批量修改作者、创建时间等元数据属性。",
     "layoutKeywords": [
       "Office元数据编辑器",
@@ -86,12 +86,30 @@
     ],
     "quickEntry": "快速入口",
     "quickLinks": [
-      { "label": "在线编辑Word文档属性", "href": "/editor" },
-      { "label": "修改DOCX作者信息", "href": "/editor" },
-      { "label": "清除Office文档元数据", "href": "/editor" },
-      { "label": "批量修改文档属性", "href": "/batch" },
-      { "label": "在线PDF属性编辑", "href": "/editor" },
-      { "label": "批量清除Excel元数据", "href": "/batch" }
+      {
+        "label": "在线编辑Word文档属性",
+        "href": "/editor"
+      },
+      {
+        "label": "修改DOCX作者信息",
+        "href": "/editor"
+      },
+      {
+        "label": "清除Office文档元数据",
+        "href": "/editor"
+      },
+      {
+        "label": "批量修改文档属性",
+        "href": "/batch"
+      },
+      {
+        "label": "在线PDF属性编辑",
+        "href": "/editor"
+      },
+      {
+        "label": "批量清除Excel元数据",
+        "href": "/batch"
+      }
     ]
   },
   "batch": {
@@ -131,7 +149,7 @@
     "saveAs": "另存为",
     "clearMetadata": "清理元数据",
     "resetToOriginal": "重置为原始",
-    "unsavedBadge": "未保持",
+    "unsavedBadge": "未保存",
     "addFile": "添加文件",
     "fileList": "文件列表",
     "unsavedChanges": "有未保存修改",
@@ -170,6 +188,26 @@
   },
   "seo": {
     "faqTitle": "常见问题",
+    "faqQuestions": {
+      "edit-word-author": "如何在线修改Word文档的作者信息？",
+      "office-metadata-info": "Office文档元数据包含哪些信息？",
+      "edit-pdf-properties": "PDF文件的属性信息可以修改吗？",
+      "batch-clear-metadata": "如何批量清除多个文档的元数据？",
+      "online-metadata-security": "在线修改文档元数据安全吗？",
+      "view-word-metadata": "Word文档的元数据在哪里查看？",
+      "modify-word-detectable": "修改Word文档属性后对方能发现吗？",
+      "remove-word-privacy": "如何彻底删除Word文档中的个人隐私信息？",
+      "excel-metadata-info": "Excel工作簿的元数据包含哪些信息？",
+      "pdf-metadata-location": "PDF文件的元数据存储在什么地方？",
+      "word-to-pdf-metadata": "将Word转为PDF后元数据会保留吗？",
+      "word-hidden-metadata": "Word文档中有哪些隐藏的元数据？",
+      "delete-properties-visible": "删除文档属性后对方还能看到吗？",
+      "batch-delete-word-privacy": "如何批量删除多个Word文档的隐私信息？",
+      "batch-edit-excel-properties": "如何批量修改多个Excel文件的属性？",
+      "excel-formula-impact": "Excel属性修改后会影响公式和图表吗？",
+      "clear-pdf-hidden-info": "如何彻底清除PDF中的所有隐藏信息？",
+      "online-pdf-upload": "在线修改PDF属性需要上传文件吗？"
+    },
     "faqAnswers": {
       "edit-word-author": "打开Office元数据编辑器，上传Word文档，在编辑器界面中找到作者字段，修改后保存即可。整个过程在浏览器本地完成，文档不会上传到任何服务器。",
       "office-metadata-info": "元数据包括作者名称、创建时间、修改时间、公司名称、标题、主题、标签、备注等。这些信息可能在不经意间泄露您的个人或公司隐私。",
@@ -191,5 +229,109 @@
       "online-pdf-upload": "不需要上传到服务器。本工具在您的浏览器中本地运行，使用Web技术直接在客户端处理PDF文件，文件始终留在您的设备上。"
     },
     "relatedToolsTitle": "相关工具推荐"
+  },
+  "tools": {
+    "excelTitle": "Excel 工作簿元数据在线编辑器",
+    "excelComingSoon": "工具交互区域 — Excel 工作簿元数据编辑功能即将上线",
+    "wordTitle": "Word 文档元数据在线编辑器",
+    "wordComingSoon": "工具交互区域 — Word 文档元数据编辑功能即将上线",
+    "pdfTitle": "PDF 文档元数据在线编辑器",
+    "pdfComingSoon": "工具交互区域 — PDF 文档元数据编辑功能即将上线"
+  },
+  "fields": {
+    "sections": {
+      "documentProperties": {
+        "title": "文档属性",
+        "desc": "Word 文档基础元数据"
+      },
+      "coreProperties": {
+        "title": "Dublin Core",
+        "desc": "跨系统兼容的核心元数据"
+      },
+      "appProperties": {
+        "title": "组织信息",
+        "desc": "公司与责任人信息"
+      },
+      "pdfDocumentProperties": {
+        "title": "文档属性",
+        "desc": "PDF 文档基础元数据"
+      },
+      "pdfCoreProperties": {
+        "title": "Dublin Core",
+        "desc": "跨系统兼容的核心元数据"
+      },
+      "xlsxDocumentProperties": {
+        "title": "文档属性",
+        "desc": "Excel 工作簿基础元数据"
+      },
+      "xlsxCoreProperties": {
+        "title": "Dublin Core",
+        "desc": "跨系统兼容的核心元数据"
+      },
+      "xlsxAppProperties": {
+        "title": "组织信息",
+        "desc": "公司与责任人信息"
+      },
+      "docx-application": {
+        "title": "应用程序"
+      },
+      "docx-stats": {
+        "title": "文档统计"
+      },
+      "xlsx-application": {
+        "title": "应用程序"
+      },
+      "xlsx-stats": {
+        "title": "文档统计"
+      },
+      "pdf-info": {
+        "title": "文档信息"
+      },
+      "pdf-security": {
+        "title": "安全属性"
+      }
+    },
+    "labels": {
+      "title": "标题",
+      "subject": "主题",
+      "language": "语言",
+      "version": "版本",
+      "category": "类别",
+      "keywords": "关键词",
+      "description": "描述",
+      "creator": "作者",
+      "lastModifiedBy": "最后修改者",
+      "contentStatus": "内容状态",
+      "identifier": "标识符",
+      "source": "来源",
+      "created": "创建时间",
+      "modified": "修改时间",
+      "dcTitle": "标题",
+      "dcSubject": "主题",
+      "dcCreator": "创建者",
+      "dcLanguage": "语言",
+      "dcKeywords": "关键词",
+      "dcDescription": "描述",
+      "dcIdentifier": "标识符",
+      "dcSource": "来源",
+      "company": "公司",
+      "manager": "管理者",
+      "template": "模板",
+      "revision": "修订号",
+      "totalTime": "总编辑时间",
+      "application": "应用程序",
+      "appVersion": "应用版本",
+      "pages": "页数",
+      "words": "字数",
+      "characters": "字符数",
+      "charactersWithSpaces": "字符数（含空格）",
+      "paragraphs": "段落数",
+      "lines": "行数",
+      "pdfVersion": "PDF 版本",
+      "pdfProducer": "PDF 生成器",
+      "pdfCreator": "PDF 创建工具",
+      "pdfEncrypted": "是否加密",
+      "pdfPages": "总页数"
+    }
   }
 }

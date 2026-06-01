@@ -14,7 +14,7 @@
     "notFoundHeading": "Page Not Found",
     "notFoundDescription": "The page you requested does not exist. It may have been removed or the address may be incorrect.",
     "notFoundBackHome": "Back to Home",
-    "footerCopyright": "© {year} zhengxs2018",
+    "footerCopyright": "© {year} m-office",
     "layoutDescription": "A professional online Office metadata editor supporting Word (.docx), Excel (.xlsx), and PDF files. No server upload required — all processing happens locally to protect your document privacy. Edit author, creation time, and other metadata properties in batch.",
     "layoutKeywords": [
       "Office metadata editor",
@@ -41,12 +41,12 @@
     "enterWorkState": "Ready in a second",
     "description": "Read, edit, clean, and batch process all locally. Supports metadata editing for multiple document formats.",
     "featureLocal": "100% Local",
-    "featureDragDrop": "Drag && Drop",
+    "featureDragDrop": "Drag & Drop",
     "featureBatch": "Batch Boost",
     "openBatchWorkspace": "Open Batch Workspace",
     "startEditing": "Start Editing",
     "moreComing": "More advanced features are on the way, stay tuned.",
-    "dragUploadStart": "Drag && Drop to Upload",
+    "dragUploadStart": "Drag & Drop to Upload",
     "singleOrBatchDesc": "Edit single files or batch process multiple files from here",
     "supportedFileTypes": "Supported File Types",
     "seoSectionTitle": "One-Stop Office Document Metadata Processing",
@@ -86,12 +86,30 @@
     ],
     "quickEntry": "Quick Links",
     "quickLinks": [
-      { "label": "Edit Word Document Properties Online", "href": "/editor" },
-      { "label": "Modify DOCX Author Information", "href": "/editor" },
-      { "label": "Clear Office Document Metadata", "href": "/editor" },
-      { "label": "Batch Edit Document Properties", "href": "/batch" },
-      { "label": "Edit PDF Properties Online", "href": "/editor" },
-      { "label": "Batch Clear Excel Metadata", "href": "/batch" }
+      {
+        "label": "Edit Word Document Properties Online",
+        "href": "/editor"
+      },
+      {
+        "label": "Modify DOCX Author Information",
+        "href": "/editor"
+      },
+      {
+        "label": "Clear Office Document Metadata",
+        "href": "/editor"
+      },
+      {
+        "label": "Batch Edit Document Properties",
+        "href": "/batch"
+      },
+      {
+        "label": "Edit PDF Properties Online",
+        "href": "/editor"
+      },
+      {
+        "label": "Batch Clear Excel Metadata",
+        "href": "/batch"
+      }
     ]
   },
   "batch": {
@@ -105,19 +123,19 @@
     "pending": "Pending",
     "synced": "Synced",
     "remove": "Remove",
-    "clearAndSave": "Clear && Save",
+    "clearAndSave": "Clear & Save",
     "save": "Save",
     "savingFile": "Saving file...",
-    "clearingAndSaving": "Clearing && saving...",
+    "clearingAndSaving": "Clearing & saving...",
     "batchSaving": "Batch saving...",
-    "batchClearingAndSaving": "Batch clearing && saving...",
+    "batchClearingAndSaving": "Batch clearing & saving...",
     "processing": "Processing...",
     "path": "Path",
     "type": "Type",
     "size": "Size",
     "addFile": "Add File",
     "saveAll": "Save All",
-    "clearAndSaveAll": "Clear && Save All",
+    "clearAndSaveAll": "Clear & Save All",
     "clearList": "Clear List"
   },
   "upload": {
@@ -159,8 +177,8 @@
     "readFailed": "Read failed",
     "saving": "Saving...",
     "synced": "Synced",
-    "clearingAndSaving": "Clearing && saving...",
-    "batchClearingAndSaving": "Batch clearing && saving...",
+    "clearingAndSaving": "Clearing & saving...",
+    "batchClearingAndSaving": "Batch clearing & saving...",
     "batchSaving": "Batch saving...",
     "processFailed": "Process failed"
   },
@@ -170,6 +188,26 @@
   },
   "seo": {
     "faqTitle": "Frequently Asked Questions",
+    "faqQuestions": {
+      "edit-word-author": "How to edit the author information of a Word document online?",
+      "office-metadata-info": "What information is included in Office document metadata?",
+      "edit-pdf-properties": "Can PDF file properties be edited?",
+      "batch-clear-metadata": "How to batch clear metadata from multiple documents?",
+      "online-metadata-security": "Is it safe to edit document metadata online?",
+      "view-word-metadata": "Where can I view the metadata of a Word document?",
+      "modify-word-detectable": "Can others tell if Word document properties have been modified?",
+      "remove-word-privacy": "How to completely delete personal privacy information in a Word document?",
+      "excel-metadata-info": "What information is included in Excel workbook metadata?",
+      "pdf-metadata-location": "Where is PDF file metadata stored?",
+      "word-to-pdf-metadata": "Will metadata be preserved after converting Word to PDF?",
+      "word-hidden-metadata": "What hidden metadata is in a Word document?",
+      "delete-properties-visible": "Can others still see the properties after deleting them?",
+      "batch-delete-word-privacy": "How to batch delete privacy information from multiple Word documents?",
+      "batch-edit-excel-properties": "How to batch edit the properties of multiple Excel files?",
+      "excel-formula-impact": "Will Excel formulas and charts be affected after modifying properties?",
+      "clear-pdf-hidden-info": "How to completely clear all hidden information in a PDF?",
+      "online-pdf-upload": "Do I need to upload files to edit PDF properties online?"
+    },
     "faqAnswers": {
       "edit-word-author": "Open the Office Metadata Editor, upload your Word document, locate the author field in the editor interface, modify it, and save. The entire process is done locally in your browser — your document is never uploaded to any server.",
       "office-metadata-info": "Metadata includes author name, creation time, modification time, company name, title, subject, tags, notes, and more. This information may inadvertently leak your personal or company privacy.",
@@ -191,5 +229,109 @@
       "online-pdf-upload": "No upload to any server is required. This tool runs locally in your browser, using web technologies to process PDF files directly on the client — your files remain on your device at all times."
     },
     "relatedToolsTitle": "Related Tools"
+  },
+  "tools": {
+    "excelTitle": "Excel Workbook Metadata Online Editor",
+    "excelComingSoon": "Tool Interaction Area — Excel workbook metadata editing coming soon",
+    "wordTitle": "Word Document Metadata Online Editor",
+    "wordComingSoon": "Tool Interaction Area — Word document metadata editing coming soon",
+    "pdfTitle": "PDF Document Metadata Online Editor",
+    "pdfComingSoon": "Tool Interaction Area — PDF document metadata editing coming soon"
+  },
+  "fields": {
+    "sections": {
+      "documentProperties": {
+        "title": "Document Properties",
+        "desc": "Word Document Base Metadata"
+      },
+      "coreProperties": {
+        "title": "Dublin Core",
+        "desc": "Cross-system Core Metadata"
+      },
+      "appProperties": {
+        "title": "Organization",
+        "desc": "Company & Manager Information"
+      },
+      "pdfDocumentProperties": {
+        "title": "Document Properties",
+        "desc": "PDF Document Base Metadata"
+      },
+      "pdfCoreProperties": {
+        "title": "Dublin Core",
+        "desc": "Cross-system Core Metadata"
+      },
+      "xlsxDocumentProperties": {
+        "title": "Workbook Properties",
+        "desc": "Excel Workbook Base Metadata"
+      },
+      "xlsxCoreProperties": {
+        "title": "Dublin Core",
+        "desc": "Cross-system Core Metadata"
+      },
+      "xlsxAppProperties": {
+        "title": "Organization",
+        "desc": "Company & Manager Information"
+      },
+      "docx-application": {
+        "title": "Application"
+      },
+      "docx-stats": {
+        "title": "Statistics"
+      },
+      "xlsx-application": {
+        "title": "Application"
+      },
+      "xlsx-stats": {
+        "title": "Statistics"
+      },
+      "pdf-info": {
+        "title": "Document Info"
+      },
+      "pdf-security": {
+        "title": "Security Attributes"
+      }
+    },
+    "labels": {
+      "title": "Title",
+      "subject": "Subject",
+      "language": "Language",
+      "version": "Version",
+      "category": "Category",
+      "keywords": "Keywords",
+      "description": "Description",
+      "creator": "Creator",
+      "lastModifiedBy": "Last Modified By",
+      "contentStatus": "Content Status",
+      "identifier": "Identifier",
+      "source": "Source",
+      "created": "Created",
+      "modified": "Modified",
+      "dcTitle": "Title",
+      "dcSubject": "Subject",
+      "dcCreator": "Creator",
+      "dcLanguage": "Language",
+      "dcKeywords": "Keywords",
+      "dcDescription": "Description",
+      "dcIdentifier": "Identifier",
+      "dcSource": "Source",
+      "company": "Company",
+      "manager": "Manager",
+      "template": "Template",
+      "revision": "Revision",
+      "totalTime": "Total Editing Time",
+      "application": "Application",
+      "appVersion": "App Version",
+      "pages": "Pages",
+      "words": "Words",
+      "characters": "Characters",
+      "charactersWithSpaces": "Characters (with spaces)",
+      "paragraphs": "Paragraphs",
+      "lines": "Lines",
+      "pdfVersion": "PDF Version",
+      "pdfProducer": "PDF Producer",
+      "pdfCreator": "PDF Creator",
+      "pdfEncrypted": "Encrypted",
+      "pdfPages": "Total Pages"
+    }
   }
 }
