@@ -1,15 +1,17 @@
 import type { Metadata, Viewport } from "next"
-import { cookies } from "next/headers"
 import { getLocale, getMessages, getTranslations } from "next-intl/server"
 import { NextIntlClientProvider } from "next-intl"
 import { APP_NAME } from "@/lib/app-config"
 import "@/style/base.css"
 import "@/style/chrome.css"
 import { ClientLayout } from "../client-layout"
+import { GoogleTagManager } from "@next/third-parties/google"
 
-export const dynamic = "force-dynamic"
+export function generateStaticParams() {
+  return [{ locale: "zh-CN" }, { locale: "en" }]
+}
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://officemetadata-editor.vercel.app"
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://metadocu.com"
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -150,9 +152,6 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
   let jsonLdWebSiteName = "Office Metadata Editor"
 
   try {
-    const cookieStore = await cookies()
-    const cookieLocale = cookieStore.get("NEXT_LOCALE")?.value
-    locale = cookieLocale || locale || (await getLocale())
     messages = (await getMessages()) as Record<string, unknown>
     const t = await getTranslations("common")
     jsonLdOrgName = t("layoutJsonLdOrgName")
@@ -199,6 +198,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
       </head>
       <body className="font-sans antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ""} />
           <ClientLayout>{children}</ClientLayout>
         </NextIntlClientProvider>
       </body>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { seoMap } from "./seo-map"
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://officemetadata-editor.vercel.app"
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://metadocu.com"
 const SITE_NAME = "Office元数据编辑器"
 
 export function generateSeoMetadata(pageCode: string, locale?: string): Metadata {

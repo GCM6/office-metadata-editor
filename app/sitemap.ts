@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next"
 import { getPublishedPages } from "@/seo/seo-map"
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://officemetadata-editor.vercel.app"
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://metadocu.com"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = getPublishedPages()

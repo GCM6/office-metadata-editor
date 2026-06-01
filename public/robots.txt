@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow:
-Sitemap: https://officemetadata-editor.vercel.app/sitemap.xml
+Sitemap: https://metadocu.com/sitemap.xml
