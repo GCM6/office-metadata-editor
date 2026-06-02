@@ -23,12 +23,17 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/page-components/*": [
-        "./src/page-components/*"
-      ]
+      "@/app/*": ["app/*"],
+      "@/components/*": ["components/*"],
+      "@/contexts/*": ["contexts/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/lib/*": ["lib/*"],
+      "@/i18n/*": ["i18n/*"],
+      "@/seo/*": ["seo/*"],
+      "@/styles/*": ["styles/*"],
+      "@/types/*": ["types/*"],
+      "@/assets/*": ["assets/*"],
+      "@/*": ["*"]
     },
     "target": "ES2017",
     "forceConsistentCasingInFileNames": true,

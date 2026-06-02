@@ -1,12 +1,10 @@
 import { getTranslations } from "next-intl/server"
-import { seoMap } from "@/seo/seo-map"
 import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 import { SeoContent } from "@/seo/components/SeoContent"
 
 export default async function ToolExcelPage() {
   const t = await getTranslations("tools")
-  const seo = seoMap["tool.excel"]
   const jsonLdData = generateJsonLd("tool.excel")
 
   return (

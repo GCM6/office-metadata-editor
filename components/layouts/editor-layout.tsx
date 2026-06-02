@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 import { useMetadata } from "@/contexts/metadata-context"
 import { OmFileTypeIcon } from "@/components/om/om-file-type-icon"
 import { SidebarProvider } from "@/components/ui/sidebar"
-import { PageLayout } from "@/layouts/page-layout"
+import { PageLayout } from "@/components/layouts/page-layout"
 import { formatFileSize } from "@/lib/utils"
 
 export interface EditorLayoutProps {

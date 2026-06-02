@@ -13,10 +13,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint \"src/**/*.{ts,tsx}\" \"app/**/*.{ts,tsx}\"",
+    "lint": "eslint \"app/**/*.{ts,tsx}\" \"components/**/*.{ts,tsx}\" \"lib/**/*.{ts,tsx}\" \"hooks/**/*.{ts,tsx}\" \"contexts/**/*.{ts,tsx}\" \"i18n/**/*.{ts,tsx}\" \"seo/**/*.{ts,tsx}\"",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
-    "seo:check": "npx tsx src/seo/validate-seo.ts",
+    "seo:check": "npx tsx seo/validate-seo.ts",
     "prebuild": "pnpm seo:check"
   },
   "packageManager": "pnpm@10.33.4",

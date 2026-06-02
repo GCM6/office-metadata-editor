@@ -1,12 +1,10 @@
 import { getTranslations } from "next-intl/server"
-import { seoMap } from "@/seo/seo-map"
 import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 import { SeoContent } from "@/seo/components/SeoContent"
 
 export default async function ToolWordPage() {
   const t = await getTranslations("tools")
-  const seo = seoMap["tool.word"]
   const jsonLdData = generateJsonLd("tool.word")
 
   return (

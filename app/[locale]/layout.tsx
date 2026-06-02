@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next"
-import { getLocale, getMessages, getTranslations } from "next-intl/server"
+import { getMessages, getTranslations } from "next-intl/server"
 import { NextIntlClientProvider } from "next-intl"
 import { APP_NAME } from "@/lib/app-config"
-import "@/style/base.css"
-import "@/style/chrome.css"
-import { ClientLayout } from "../client-layout"
+import "@/styles/base.css"
+import "@/styles/chrome.css"
+import { Providers } from "../Providers"
 import { GoogleTagManager } from "@next/third-parties/google"
 
 export function generateStaticParams() {
@@ -145,7 +145,7 @@ interface RootLayoutProps {
 
 export default async function RootLayout({ children, params }: RootLayoutProps) {
   const resolvedParams = await params
-  let locale = resolvedParams.locale || "zh-CN"
+  const locale = resolvedParams.locale || "zh-CN"
   let messages: Record<string, unknown> = {}
   let jsonLdOrgName = "Office Metadata Editor"
   let jsonLdOrgDesc = "A professional online Office metadata editor."
@@ -199,7 +199,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
       <body className="font-sans antialiased">
         <NextIntlClientProvider locale={locale} messages={messages}>
           <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ""} />
-          <ClientLayout>{children}</ClientLayout>
+          <Providers>{children}</Providers>
         </NextIntlClientProvider>
       </body>
     </html>

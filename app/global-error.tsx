@@ -1,7 +1,7 @@
 "use client"
 
-import "@/style/base.css"
-import "@/style/chrome.css"
+import "@/styles/base.css"
+import "@/styles/chrome.css"
 import { NextIntlClientProvider } from "next-intl"
 import zhCN from "../messages/zh-CN.json"
 import en from "../messages/en.json"

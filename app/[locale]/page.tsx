@@ -36,7 +36,7 @@ import {
 } from "lucide-react"
 import { SUPPORTED_FILE_EXTENSIONS } from "@/lib/documents/supported-formats"
 import { APP_NAME } from "@/lib/app-config"
-import BlankLayout from "@/layouts/blank-layout"
+import BlankLayout from "@/components/layouts/blank-layout"
 
 export default function HomePage() {
   const router = useRouter()

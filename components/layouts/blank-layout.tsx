@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useTranslations } from "next-intl"
-import { ChromeWindowToolbar } from "../components/chrome/chrome-window-toolbar"
+import { ChromeWindowToolbar } from "@/components/chrome/chrome-window-toolbar"
 
 export interface BlankLayoutProps {
   header?: React.ReactNode

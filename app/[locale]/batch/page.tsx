@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { PageLayout } from "@/layouts/page-layout"
+import { PageLayout } from "@/components/layouts/page-layout"
 import { OmBatchToolbar } from "@/components/om/om-batch-toolbar"
 import { type FileStatus, useFileContext } from "@/contexts/file-context"
 import { useMetadata } from "@/contexts/metadata-context"

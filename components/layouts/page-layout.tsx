@@ -6,7 +6,7 @@ import { ArrowLeft, PanelLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { OmWindowTitleBar } from "@/components/om/om-window-title-bar"
-import { BlankLayout } from "@/layouts/blank-layout"
+import { BlankLayout } from "@/components/layouts/blank-layout"
 
 export interface PageLayoutProps {
   backTo?: string
