@@ -4,7 +4,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { APP_NAME } from "@/lib/app-config"
 import "@/styles/base.css"
 import "@/styles/chrome.css"
-import { Providers } from "../Providers"
+import { Providers } from "../providers"
 import { GoogleTagManager } from "@next/third-parties/google"
 
 export function generateStaticParams() {

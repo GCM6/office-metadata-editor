@@ -3,8 +3,7 @@
 
 
 import React, { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
+import { Link, useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
 import { LanguageSwitcher } from "@/i18n/language-switcher"
 import { useFileContext } from "@/contexts/file-context"
@@ -174,36 +173,69 @@ export default function HomePage() {
             </div>
 
             <section className="mt-8 mb-12">
-              <h2 className="mb-6 text-center text-xl font-bold text-foreground sm:text-2xl">
-                {t("seoSectionTitle")}
+              <h2 className="mb-4 text-center text-xl font-bold text-foreground sm:text-2xl">
+                {t("solutionSectionTitle")}
               </h2>
               <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
-                {t.rich("seoSectionDesc", {
-                  strong: (chunks) => <strong>{chunks}</strong>,
-                })}
+                {t("solutionSectionDesc")}
               </p>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <div className="rounded-lg border border-border/60 bg-card/60 p-5 backdrop-blur-sm">
-                  <FileText className="mb-3 h-8 w-8 text-blue-500" />
-                  <h3 className="mb-2 text-base font-semibold text-foreground">{t("featureWordTitle")}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {t("featureWordDesc")}
-                  </p>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+                <div className="flex flex-col justify-between rounded-xl border border-border/60 bg-card/60 p-6 shadow-md backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:border-primary/20">
+                  <div>
+                    <FileText className="mb-4 h-8 w-8 text-blue-500" />
+                    <h3 className="mb-2 text-base font-semibold text-foreground">{t("featureWordTitle")}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {t("featureWordDesc")}
+                    </p>
+                  </div>
+                  <div className="mt-5 pt-3 border-t border-border/40">
+                    <Link
+                      href="/tools/word"
+                      className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80"
+                    >
+                      {t("btnStartWord")}
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </div>
                 </div>
-                <div className="rounded-lg border border-border/60 bg-card/60 p-5 backdrop-blur-sm">
-                  <FileSpreadsheet className="mb-3 h-8 w-8 text-green-500" />
-                  <h3 className="mb-2 text-base font-semibold text-foreground">{t("featureExcelTitle")}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {t("featureExcelDesc")}
-                  </p>
+
+                <div className="flex flex-col justify-between rounded-xl border border-border/60 bg-card/60 p-6 shadow-md backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:border-primary/20">
+                  <div>
+                    <FileSpreadsheet className="mb-4 h-8 w-8 text-green-500" />
+                    <h3 className="mb-2 text-base font-semibold text-foreground">{t("featureExcelTitle")}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {t("featureExcelDesc")}
+                    </p>
+                  </div>
+                  <div className="mt-5 pt-3 border-t border-border/40">
+                    <Link
+                      href="/tools/excel"
+                      className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80"
+                    >
+                      {t("btnStartExcel")}
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </div>
                 </div>
-                <div className="rounded-lg border border-border/60 bg-card/60 p-5 backdrop-blur-sm">
-                  <FileType className="mb-3 h-8 w-8 text-red-500" />
-                  <h3 className="mb-2 text-base font-semibold text-foreground">{t("featurePdfTitle")}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {t("featurePdfDesc")}
-                  </p>
+
+                <div className="flex flex-col justify-between rounded-xl border border-border/60 bg-card/60 p-6 shadow-md backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:border-primary/20">
+                  <div>
+                    <FileType className="mb-4 h-8 w-8 text-red-500" />
+                    <h3 className="mb-2 text-base font-semibold text-foreground">{t("featurePdfTitle")}</h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {t("featurePdfDesc")}
+                    </p>
+                  </div>
+                  <div className="mt-5 pt-3 border-t border-border/40">
+                    <Link
+                      href="/tools/pdf"
+                      className="group inline-flex items-center gap-1.5 text-xs font-semibold text-primary transition-colors hover:text-primary/80"
+                    >
+                      {t("btnStartPdf")}
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </section>

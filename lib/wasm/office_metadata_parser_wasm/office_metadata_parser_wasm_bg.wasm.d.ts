@@ -1,0 +1,32 @@
+/* tslint:disable */
+/* eslint-disable */
+export const memory: WebAssembly.Memory;
+export const __wbg_wasmbuffer_free: (a: number, b: number) => void;
+export const clean_docx_wasm: (a: number, b: number) => [number, number, number];
+export const clean_pdf_wasm: (a: number, b: number) => [number, number, number];
+export const deallocate_wasm_memory: (a: number, b: number) => void;
+export const scan_docx_wasm: (a: number, b: number) => [number, number, number, number];
+export const scan_pdf_wasm: (a: number, b: number) => [number, number, number, number];
+export const scan_pdf_with_password_wasm: (a: number, b: number, c: number, d: number) => [number, number, number, number];
+export const wasmbuffer_cap: (a: number) => number;
+export const wasmbuffer_len: (a: number) => number;
+export const wasmbuffer_ptr: (a: number) => number;
+export const deflate: (a: number, b: number) => number;
+export const inflate: (a: number, b: number) => number;
+export const zlibVersion: () => number;
+export const deflateInit2_: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number) => number;
+export const deflateReset: (a: number) => number;
+export const inflateInit2_: (a: number, b: number, c: number, d: number) => number;
+export const inflateReset2: (a: number, b: number) => number;
+export const deflateEnd: (a: number) => number;
+export const inflateEnd: (a: number) => number;
+export const inflateSetDictionary: (a: number, b: number, c: number) => number;
+export const deflateSetDictionary: (a: number, b: number, c: number) => number;
+export const deflateParams: (a: number, b: number, c: number) => number;
+export const inflateReset: (a: number) => number;
+export const __wbindgen_externrefs: WebAssembly.Table;
+export const __wbindgen_malloc: (a: number, b: number) => number;
+export const __externref_table_dealloc: (a: number) => void;
+export const __wbindgen_free: (a: number, b: number, c: number) => void;
+export const __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
+export const __wbindgen_start: () => void;

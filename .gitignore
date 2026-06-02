@@ -42,3 +42,11 @@ screenshots/
 # Routa auto-generated
 AGENTS.md
 CLAUDE.md
+
+# Rust / Wasm build artifacts
+src-wasm/target/
+src-wasm/libz-sys-mock/target/
+src-wasm/libz-sys-mock/Cargo.lock
+src-wasm/.crates.toml
+src-wasm/.crates2.json
+src-wasm/bin/

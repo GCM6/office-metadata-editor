@@ -88,7 +88,7 @@ export const seoMap: Record<string, SeoPageContract> = {
     ],
     intent: "transactional",
     serpPageType: "tool-detail",
-    indexable: false,
+    indexable: true,
     parentPageCode: "home",
     title: "在线修改Word文档属性 - 修改作者、清除元数据 | Office元数据编辑器",
     description:
@@ -126,7 +126,7 @@ export const seoMap: Record<string, SeoPageContract> = {
     secondaryKeywords: ["修改XLSX属性", "清除Excel元数据", "Excel工作簿信息修改"],
     intent: "transactional",
     serpPageType: "tool-detail",
-    indexable: false,
+    indexable: true,
     parentPageCode: "home",
     title: "在线修改Excel文档属性 - 清除工作簿元数据 | Office元数据编辑器",
     description:
@@ -162,7 +162,7 @@ export const seoMap: Record<string, SeoPageContract> = {
     secondaryKeywords: ["修改PDF元数据", "清除PDF属性信息", "PDF作者修改", "PDF信息编辑"],
     intent: "transactional",
     serpPageType: "tool-detail",
-    indexable: false,
+    indexable: true,
     parentPageCode: "home",
     title: "在线修改PDF文档属性 - 编辑PDF元数据信息 | Office元数据编辑器",
     description:
@@ -205,7 +205,7 @@ export const seoMap: Record<string, SeoPageContract> = {
     ],
     intent: "transactional",
     serpPageType: "tool-detail",
-    indexable: false,
+    indexable: true,
     parentPageCode: "home",
     title: "Office元数据在线编辑 | Office元数据编辑器",
     description:
@@ -230,7 +230,7 @@ export const seoMap: Record<string, SeoPageContract> = {
     secondaryKeywords: ["批量修改文档属性", "批量清除元数据", "批量处理Office文件"],
     intent: "transactional",
     serpPageType: "tool-detail",
-    indexable: false,
+    indexable: true,
     parentPageCode: "home",
     title: "Office元数据批量处理 - 一键修改多个文档属性 | Office元数据编辑器",
     description:
@@ -255,7 +255,7 @@ export const seoMap: Record<string, SeoPageContract> = {
     secondaryKeywords: ["文档隐私保护指南", "元数据修改技巧", "Office安全使用"],
     intent: "informational",
     serpPageType: "blog-hub",
-    indexable: false,
+    indexable: true,
     parentPageCode: "home",
     title: "Office文档元数据知识 - 隐私保护与编辑技巧 | Office元数据编辑器",
     description:
@@ -286,7 +286,7 @@ export const seoMap: Record<string, SeoPageContract> = {
     ],
     intent: "informational",
     serpPageType: "blog-post",
-    indexable: false,
+    indexable: true,
     parentPageCode: "blog",
     title: "如何彻底删除Word文档中的原始作者信息？完整指南 | Office元数据编辑器",
     description:

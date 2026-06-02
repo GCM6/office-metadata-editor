@@ -1,8 +1,8 @@
 {
   "common": {
-    "appName": "office-metadata-editor",
-    "appTitle": "Office Metadata Editor",
-    "appLogo": "App Logo",
+    "appName": "MetaDocu",
+    "appTitle": "MetaDocu Free Local Metadata Privacy Scanner",
+    "appLogo": "MetaDocu Logo",
     "theme": "Theme",
     "light": "Light",
     "dark": "Dark",
@@ -10,78 +10,84 @@
     "dragArea": "Window drag area",
     "langZh": "中",
     "langEn": "EN",
-    "notFoundTitle": "Page Not Found | Office Metadata Editor",
+    "notFoundTitle": "Page Not Found | MetaDocu Privacy Scanner",
     "notFoundHeading": "Page Not Found",
     "notFoundDescription": "The page you requested does not exist. It may have been removed or the address may be incorrect.",
     "notFoundBackHome": "Back to Home",
-    "footerCopyright": "© {year} m-office",
-    "layoutDescription": "A professional online Office metadata editor supporting Word (.docx), Excel (.xlsx), and PDF files. No server upload required — all processing happens locally to protect your document privacy. Edit author, creation time, and other metadata properties in batch.",
+    "footerCopyright": "© {year} MetaDocu",
+    "layoutDescription": "Free and ultra-secure online PDF, Word, Excel, and image privacy metadata scanner & one-click cleaner. MetaDocu runs 100% locally in your browser sandbox — your files never leave your device. Deeply strip author names, company names, local file paths, comments, random revision history (RSIDs), and embedded EXIF/GPS photos.",
     "layoutKeywords": [
-      "Office metadata editor",
-      "edit document properties",
-      "remove metadata online",
+      "PDF metadata cleaner",
       "Word author editor",
-      "PDF properties editor",
-      "Excel metadata cleaner",
-      "DOCX metadata editor",
-      "free online metadata tool"
+      "Excel property eraser",
+      "remove metadata online",
+      "delete photo EXIF",
+      "PDF signature check",
+      "privacy security scan",
+      "local file processing",
+      "Word RSID cleanup"
     ],
-    "layoutOgTitle": "Office Metadata Editor — Edit Word/Excel/PDF Properties Online for Free",
-    "layoutOgDescription": "Edit Word, Excel, and PDF metadata online — no server upload, protecting document privacy. Supports batch processing and one-click removal of sensitive information.",
-    "layoutOgImageAlt": "Office Metadata Editor",
-    "layoutTwitterTitle": "Office Metadata Editor — Edit Document Properties Online, 100% Local",
-    "layoutTwitterDescription": "Edit Word, Excel, and PDF metadata online — no server upload, protecting document privacy. Supports batch processing and one-click removal of sensitive information.",
-    "layoutJsonLdOrgName": "Office Metadata Editor",
-    "layoutJsonLdOrgDesc": "A professional online Office metadata editor supporting Word, Excel, and PDF file metadata editing and removal. All processing is local to protect document privacy.",
-    "layoutJsonLdWebSiteName": "Office Metadata Editor",
-    "layoutAppleWebAppTitle": "Office Metadata Editor",
-    "layoutTitleTemplate": "%s | Office Metadata Editor"
+    "layoutOgTitle": "MetaDocu Free Local Metadata Privacy Scanner — 100% Browser Local Sandbox",
+    "layoutOgDescription": "Scan and clean Word/Excel/PDF/image privacy metadata online for free — 100% local sandbox processing, no server upload. Deeply purge random revision history (RSID), physical Xref table reconstruction, and nested EXIF media metadata.",
+    "layoutOgImageAlt": "MetaDocu Privacy Scanner",
+    "layoutTwitterTitle": "MetaDocu Free Local Metadata Privacy Scanner — Protect Privacy, Files Stay on Device",
+    "layoutTwitterDescription": "Scan and clean Word/Excel/PDF/image privacy metadata online for free — 100% local sandbox processing, no server upload. Deeply purge random revision history (RSID), physical Xref table reconstruction, and nested EXIF media metadata.",
+    "layoutJsonLdOrgName": "MetaDocu Privacy Scanner",
+    "layoutJsonLdOrgDesc": "Free and ultra-secure online PDF, Word, Excel, and image privacy metadata scanner & one-click cleaner. 100% browser local sandbox execution to protect your business documents.",
+    "layoutJsonLdWebSiteName": "MetaDocu Privacy Scanner",
+    "layoutAppleWebAppTitle": "MetaDocu Privacy Scan",
+    "layoutTitleTemplate": "%s | MetaDocu Privacy Scanner"
   },
   "home": {
-    "enterWorkState": "Ready in a second",
-    "description": "Read, edit, clean, and batch process all locally. Supports metadata editing for multiple document formats.",
-    "featureLocal": "100% Local",
-    "featureDragDrop": "Drag & Drop",
-    "featureBatch": "Batch Boost",
+    "enterWorkState": "100% Browser Local Sandbox Running · Zero Network Upload",
+    "description": "Before sharing PDF, Word, Excel, or image files online, deeply scan and clean hidden author names, company info, local development absolute paths, revision histories (RSID), and media EXIF details. Everything runs locally in your browser sandbox.",
+    "featureLocal": "100% Local Run",
+    "featureDragDrop": "No File Upload",
+    "featureBatch": "Privacy Risk Scan",
     "openBatchWorkspace": "Open Batch Workspace",
-    "startEditing": "Start Editing",
-    "moreComing": "More advanced features are on the way, stay tuned.",
-    "dragUploadStart": "Drag & Drop to Upload",
-    "singleOrBatchDesc": "Edit single files or batch process multiple files from here",
-    "supportedFileTypes": "Supported File Types",
-    "seoSectionTitle": "One-Stop Office Document Metadata Processing",
-    "seoSectionDesc": "Office Metadata Editor is a professional online Office document property management tool. Whether you need to <strong>edit Word document author information</strong>, <strong>remove hidden properties from PDF files</strong>, or <strong>batch process Excel workbook metadata</strong>, it can all be done in one place right in your browser. All processing is performed locally — your files never leave your device, fully ensuring data security and document privacy.",
-    "featureWordTitle": "Word Document Metadata",
-    "featureWordDesc": "Edit DOCX document properties such as author, title, company, and creation time online. Supports removing sensitive metadata like revision history and hidden information to protect your document privacy from leaks.",
-    "featureExcelTitle": "Excel Workbook Properties",
-    "featureExcelDesc": "Edit XLSX workbook author, title, tags, notes, and more. Batch clear metadata from multiple Excel files — ideal for enterprise document compliance checks and information security management.",
-    "featurePdfTitle": "PDF Properties Editor",
-    "featurePdfDesc": "Edit PDF file title, author, subject, keywords, and other metadata online. No need to install Adobe Acrobat — operate directly in your browser, safe and efficient.",
+    "startEditing": "One-click Clean & Download",
+    "moreComing": "We promise to never access your document content. All operations are performed 100% safely within your local browser sandbox.",
+    "solutionSectionTitle": "Metadata Privacy Cleaning Solutions",
+    "solutionSectionDesc": "For common document formats shared and submitted online, MetaDocu provides professional browser-local metadata sanitization solutions, targeting key sensitive properties and rebuilding file binary structures safely.",
+    "btnStartWord": "Edit Word Metadata Online",
+    "btnStartExcel": "Edit Excel Metadata Online",
+    "btnStartPdf": "Edit PDF Metadata Online",
+    "dragUploadStart": "Drag & drop files here to audit privacy",
+    "singleOrBatchDesc": "Supports PDF, DOCX, XLSX, PPTX, JPG, PNG. Directly drag files in to get a detailed privacy report instantly.",
+    "supportedFileTypes": "Supported Scanners",
+    "seoSectionTitle": "The First 100% Browser-Local Metadata Privacy Audit Tool",
+    "seoSectionDesc": "MetaDocu is a professional browser-local metadata privacy scanner and cleanup utility. Unlike standard online metadata editors, <strong>MetaDocu does not require uploading any of your files to a remote server</strong>. All complex operations, including Office XML tree reconstruction, PDF Xref offset recalculation, RSID paragraph tag stripping, and embedded image EXIF purging, are executed safely in your local browser sandbox.",
+    "featureWordTitle": "Word / Excel / PPT Purging",
+    "featureWordDesc": "Instantly scan and strip creator, manager, company name, and last modified by. Clean random revision histories (RSID) embedded within paragraphs, and recursively strip camera EXIF data from nested media images.",
+    "featureExcelTitle": "PDF Signature & Xref Rebuild",
+    "featureExcelDesc": "Scan PDF files to detect digital signatures (warning triggered) to prevent file hash corruption. Gracefully capture password-protected PDFs for local decryption, and physically rebuild the PDF layout with Xref recalculation.",
+    "featurePdfTitle": "EXIF & GPS Photo Stripper",
+    "featurePdfDesc": "Scan and physically wipe camera metadata, capture timestamp, and geographic GPS coordinates from JPEG/PNG images. Retain perfect image resolution while removing all metadata footprints.",
     "faqTitle": "Frequently Asked Questions",
     "faqItems": [
       {
-        "q": "How to edit the author information of a Word document online?",
-        "a": "Open the Office Metadata Editor, upload your Word document, locate the author field in the editor interface, modify it, and save. The entire process is done locally in your browser — your document is never uploaded to any server."
+        "q": "Are my files uploaded to your server?",
+        "a": "Absolutely not. MetaDocu is 100% browser-local. The metadata scanning and cleaning processes run entirely within your local WebAssembly sandbox. Your files never leave your device."
       },
       {
-        "q": "What information is included in Office document metadata?",
-        "a": "Metadata includes author name, creation time, modification time, company name, title, subject, tags, notes, and more. This information may inadvertently leak your personal or company privacy."
+        "q": "What metadata privacy risks can this tool detect?",
+        "a": "It deeply parses and strips over 20 sensitive items, including creator name, last modified by, creation/modification times, local development template absolute paths, software versions, paragraph RSIDs, and image GPS locations."
       },
       {
-        "q": "Can PDF file properties be edited?",
-        "a": "Yes. Upload a PDF file through the online Office Metadata Editor to edit properties such as title, author, and subject. All processing is done locally in your browser, safe and convenient."
+        "q": "How do I check PDF metadata without uploading?",
+        "a": "Simply drag and drop your PDF into the upload zone. The local WebAssembly engine parses the document's Info dictionary in browser memory, listing all properties on your screen with zero network transfer."
       },
       {
-        "q": "How to batch clear metadata from multiple documents?",
-        "a": "Open the Batch Workspace, add multiple files, and use the batch clear feature to remove metadata from all files in one click. Supports mixed batch processing of Word, Excel, and PDF files."
+        "q": "Can Word documents reveal comments or revision history?",
+        "a": "Yes. Word documents record random paragraph RSID markers that trace revision histories and editor footprints. MetaDocu purges these internal XML nodes cleanly, restoring privacy."
       },
       {
-        "q": "Is it safe to edit document metadata online?",
-        "a": "It is very safe. This tool processes everything locally in your browser. Your files are never uploaded to any server — all operations are completed on your device, fully protecting your data privacy."
+        "q": "Is local metadata scanning safer?",
+        "a": "Yes. Traditional online metadata utilities require uploading contracts, resumes, or financial spreadsheets to their servers, inviting leakages. MetaDocu performs a strict client-side sandbox cleanup, locking down your data."
       },
       {
-        "q": "Can others tell if Word document properties have been modified?",
-        "a": "This tool removes or overwrites common visible metadata fields. However, some applications or forensic tools may expose additional hidden information depending on the file format and editing history."
+        "q": "Can images contain GPS metadata?",
+        "a": "Yes. Smart phones and digital cameras record capture parameters and GPS locations into EXIF segments. MetaDocu performs a physical byte-strip of EXIF chunks, outputting clean images."
       }
     ],
     "quickEntry": "Quick Links",
@@ -289,6 +295,36 @@
       },
       "pdf-security": {
         "title": "Security Attributes"
+      },
+      "pdf-summary": {
+        "title": "PDF Summary"
+      },
+      "xlsx-workbook": {
+        "title": "Workbook Info"
+      },
+      "docx-document-properties": {
+        "title": "Document Properties",
+        "desc": "Word Document Base Metadata"
+      },
+      "docx-dublin-core": {
+        "title": "Dublin Core",
+        "desc": "Cross-system Core Metadata"
+      },
+      "docx-organization": {
+        "title": "Organization",
+        "desc": "Company & Manager Information"
+      },
+      "xlsx-workbook-properties": {
+        "title": "Workbook Properties",
+        "desc": "Excel Workbook Base Metadata"
+      },
+      "xlsx-dublin-core": {
+        "title": "Dublin Core",
+        "desc": "Cross-system Core Metadata"
+      },
+      "xlsx-organization": {
+        "title": "Organization",
+        "desc": "Company & Manager Information"
       }
     },
     "labels": {

@@ -1,8 +1,8 @@
 {
   "common": {
-    "appName": "office-metadata-editor",
-    "appTitle": "Office 元数据编辑器",
-    "appLogo": "应用 Logo",
+    "appName": "MetaDocu",
+    "appTitle": "MetaDocu 免费本地隐私元数据扫描器",
+    "appLogo": "MetaDocu Logo",
     "theme": "主题",
     "light": "白天",
     "dark": "暗黑",
@@ -10,78 +10,84 @@
     "dragArea": "窗口拖拽区",
     "langZh": "中",
     "langEn": "EN",
-    "notFoundTitle": "页面未找到 | Office 元数据编辑器",
+    "notFoundTitle": "页面未找到 | MetaDocu 隐私元数据扫描器",
     "notFoundHeading": "页面未找到",
     "notFoundDescription": "您请求的页面不存在，可能已被移除或地址输入有误。",
     "notFoundBackHome": "返回首页",
-    "footerCopyright": "© {year} m-office",
-    "layoutDescription": "专业的在线Office元数据编辑器，支持Word(.docx)、Excel(.xlsx)、PDF文件，无需上传服务器，全程本地处理，保护您的文档隐私。可批量修改作者、创建时间等元数据属性。",
+    "footerCopyright": "© {year} MetaDocu",
+    "layoutDescription": "免费、超安全的在线 PDF、Word、Excel 及图片隐私元数据扫描与一键清理工具。MetaDocu 100% 基于浏览器本地沙箱环境计算，文件永不上传服务器，深度剥离作者姓名、公司名称、本地路径、随机协作历史(RSID)、以及多媒体嵌套图片 EXIF/GPS 轨迹。",
     "layoutKeywords": [
-      "Office元数据编辑器",
-      "修改文档属性",
-      "在线清除元数据",
+      "PDF元数据清理",
       "Word作者修改",
-      "PDF属性编辑",
-      "Excel元数据清除",
-      "DOCX元数据编辑器",
-      "免费在线元数据工具"
+      "Excel属性擦除",
+      "在线清除元数据",
+      "照片EXIF删除",
+      "PDF数字签名检测",
+      "隐私安全扫描",
+      "本地文件处理",
+      "Word修订历史净化"
     ],
-    "layoutOgTitle": "Office元数据在线编辑器 - 免费修改Word/Excel/PDF文档属性",
-    "layoutOgDescription": "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
-    "layoutOgImageAlt": "Office元数据编辑器",
-    "layoutTwitterTitle": "Office元数据在线编辑器 - 免费修改文档属性，全程本地处理",
-    "layoutTwitterDescription": "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
-    "layoutJsonLdOrgName": "Office元数据编辑器",
-    "layoutJsonLdOrgDesc": "专业的在线Office元数据编辑器，支持Word、Excel、PDF文件元数据修改与清除，全程本地处理，保护文档隐私。",
-    "layoutJsonLdWebSiteName": "Office元数据编辑器",
-    "layoutAppleWebAppTitle": "Office元数据编辑器",
-    "layoutTitleTemplate": "%s | Office 元数据编辑器"
+    "layoutOgTitle": "MetaDocu 免费本地隐私元数据扫描器 - 100% 本地浏览器沙箱运行",
+    "layoutOgDescription": "免费在线扫描并一键清理 Word/Excel/PDF/图片的隐私元数据，全本地沙箱环境安全处理，文档不上传服务器，物理重组交叉引用表并进行嵌套 EXIF/RSID 深度净化。",
+    "layoutOgImageAlt": "MetaDocu 隐私元数据扫描器",
+    "layoutTwitterTitle": "MetaDocu 免费本地隐私元数据扫描器 - 保护文档隐私，文件不离设备",
+    "layoutTwitterDescription": "免费在线扫描并一键清理 Word/Excel/PDF/图片的隐私元数据，全本地沙箱环境安全处理，文档不上传服务器，物理重组交叉引用表并进行嵌套 EXIF/RSID 深度净化。",
+    "layoutJsonLdOrgName": "MetaDocu 隐私扫描器",
+    "layoutJsonLdOrgDesc": "免费、超安全的在线 PDF、Word、Excel 及图片隐私元数据扫描与一键清理工具。100% 本地浏览器沙箱运行，守护您的信息安全。",
+    "layoutJsonLdWebSiteName": "MetaDocu 隐私元数据扫描器",
+    "layoutAppleWebAppTitle": "MetaDocu 隐私扫描",
+    "layoutTitleTemplate": "%s | MetaDocu 隐私元数据扫描器"
   },
   "home": {
-    "enterWorkState": "一秒进入工作状态",
-    "description": "读取、编辑、清理、批处理全部本地完成，支持多格式文档的元数据处理。",
-    "featureLocal": "全程本地",
-    "featureDragDrop": "拖拽即用",
-    "featureBatch": "批量提速",
+    "enterWorkState": "100% 浏览器本地沙箱安全运行 · 零网络上传",
+    "description": "在网络分享或提交 PDF、Word、Excel 和图片之前，深度扫描并一键清理其中隐藏的作者姓名、公司、本地开发文件路径、修改时间、修订历史 (RSID) 等隐私风险。一切处理纯本地化，杜绝泄露隐患。",
+    "featureLocal": "100% 本地运行",
+    "featureDragDrop": "零文件上传",
+    "featureBatch": "隐私风险扫描",
     "openBatchWorkspace": "打开批量处理工作台",
-    "startEditing": "直接开始编辑",
-    "moreComing": "更多高级能力正在路上，敬请期待。",
-    "dragUploadStart": "拖拽上传并开始",
-    "singleOrBatchDesc": "单文件编辑或多文件批处理都可从这里进入",
-    "supportedFileTypes": "支持的文件类型",
-    "seoSectionTitle": "一站式 Office 文档元数据处理",
-    "seoSectionDesc": "Office元数据编辑器是一款专业的在线Office文档属性管理工具。无论您需要<strong>修改Word文档作者信息</strong>、<strong>清除PDF文件中的隐藏属性</strong>、还是<strong>批量处理Excel工作簿元数据</strong>，都能在浏览器中一站式完成。所有处理均在本地执行，文件不会离开您的设备，完全保障数据安全与文档隐私。",
-    "featureWordTitle": "Word 文档元数据",
-    "featureWordDesc": "在线修改 DOCX 文档的作者、标题、公司、创建时间等属性。支持清除修订历史、隐藏信息等敏感元数据，保护您的文档隐私不被泄露。",
-    "featureExcelTitle": "Excel 工作簿属性",
-    "featureExcelDesc": "编辑 XLSX 工作簿的作者、标题、标签、备注等信息。批量清除多个 Excel 文件的元数据，适用于企业文件合规检查与信息安全管理场景。",
-    "featurePdfTitle": "PDF 属性编辑",
-    "featurePdfDesc": "在线编辑 PDF 文件的标题、作者、主题、关键词等元数据信息。无需安装 Adobe Acrobat，浏览器直接操作，安全高效。",
-    "faqTitle": "常见问题",
+    "startEditing": "一键清除隐私并下载",
+    "moreComing": "我们承诺永远不接触您的文档内容，所有操作 100% 在您的本地浏览器沙箱中安全完成。",
+    "solutionSectionTitle": "核心文档格式隐私脱敏解决方案",
+    "solutionSectionDesc": "针对网络分享与提交的常见文档格式，MetaDocu 提供专业的浏览器本地隐私净化解决方案，精准剔除核心敏感属性，无损重构结构性物理字节。",
+    "btnStartWord": "在线修改Word文档属性",
+    "btnStartExcel": "在线修改Excel文档属性",
+    "btnStartPdf": "在线修改PDF文档属性",
+    "dragUploadStart": "拖入文件开始隐私审计",
+    "singleOrBatchDesc": "支持 PDF, DOCX, XLSX, PPTX, JPG, PNG 格式文件，直接在下方拖入即可秒级输出报告",
+    "supportedFileTypes": "支持扫描的格式",
+    "seoSectionTitle": "首款 100% 浏览器本地隐私元数据审计工具",
+    "seoSectionDesc": "MetaDocu 是一款专业的本地隐私元数据审计与一键脱敏清理工具。与普通在线元数据编辑器不同，MetaDocu <strong>不需要您上传任何文件到远程服务器</strong>。所有复杂的 Office XML 树重构、PDF Xref 交叉引用偏移重算、RSID 段落标记过滤、以及嵌套多媒体 EXIF 递归擦除，均在您的浏览器本地沙箱中安全运行，100% 守护您的商业合同、简历、商业机密和信息合规隐私。",
+    "featureWordTitle": "Word / Excel / PPT 深度净化",
+    "featureWordDesc": "秒级提取并清理文档的作者、管理者、公司、最后修改时间等属性。流式清除段落中暗藏的随机协作 Session ID (RSID)，并递归物理擦除文档嵌套多媒体图片的 EXIF 信息。",
+    "featureExcelTitle": "PDF 签名检测与 Xref 重构",
+    "featureExcelDesc": "扫描 PDF 是否包含官方数字签名（黄色警示），防止重写损坏签名。优雅捕获密码加密 PDF，支持本地密码解密，物理完全重建 PDF 并强制 Xref 偏移重算， Adobe 零报错兼容。",
+    "featurePdfTitle": "图片 EXIF 与 GPS 剥离",
+    "featurePdfDesc": "扫描并物理擦除 JPEG/PNG 等图片的相机型号、拍照时间、地理定位坐标 (GPS) 等核心隐私块。不破坏图片画质，完美还原最纯净的图片文件二进制。",
+    "faqTitle": "常见问题 (FAQ)",
     "faqItems": [
       {
-        "q": "如何在线修改Word文档的作者信息？",
-        "a": "打开Office元数据编辑器，上传Word文档，在编辑器界面中找到作者字段，修改后保存即可。整个过程在浏览器本地完成，文档不会上传到任何服务器。"
+        "q": "Are my files uploaded to your server? (我的文件会被上传到服务器吗？)",
+        "a": "绝对不会。MetaDocu 纯本地运行，元数据扫描和一键清理全部在您浏览器的 WebAssembly 本地沙箱中执行。我们没有服务器端文件存储，也没有网络文件读取，您的隐私安全高枕无忧。"
       },
       {
-        "q": "Office文档元数据包含哪些信息？",
-        "a": "元数据包括作者名称、创建时间、修改时间、公司名称、标题、主题、标签、备注等。这些信息可能在不经意间泄露您的个人或公司隐私。"
+        "q": "What metadata privacy risks can this tool detect? (能检测到哪些隐私风险？)",
+        "a": "能深度检测并剥离出包括作者姓名、公司、管理者、最后修改人、创建/修改时间、本地开发模板文件绝对路径、办公软件版本标识、Excel 内部元数据、协作 Sessions ID 随机历史 (RSID)、以及图片 GPS 定位坐标等在内的 20 多项高危隐私。"
       },
       {
-        "q": "PDF文件的属性信息可以修改吗？",
-        "a": "可以。通过在线Office元数据编辑器上传PDF文件，即可编辑标题、作者、主题等属性信息。所有处理在浏览器本地完成，安全便捷。"
+        "q": "How do I check PDF metadata without uploading? (如何不上传文件检查 PDF 属性？)",
+        "a": "直接将 PDF 拖入本站，底层 WebAssembly 引擎会在本地内存读取并解析 PDF 的 Info 字典，100% 在前端为您列出所有属性，不产生任何网络流量上报。"
       },
       {
-        "q": "如何批量清除多个文档的元数据？",
-        "a": "打开批量处理工作台，添加多个文件，选择批量清除功能即可一键清除所有文件的元数据信息。支持Word、Excel、PDF文件混合批量处理。"
+        "q": "Can Word documents reveal comments or revision history? (Word 文档会泄露修订历史和作者名吗？)",
+        "a": "会。Word 文档内部的 XML 中记录了每个段落协作产生的 RSID 随机标记，可能无意中暴露团队协作成员名、修改次数等内部足迹。本站可以流式过滤并擦除全部段落的 RSID，还原本色。"
       },
       {
-        "q": "在线修改文档元数据安全吗？",
-        "a": "非常安全。本工具全程在浏览器本地处理，您的文件不会上传到任何服务器，所有操作都在您的设备上完成，完全保护数据隐私。"
+        "q": "Is local metadata scanning safer? (本地元数据扫描为什么更安全？)",
+        "a": "传统的元数据工具需要将合同、简历等极其敏感的文件上传到其服务器处理，存在泄露或后台被窃取风险。MetaDocu 纯本地操作，直接在客户端闭环，彻底切断了网络泄露通道。"
       },
       {
-        "q": "修改Word文档属性后对方能发现吗？",
-        "a": "本工具可以清除或覆盖常见的可见元数据字段。然而，根据文件格式和编辑历史的不同，某些应用程序或专业取证工具仍可能暴露出其他隐藏痕迹。本工具旨在安全清理常见元数据并提供透明报告，无法保证绝对无痕。"
+        "q": "Can images contain GPS metadata? (照片会包含拍照地理位置坐标吗？)",
+        "a": "是的。数码相机和智能手机拍摄的照片默认会带有 EXIF 属性，里面包含 GPS 纬度、经度、高度以及拍摄参数等。MetaDocu 可对图片 EXIF 块进行 100% 物理剥离，擦除隐私。"
       }
     ],
     "quickEntry": "快速入口",
@@ -289,6 +295,36 @@
       },
       "pdf-security": {
         "title": "安全属性"
+      },
+      "pdf-summary": {
+        "title": "PDF 摘要"
+      },
+      "xlsx-workbook": {
+        "title": "工作簿信息"
+      },
+      "docx-document-properties": {
+        "title": "文档属性",
+        "desc": "Word 文档基础元数据"
+      },
+      "docx-dublin-core": {
+        "title": "Dublin Core",
+        "desc": "跨系统兼容的核心元数据"
+      },
+      "docx-organization": {
+        "title": "组织信息",
+        "desc": "公司与责任人信息"
+      },
+      "xlsx-workbook-properties": {
+        "title": "工作簿属性",
+        "desc": "Excel 工作簿基础元数据"
+      },
+      "xlsx-dublin-core": {
+        "title": "Dublin Core",
+        "desc": "跨系统兼容的核心元数据"
+      },
+      "xlsx-organization": {
+        "title": "组织信息",
+        "desc": "公司与责任人信息"
       }
     },
     "labels": {

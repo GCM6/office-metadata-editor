@@ -1,0 +1,4 @@
+[target.wasm32-unknown-unknown]
+rustflags = [
+    "--cfg", "flate2_backend=\"rust_backend\""
+]
