@@ -7,9 +7,9 @@ import zhCN from "../messages/zh-CN.json"
 import en from "../messages/en.json"
 
 function getLocale(): string {
-  if (typeof document === "undefined") return "zh-CN"
+  if (typeof document === "undefined") return "en"
   const match = document.cookie.match(/(?:^|;\s*)NEXT_LOCALE=([^;]*)/)
-  return match?.[1] === "en" ? "en" : "zh-CN"
+  return match?.[1] === "zh-CN" ? "zh-CN" : "en"
 }
 
 function ErrorDisplay({

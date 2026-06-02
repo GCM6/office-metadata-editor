@@ -8,7 +8,7 @@ import { Providers } from "../providers"
 import { GoogleTagManager } from "@next/third-parties/google"
 
 export function generateStaticParams() {
-  return [{ locale: "zh-CN" }, { locale: "en" }]
+  return [{ locale: "en" }, { locale: "zh-CN" }]
 }
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://metadocu.com"
@@ -49,7 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
     // fallback during static generation
   }
 
-  const locale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE === "en" ? "en_US" : "zh_CN"
+  const locale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE === "zh-CN" ? "zh_CN" : "en_US"
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -145,7 +145,7 @@ interface RootLayoutProps {
 
 export default async function RootLayout({ children, params }: RootLayoutProps) {
   const resolvedParams = await params
-  const locale = resolvedParams.locale || "zh-CN"
+  const locale = resolvedParams.locale || "en"
   let messages: Record<string, unknown> = {}
   let jsonLdOrgName = "Office Metadata Editor"
   let jsonLdOrgDesc = "A professional online Office metadata editor."
