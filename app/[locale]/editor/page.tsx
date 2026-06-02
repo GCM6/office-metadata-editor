@@ -16,6 +16,8 @@ import { resolveMetadataPreviewGroups } from "@/lib/documents/metadata"
 import { seoMap } from "@/seo/seo-map"
 
 export default function EditorPage() {
+  console.log("zs");
+
   const router = useRouter()
 
   const { metadata, documents } = useMetadata()

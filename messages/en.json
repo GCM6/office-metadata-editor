@@ -81,7 +81,7 @@
       },
       {
         "q": "Can others tell if Word document properties have been modified?",
-        "a": "No. Once you use this editor to modify or clear metadata fields (such as original author, creation date, revision history), the original information is permanently overwritten or deleted, and the file appears as if newly created."
+        "a": "This tool removes or overwrites common visible metadata fields. However, some applications or forensic tools may expose additional hidden information depending on the file format and editing history."
       }
     ],
     "quickEntry": "Quick Links",
@@ -215,7 +215,7 @@
       "batch-clear-metadata": "Open the Batch Workspace, add multiple files, and use the batch clear feature to remove metadata from all files in one click. Supports mixed batch processing of Word, Excel, and PDF files.",
       "online-metadata-security": "It is very safe. This tool processes everything locally in your browser. Your files are never uploaded to any server — all operations are completed on your device, fully protecting your data privacy.",
       "view-word-metadata": "In Word, go to File → Info → Properties → Advanced Properties to view complete metadata, including author, revision count, editing time, and other hidden data.",
-      "modify-word-detectable": "No. Once you use this editor to modify or clear metadata fields (such as original author, creation date, revision history), the original information is permanently overwritten or deleted, and the file appears as if newly created.",
+      "modify-word-detectable": "This tool removes or overwrites common visible metadata fields. However, some applications or forensic tools may expose additional hidden information depending on the file format and editing history.",
       "remove-word-privacy": "Upload your Word document to the editor, clear all personal fields (author, company, notes, etc.) in the metadata editing area, save, and download. It is also recommended to check custom properties in the document properties panel.",
       "excel-metadata-info": "Excel workbook metadata includes author, creation date, modification date, company name, title, subject, category, and more. This information travels with the file and may leak sensitive information.",
       "pdf-metadata-location": "PDF metadata is stored in the document information dictionary (Info Dictionary) in the PDF header, including standard fields such as title, author, subject, keywords, creation date, and modification date.",

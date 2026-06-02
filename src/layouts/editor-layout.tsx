@@ -29,14 +29,16 @@ export const EditorLayout: React.FC<React.PropsWithChildren<EditorLayoutProps>> 
       <PageLayout
         backTo="/"
         header={
-          <div className="flex items-center gap-2" data-tauri-drag-region>
+          <div className="flex items-center gap-2 min-w-0" data-tauri-drag-region>
             <OmFileTypeIcon type={fileType} />
-            <div className="flex flex-col leading-tight">
-              <span className="text-sm font-medium text-foreground">{fileName}</span>
+            <div className="flex flex-col leading-tight min-w-0">
+              <span className="text-sm font-medium text-foreground truncate max-w-25 xs:max-w-[180px] sm:max-w-xs md:max-w-md" title={fileName}>
+                {fileName}
+              </span>
               <span className="text-xs text-muted-foreground">{formatFileSize(fileSize)}</span>
             </div>
             {hasChanges && (
-              <span className="rounded-md border border-primary/20 bg-primary/10 px-1.5 py-0.5 text-[11px] font-medium text-primary">
+              <span className="shrink-0 rounded-md border border-primary/20 bg-primary/10 px-1.5 py-0.5 text-[11px] font-medium text-primary">
                 {t("unsavedBadge")}
               </span>
             )}
