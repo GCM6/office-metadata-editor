@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import {
   Table,
@@ -89,6 +90,10 @@ export default function BatchPage() {
     setActionStatus(statusText)
     try {
       await action()
+      toast.success(isEn ? "Action completed successfully" : "操作成功完成")
+    } catch (err) {
+      console.error("批量操作失败:", err)
+      toast.error(isEn ? `Action failed: ${String(err)}` : `操作失败: ${String(err)}`)
     } finally {
       setActionStatus(null)
     }
@@ -112,6 +117,12 @@ export default function BatchPage() {
 
   const handleBatchSave = async () => {
     if (rows.length === 0) return
+
+    const hasAnyChanges = rows.some(r => r.hasChanges)
+    if (!hasAnyChanges) {
+      toast.info(isEn ? "No unsaved changes to save" : "无待保存的修改")
+      return
+    }
 
     await runAction(t("batchSaving"), async () => {
       await batchSaveAll()

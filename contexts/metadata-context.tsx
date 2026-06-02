@@ -447,7 +447,25 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
     const results = resultGroups.flat()
 
     const successPathSet = new Set(results.filter(item => item.success).map(item => item.filePath))
-    if (successPathSet.size === 0) return
+    
+    // 如果有失败的，更新其状态为 error 并在界面上显示对应报错信息
+    const failedItems = results.filter(item => !item.success)
+    if (failedItems.length > 0) {
+      failedItems.forEach(item => {
+        const doc = documents.find(d => d.filePath === item.filePath)
+        if (doc) {
+          updateFileStatus(doc.id, {
+            status: "error",
+            progressMessage: tp("processFailed"),
+            error: item.error || "清理失败",
+          })
+        }
+      })
+    }
+
+    if (successPathSet.size === 0) {
+      throw new Error(failedItems.map(item => `${basename(item.filePath)}: ${item.error || "未知错误"}`).join("; ") || "全部清除失败")
+    }
 
     const refreshTargets = documents.filter(item => successPathSet.has(item.filePath))
     const refreshed = await Promise.all(
@@ -509,6 +527,21 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
     const results = resultGroups.flat()
     const successPathSet = new Set(results.filter(item => item.success).map(item => item.filePath))
 
+    // 如果有失败的，更新其状态为 error 并在界面上显示对应报错信息
+    const failedItems = results.filter(item => !item.success)
+    if (failedItems.length > 0) {
+      failedItems.forEach(item => {
+        const doc = documents.find(d => d.filePath === item.filePath)
+        if (doc) {
+          updateFileStatus(doc.id, {
+            status: "error",
+            progressMessage: tp("processFailed"),
+            error: item.error || "保存失败",
+          })
+        }
+      })
+    }
+
     setDocumentsById(prev => {
       const next = { ...prev }
       documents.forEach(item => {
@@ -529,6 +562,10 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
         updateFileStatus(item.id, { status: "ready", progressMessage: tp("synced"), error: undefined })
       }
     })
+
+    if (successPathSet.size === 0) {
+      throw new Error(failedItems.map(item => `${basename(item.filePath)}: ${item.error || "未知错误"}`).join("; ") || "全部保存失败")
+    }
   }, [documents, updateFileStatus, tp])
 
   const downloadFile = useCallback(async () => {

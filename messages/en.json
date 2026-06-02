@@ -369,5 +369,150 @@
       "pdfEncrypted": "Encrypted",
       "pdfPages": "Total Pages"
     }
+  },
+  "footer": {
+    "aboutTitle": "About MetaDocu",
+    "aboutDesc": "MetaDocu is a free, professional-grade privacy metadata scanner. All file processing runs 100% inside your browser's local WebAssembly sandbox — your documents never leave your device.",
+    "toolsTitle": "Tools",
+    "linkEditor": "Metadata Editor",
+    "linkBatch": "Batch Workspace",
+    "linkWord": "Word Metadata",
+    "linkExcel": "Excel Metadata",
+    "linkPdf": "PDF Metadata",
+    "legalTitle": "Legal",
+    "linkAbout": "About Us",
+    "linkPrivacy": "Privacy Policy",
+    "linkTerms": "Terms of Service",
+    "contactTitle": "Contact",
+    "contactEmail": "mingicelucky@gmail.com",
+    "contactDesc": "Have questions or feedback? Reach out to us.",
+    "copyright": "© {year} MetaDocu. All rights reserved."
+  },
+  "about": {
+    "metaTitle": "About Us | MetaDocu Privacy Scanner",
+    "metaDescription": "Learn about MetaDocu — a free, 100% browser-local privacy metadata scanner for PDF, Word, Excel, and image files. No uploads, no servers, total privacy.",
+    "heroTitle": "About MetaDocu",
+    "heroSubtitle": "Protecting Document Privacy with Browser-Local Technology",
+    "missionTitle": "Our Mission",
+    "missionContent": "Every day, millions of business contracts, resumes, and confidential documents are shared online carrying hidden metadata — author names, company details, local file paths, GPS coordinates in embedded images, and revision histories that silently expose private information.\n\nMetaDocu was built with a singular conviction: privacy-sensitive document processing should never require uploading your files to anyone's server. We deliver a complete metadata audit and cleaning toolkit that runs entirely inside your browser's WebAssembly sandbox.",
+    "techTitle": "How It Works",
+    "techContent": "MetaDocu uses cutting-edge WebAssembly technology to process documents directly in your browser. When you load a file, it stays in your device's local memory — no network requests, no cloud storage, no server-side processing whatsoever.\n\nOur engine reconstructs Office XML trees, recalculates PDF cross-reference tables, strips paragraph-level RSID revision markers, and recursively purges embedded EXIF/GPS data from nested images — all within milliseconds, right on your machine.",
+    "whyTitle": "Why Choose MetaDocu?",
+    "whyItems": [
+      {
+        "title": "Zero Upload, Zero Risk",
+        "desc": "Your files never leave your device. There is no server to breach, no cloud storage to compromise, and no network transfer to intercept."
+      },
+      {
+        "title": "Deep Metadata Stripping",
+        "desc": "We don't just clear surface-level properties. MetaDocu performs byte-level sanitization of XML nodes, RSID markers, EXIF chunks, and PDF Info dictionaries."
+      },
+      {
+        "title": "Professional & Free",
+        "desc": "Enterprise-grade metadata auditing available to everyone at no cost. No accounts, no subscriptions, no limitations."
+      },
+      {
+        "title": "Multi-Format Support",
+        "desc": "Process Word (.docx), Excel (.xlsx), PDF, JPEG, and PNG files with specialized engines built for each format."
+      }
+    ],
+    "contactTitle": "Get in Touch",
+    "contactContent": "For questions, feedback, or partnership inquiries, reach us at:"
+  },
+  "privacy": {
+    "metaTitle": "Privacy Policy | MetaDocu",
+    "metaDescription": "MetaDocu Privacy Policy — Learn how we protect your data. 100% browser-local processing, zero file uploads, zero tracking of document content.",
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: June 2, 2025",
+    "sections": [
+      {
+        "heading": "1. Introduction",
+        "content": "MetaDocu (\"we\", \"our\", or \"us\") is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our website and services at metadocu.com."
+      },
+      {
+        "heading": "2. Core Privacy Principle: 100% Local Processing",
+        "content": "MetaDocu is architecturally designed so that your documents are NEVER uploaded to any server. All file parsing, metadata scanning, editing, and cleaning operations are executed entirely within your browser's local WebAssembly sandbox. We have no server-side file storage infrastructure and no mechanism to access, read, or transmit your document content."
+      },
+      {
+        "heading": "3. Information We Collect",
+        "content": "We do NOT collect, store, or process any of your document files or their content. The only information we may collect includes: (a) basic website analytics via Google Analytics (page views, browser type, approximate geographic region) to improve our service; (b) a locale preference cookie (NEXT_LOCALE) to remember your language selection."
+      },
+      {
+        "heading": "4. Cookies",
+        "content": "We use a minimal set of cookies: (a) NEXT_LOCALE — stores your preferred language (en or zh-CN), valid for 1 year; (b) Google Analytics cookies — used for anonymous traffic analysis. You can disable cookies in your browser settings at any time."
+      },
+      {
+        "heading": "5. Third-Party Services",
+        "content": "We use Google Analytics and Google Tag Manager to understand website traffic patterns. These services may collect anonymized usage data. We do not share any personal or document-related information with third parties."
+      },
+      {
+        "heading": "6. Data Security",
+        "content": "Since your files never leave your device, the risk of data breach through our service is fundamentally eliminated. Your documents exist only in your browser's local memory during processing and are discarded when you close the page or clear the session."
+      },
+      {
+        "heading": "7. Children's Privacy",
+        "content": "Our service is not directed at children under the age of 13. We do not knowingly collect personal information from children."
+      },
+      {
+        "heading": "8. Changes to This Policy",
+        "content": "We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated revision date. Continued use of the service after changes constitutes acceptance."
+      },
+      {
+        "heading": "9. User-Uploaded Content & Infringement Exemption",
+        "content": "Because our tools operate 100% locally within your browser using WebAssembly technology, we do not upload, transmit, or store any file content on our servers. As a result, we have no physical control over, access to, or ability to inspect or block the content you process. You must ensure you have lawful rights and authorizations for all processed content. MetaDocu explicitly disclaims any and all liability for third-party intellectual property or copyright infringements arising from files processed or shared by users."
+      },
+      {
+        "heading": "10. Contact Us",
+        "content": "If you have any questions about this Privacy Policy, please contact us at mingicelucky@gmail.com."
+      }
+    ]
+  },
+  "terms": {
+    "metaTitle": "Terms of Service | MetaDocu",
+    "metaDescription": "MetaDocu Terms of Service — Understand the terms governing use of our free, browser-local document metadata scanner and editor.",
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: June 2, 2025",
+    "sections": [
+      {
+        "heading": "1. Acceptance of Terms",
+        "content": "By accessing and using MetaDocu (metadocu.com), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service."
+      },
+      {
+        "heading": "2. Service Description",
+        "content": "MetaDocu provides a free, browser-based document metadata scanning, editing, and cleaning tool. All file processing occurs locally in your browser using WebAssembly technology. We do not provide server-side file storage or processing."
+      },
+      {
+        "heading": "3. User Responsibilities & Warranties",
+        "content": "You represent, warrant, and agree that you are solely responsible for: (a) all files and content you choose to process using our tool; (b) ensuring you possess all necessary legal rights, licenses, and permissions to modify the metadata of and process any documents; (c) ensuring that the documents you process do not violate any third-party copyrights, trademarks, patents, trade secrets, or any other proprietary or legal rights; (d) maintaining secure backups of your original files before using the tool. You agree to bear all legal, civil, and criminal liabilities, and fully indemnify MetaDocu and its creators for any third-party claims or lawsuits resulting from your processing, transmission, or distribution of unauthorized, illegal, or infringing content."
+      },
+      {
+        "heading": "4. Intellectual Property",
+        "content": "All content, design, code, and branding of MetaDocu are the intellectual property of MetaDocu. You retain full ownership of all documents you process through our tool. We claim no rights over your files or their content."
+      },
+      {
+        "heading": "5. Disclaimer of Warranties",
+        "content": "METADOCU AND ITS CREATORS PROVIDE THE SERVICE \"AS IS\" AND \"AS AVAILABLE,\" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, SECURITY, OR ACCURACY. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, COMPLETELY ERROR-FREE, OR OF ANY ASSURED QUALITY, OR THAT ALL METADATA TRACES WILL BE SUCCESSFULLY OR COMPLETELY STRIPPED OR SANITIZED FROM EVERY DOCUMENT. YOUR USE OF THIS SERVICE IS ENTIRELY AT YOUR OWN SOLE RISK AND DISCRETION."
+      },
+      {
+        "heading": "6. Limitation of Liability",
+        "content": "TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL METADOCU OR ITS DEVELOPERS BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES OF ANY KIND (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION, LOSS OF DATA, FILE CORRUPTION, OR PRIVACY BREACHES ARISING FROM INCOMPLETE METADATA STRIPPING), EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. IN NO EVENT SHALL THE TOTAL AGGREGATE LIABILITY OF METADOCU OR ITS DEVELOPERS EXCEED ZERO DOLLARS ($0.00)."
+      },
+      {
+        "heading": "7. Modifications to Service",
+        "content": "We reserve the right to modify, suspend, or discontinue any aspect of the service at any time without prior notice. We are not liable for any modification, suspension, or discontinuation."
+      },
+      {
+        "heading": "8. Governing Law",
+        "content": "These Terms shall be governed by and construed in accordance with applicable laws, without regard to conflict of law principles."
+      },
+      {
+        "heading": "9. Complete Intellectual Property Infringement Disclaimer & Indemnification",
+        "content": "MetaDocu provides an offline, client-side, browser-local utility. We do not host, check, or control the documents you import. You agree to defend, indemnify, and hold harmless MetaDocu and its creators from and against any and all claims, liabilities, damages, losses, or expenses (including reasonable attorneys' fees) arising out of or in any way connected with your violation of any third-party intellectual property rights (including copyrights, trademarks, patents, or trade secrets) through your use of this tool. Your use of this tool to process any infringing, unauthorized, or illegal material is entirely at your own risk."
+      },
+      {
+        "heading": "10. Contact",
+        "content": "For questions about these Terms of Service, please contact us at mingicelucky@gmail.com."
+      }
+    ]
   }
 }

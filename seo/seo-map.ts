@@ -312,6 +312,78 @@ export const seoMap: Record<string, SeoPageContract> = {
       ]
     }
   },
+
+  about: {
+    pageCode: "about",
+    path: "/about",
+    level: 2,
+    pageType: "tool-detail",
+    primaryKeyword: "About MetaDocu",
+    secondaryKeywords: ["MetaDocu team", "document privacy tool", "browser local metadata scanner"],
+    intent: "informational",
+    serpPageType: "tool-detail",
+    indexable: true,
+    parentPageCode: "home",
+    title: "关于我们 - MetaDocu 隐私元数据扫描器",
+    description: "了解 MetaDocu 的使命与技术——一款免费的、100% 浏览器本地运行的隐私元数据扫描器，守护您的文档隐私安全。",
+    h1: "关于 MetaDocu",
+    canonical: "/about",
+    internalLinksTo: ["home"],
+    status: "published",
+    en: {
+      title: "About Us - MetaDocu Privacy Metadata Scanner",
+      description: "Learn about MetaDocu — a free, 100% browser-local privacy metadata scanner for PDF, Word, Excel, and image files. No uploads, no servers, total privacy.",
+      h1: "About MetaDocu"
+    }
+  },
+
+  privacy: {
+    pageCode: "privacy",
+    path: "/privacy",
+    level: 2,
+    pageType: "tool-detail",
+    primaryKeyword: "MetaDocu Privacy Policy",
+    secondaryKeywords: ["privacy policy", "data protection", "local processing privacy"],
+    intent: "informational",
+    serpPageType: "tool-detail",
+    indexable: true,
+    parentPageCode: "home",
+    title: "隐私政策 - MetaDocu",
+    description: "MetaDocu 隐私政策——了解我们如何保护您的数据。100% 浏览器本地处理，零文件上传，零文档内容追踪。",
+    h1: "隐私政策",
+    canonical: "/privacy",
+    internalLinksTo: ["home"],
+    status: "published",
+    en: {
+      title: "Privacy Policy - MetaDocu",
+      description: "MetaDocu Privacy Policy — Learn how we protect your data. 100% browser-local processing, zero file uploads, zero tracking of document content.",
+      h1: "Privacy Policy"
+    }
+  },
+
+  terms: {
+    pageCode: "terms",
+    path: "/terms",
+    level: 2,
+    pageType: "tool-detail",
+    primaryKeyword: "MetaDocu Terms of Service",
+    secondaryKeywords: ["terms of service", "usage terms", "service agreement"],
+    intent: "informational",
+    serpPageType: "tool-detail",
+    indexable: true,
+    parentPageCode: "home",
+    title: "服务条款 - MetaDocu",
+    description: "MetaDocu 服务条款——了解使用我们免费的浏览器本地文档元数据扫描器和编辑器的相关条款。",
+    h1: "服务条款",
+    canonical: "/terms",
+    internalLinksTo: ["home"],
+    status: "published",
+    en: {
+      title: "Terms of Service - MetaDocu",
+      description: "MetaDocu Terms of Service — Understand the terms governing use of our free, browser-local document metadata scanner and editor.",
+      h1: "Terms of Service"
+    }
+  },
 }
 
 export function getPublishedPages(): SeoPageContract[] {

@@ -26,6 +26,7 @@ export const PageLayout: React.FC<React.PropsWithChildren<PageLayoutProps>> = ({
 
   return (
     <BlankLayout
+      hideFooter
       header={
         <OmWindowTitleBar
           leading={
