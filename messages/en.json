@@ -215,13 +215,13 @@
       "online-pdf-upload": "Do I need to upload files to edit PDF properties online?"
     },
     "faqAnswers": {
-      "edit-word-author": "Open the Office Metadata Editor, upload your Word document, locate the author field in the editor interface, modify it, and save. The entire process is done locally in your browser — your document is never uploaded to any server.",
+      "edit-word-author": "Open the MetaDocu Privacy Scanner, upload your Word document, locate the author field in the scanner report interface, clean or modify it, and save. The entire process is done locally in your browser — your document is never uploaded to any server.",
       "office-metadata-info": "Metadata includes author name, creation time, modification time, company name, title, subject, tags, notes, and more. This information may inadvertently leak your personal or company privacy.",
-      "edit-pdf-properties": "Yes. Upload a PDF file through the online Office Metadata Editor to edit properties such as title, author, and subject. All processing is done locally in your browser, safe and convenient.",
+      "edit-pdf-properties": "Yes. Upload a PDF file through the MetaDocu Privacy Scanner to detect and clean properties such as title, author, and subject. All processing is done locally in your browser, safe and convenient.",
       "batch-clear-metadata": "Open the Batch Workspace, add multiple files, and use the batch clear feature to remove metadata from all files in one click. Supports mixed batch processing of Word, Excel, and PDF files.",
       "online-metadata-security": "It is very safe. This tool processes everything locally in your browser. Your files are never uploaded to any server — all operations are completed on your device, fully protecting your data privacy.",
       "view-word-metadata": "In Word, go to File → Info → Properties → Advanced Properties to view complete metadata, including author, revision count, editing time, and other hidden data.",
-      "modify-word-detectable": "This tool removes or overwrites common visible metadata fields. However, some applications or forensic tools may expose additional hidden information depending on the file format and editing history.",
+      "modify-word-detectable": "This tool removes or overwrites common document metadata fields. However, some hidden information may still exist depending on the file format, editing history, embedded objects, PDF structure, or operating system metadata. We recommend using the after-clean verification report before sharing sensitive files.",
       "remove-word-privacy": "Upload your Word document to the editor, clear all personal fields (author, company, notes, etc.) in the metadata editing area, save, and download. It is also recommended to check custom properties in the document properties panel.",
       "excel-metadata-info": "Excel workbook metadata includes author, creation date, modification date, company name, title, subject, category, and more. This information travels with the file and may leak sensitive information.",
       "pdf-metadata-location": "PDF metadata is stored in the document information dictionary (Info Dictionary) in the PDF header, including standard fields such as title, author, subject, keywords, creation date, and modification date.",
@@ -514,5 +514,40 @@
         "content": "For questions about these Terms of Service, please contact us at mingicelucky@gmail.com."
       }
     ]
+  },
+  "audit": {
+    "title": "Metadata Privacy Audit Report",
+    "riskLevel": "Privacy Risk Level",
+    "riskHigh": "High Risk (⚠️)",
+    "riskMedium": "Medium Risk (⚠️)",
+    "riskLow": "Safe (No Risk ✨)",
+    "risksFound": "Found {count} privacy exposure risks",
+    "fieldsDetected": "Detected {count} sensitive metadata fields",
+    "fileType": "File Format",
+    "scanTime": "Scanned locally in {time}s",
+    "noUpload": "File Upload: No (🔒 100% Local)",
+    "showFull": "Show Full Value",
+    "hideFull": "Hide Value",
+    "localRunning": "This audit report is generated locally in your browser memory via WebAssembly. Your documents never leave your device.",
+    "removeLocally": "Remove Metadata Locally",
+    "downloadReport": "Download 100% Safe File",
+    "scanAnother": "Scan Another File",
+    "cleanSuccess": "Metadata Cleaned Successfully!",
+    "cleanSuccessDesc": "All sensitive metadata (including creator, company name, local file absolute paths, revision histories (RSID), and nested EXIF/GPS data) has been wiped in your browser. The file is now fully sanitized and safe to share online!",
+    "redactedAlert": "This sensitive value is automatically redacted and only rendered locally in your browser memory.",
+    "steps": {
+      "reading": "Reading and verifying file binary locally...",
+      "extracting": "Extracting metadata XML trees...",
+      "checking": "Auditing and evaluating privacy exposure risks...",
+      "generating": "Generating local privacy audit report..."
+    },
+    "categories": {
+      "identity": "Identity Exposure Risks",
+      "organization": "Organization Exposure Risks",
+      "path": "Local Absolute Path Exposure",
+      "history": "Random Collaboration Session Traces",
+      "media": "Nested Media EXIF / GPS Traces",
+      "software": "Software Fingerprint Risks"
+    }
   }
 }

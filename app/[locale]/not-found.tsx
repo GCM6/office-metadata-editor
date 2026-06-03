@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server"
 import { NotFoundContent } from "./not-found-content"
 
 export async function generateMetadata(): Promise<Metadata> {
-  let title = "Page Not Found | Office Metadata Editor"
+  let title = "Page Not Found | MetaDocu"
   try {
     const t = await getTranslations("common")
     title = t("notFoundTitle")

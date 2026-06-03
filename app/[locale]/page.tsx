@@ -36,27 +36,60 @@ import {
 import { SUPPORTED_FILE_EXTENSIONS } from "@/lib/documents/supported-formats"
 import { APP_NAME } from "@/lib/app-config"
 import BlankLayout from "@/components/layouts/blank-layout"
+import { OmAuditReport } from "@/components/om/om-audit-report"
+import { useLocale } from "next-intl"
 
 export default function HomePage() {
   const router = useRouter()
-  const { openFiles, isLoading, clearFiles } = useFileContext()
+  const { files, openFiles, isLoading, clearFiles } = useFileContext()
   const { theme, resolvedTheme, setTheme } = useTheme()
   const t = useTranslations("home")
   const tc = useTranslations("common")
+  const locale = useLocale()
+  const isZh = locale === "zh-CN"
   const [mounted, setMounted] = useState(false)
+  const [activeTab, setActiveTab] = useState<"scan" | "edit" | "batch">("scan")
+  const [auditFile, setAuditFile] = useState<{ id: string; filePath: string; fileName: string } | null>(null)
+  
+  const [isInitialClearDone, setIsInitialClearDone] = useState(false)
+  
   const faqItems = t.raw("faqItems") as Array<{ q: string; a: string }>
   const quickLinks = t.raw("quickLinks") as Array<{ label: string; href: string }>
 
   useEffect(() => {
     setMounted(true)
     clearFiles()
+    setIsInitialClearDone(true)
   }, [clearFiles])
+
+  // 监听 Scan 模式下的新增文件，自动拦截并注入 3D 扫描状态
+  useEffect(() => {
+    if (activeTab === "scan" && isInitialClearDone && files.length > 0 && !auditFile) {
+      const latest = files[files.length - 1]
+      if (latest && (latest.status === "idle" || latest.status === "reading" || latest.status === "ready")) {
+        setAuditFile({
+          id: latest.id,
+          filePath: latest.filePath,
+          fileName: latest.fileName,
+        })
+      }
+    }
+  }, [files, activeTab, auditFile, isInitialClearDone])
 
   const handleOpenFiles = async () => {
     const added = await openFiles()
     if (added === 0) return
 
-    router.push("/editor")
+    if (activeTab === "batch") {
+      router.push("/batch")
+    } else if (activeTab === "edit") {
+      router.push("/editor")
+    }
+  }
+
+  const handleCloseAudit = () => {
+    setAuditFile(null)
+    clearFiles()
   }
 
   return (
@@ -149,27 +182,85 @@ export default function HomePage() {
                 <p className="mt-4 text-xs text-muted-foreground select-none">{t("moreComing")}</p>
               </section>
 
-              <section className="mx-auto w-full max-w-125 rounded-xl border border-border/70 bg-card/82 p-5 shadow-xl backdrop-blur-sm sm:p-6">
-                <div className="mb-4 flex items-center justify-between gap-3 select-none">
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{t("dragUploadStart")}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {t("singleOrBatchDesc")}
-                    </p>
+              <div className="mx-auto w-full max-w-125">
+                {/* 药丸滑块 segmented control */}
+                {!auditFile && (
+                  <div className="flex items-center justify-center mb-5">
+                    <div className="flex p-1 bg-card/65 border border-border/60 rounded-full select-none shadow-sm backdrop-blur-sm">
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab("scan")}
+                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+                          activeTab === "scan"
+                            ? "bg-primary text-primary-foreground shadow-sm scale-102"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        {isZh ? "隐私风险审计" : "Scan Risks"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab("edit")}
+                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+                          activeTab === "edit"
+                            ? "bg-primary text-primary-foreground shadow-sm scale-102"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        {isZh ? "属性编辑器" : "Edit Metadata"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab("batch")}
+                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+                          activeTab === "batch"
+                            ? "bg-primary text-primary-foreground shadow-sm scale-102"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        {isZh ? "批量工作台" : "Batch Clean"}
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
 
-                <OmFileUploadZone onOpenFiles={handleOpenFiles} isLoading={isLoading} />
+                {auditFile ? (
+                  <OmAuditReport
+                    fileId={auditFile.id}
+                    filePath={auditFile.filePath}
+                    fileName={auditFile.fileName}
+                    onClose={handleCloseAudit}
+                  />
+                ) : (
+                  <section className="rounded-xl border border-border/70 bg-card/82 p-5 shadow-xl backdrop-blur-sm sm:p-6 transition-all duration-500">
+                    <div className="mb-4 flex items-center justify-between gap-3 select-none">
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">
+                          {activeTab === "scan"
+                            ? (isZh ? "开始本地隐私风险审计" : "Audit Local Metadata Risks")
+                            : t("dragUploadStart")}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {activeTab === "scan"
+                            ? (isZh ? "直接在下方拖入文件，100% 本地沙箱无痕扫描报告" : "Drag files below to generate offline privacy audit report")
+                            : t("singleOrBatchDesc")}
+                        </p>
+                      </div>
+                    </div>
 
-                <div className="mt-8">
-                  <p className="mb-2 text-xs font-medium text-muted-foreground select-none">{t("supportedFileTypes")}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {SUPPORTED_FILE_EXTENSIONS.map(type => (
-                      <OmFileTypeBadge key={type} type={type} supported />
-                    ))}
-                  </div>
-                </div>
-              </section>
+                    <OmFileUploadZone onOpenFiles={handleOpenFiles} isLoading={isLoading} />
+
+                    <div className="mt-8">
+                      <p className="mb-2 text-xs font-medium text-muted-foreground select-none">{t("supportedFileTypes")}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {SUPPORTED_FILE_EXTENSIONS.map(type => (
+                          <OmFileTypeBadge key={type} type={type} supported />
+                        ))}
+                      </div>
+                    </div>
+                  </section>
+                )}
+              </div>
             </div>
 
             <section className="mt-8 mb-12">

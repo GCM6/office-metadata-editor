@@ -215,9 +215,9 @@
       "online-pdf-upload": "在线修改PDF属性需要上传文件吗？"
     },
     "faqAnswers": {
-      "edit-word-author": "打开Office元数据编辑器，上传Word文档，在编辑器界面中找到作者字段，修改后保存即可。整个过程在浏览器本地完成，文档不会上传到任何服务器。",
+      "edit-word-author": "打开 MetaDocu 隐私元数据扫描器，上传Word文档，在报告中清理或修改作者字段并保存下载即可。整个过程在浏览器本地完成，文档不会上传到任何服务器。",
       "office-metadata-info": "元数据包括作者名称、创建时间、修改时间、公司名称、标题、主题、标签、备注等。这些信息可能在不经意间泄露您的个人或公司隐私。",
-      "edit-pdf-properties": "可以。通过在线Office元数据编辑器上传PDF文件，即可编辑标题、作者、主题等属性信息。所有处理在浏览器本地完成，安全便捷。",
+      "edit-pdf-properties": "可以。通过 MetaDocu 隐私元数据扫描器上传PDF文件，即可检测并清理标题、作者、主题等属性信息。所有处理在浏览器本地完成，安全便捷。",
       "batch-clear-metadata": "打开批量处理工作台，添加多个文件，选择批量清除功能即可一键清除所有文件的元数据信息。支持Word、Excel、PDF文件混合批量处理。",
       "online-metadata-security": "非常安全。本工具全程在浏览器本地处理，您的文件不会上传到任何服务器，所有操作都在您的设备上完成，完全保护数据隐私。",
       "view-word-metadata": "在Word中，点击「文件」→「信息」→「属性」中的「高级属性」可以查看完整的元数据信息，包括作者、修订次数、编辑时间等隐藏数据。",
@@ -514,5 +514,40 @@
         "content": "如您对本服务条款有任何疑问，请通过 mingicelucky@gmail.com 与我们联系。"
       }
     ]
+  },
+  "audit": {
+    "title": "元数据隐私审计报告",
+    "riskLevel": "隐私风险等级",
+    "riskHigh": "高风险 (⚠️)",
+    "riskMedium": "中风险 (⚠️)",
+    "riskLow": "安全 (零风险 ✨)",
+    "risksFound": "发现 {count} 个隐私泄漏风险",
+    "fieldsDetected": "检测到 {count} 个敏感元数据字段",
+    "fileType": "文件格式",
+    "scanTime": "本地扫描用时 {time}s",
+    "noUpload": "文件上传: 否 (🔒 纯本地运行)",
+    "showFull": "显示完整值",
+    "hideFull": "脱敏隐藏",
+    "localRunning": "此审计报告由浏览器 WebAssembly 沙箱在您本地内存中扫描生成，您的文档从未离开您的设备。",
+    "removeLocally": "本地一键脱敏清理",
+    "downloadReport": "下载 100% 安全文件",
+    "scanAnother": "扫描其他文件",
+    "cleanSuccess": "一键本地脱敏成功！",
+    "cleanSuccessDesc": "所有隐私敏感的元数据（包括作者姓名、公司、本地绝对路径、RSID 协作标记以及图片嵌套 EXIF/GPS 等）已在您的浏览器中安全抹除。文件已重构为零风险状态，现在可以放心在网络上分享了！",
+    "redactedAlert": "此敏感值已自动脱敏，且仅在您浏览器本地内存中显示，绝不产生网络上报。",
+    "steps": {
+      "reading": "本地读取并校验文件二进制",
+      "extracting": "正在解包并提取元数据结构...",
+      "checking": "正在审计与评估隐私泄漏风险...",
+      "generating": "正在生成本地隐私审计报告..."
+    },
+    "categories": {
+      "identity": "个人身份泄露风险 (Identity Exposure)",
+      "organization": "组织与公司泄露风险 (Organization Exposure)",
+      "path": "本地开发文件路径暴露 (Local Path Exposure)",
+      "history": "随机协作Session痕迹 (Collaboration History)",
+      "media": "嵌套多媒体 EXIF 轨迹 (Media Exposure)",
+      "software": "软件指纹暴露风险 (Software Fingerprint)"
+    }
   }
 }

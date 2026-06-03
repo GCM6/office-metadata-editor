@@ -1,6 +1,6 @@
-# Office 元数据编辑器
+# MetaDocu 隐私元数据扫描器
 
-一个基于 Tauri 2 + React 19 的桌面应用，用于本地读取、编辑、清理和批量处理 Office/PDF 文档元数据。
+一个基于 Tauri 2 + React 19 的桌面应用，用于本地读取、检测、清理和批量处理 Office/PDF 文档隐私元数据。
 
 ## 功能概览
 

@@ -24,15 +24,15 @@ export const viewport: Viewport = {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  let title = "Office Metadata Editor"
-  let description = "A professional online Office metadata editor supporting Word, Excel, and PDF files."
-  let ogTitle = "Office Metadata Editor"
+  let title = "MetaDocu"
+  let description = "A professional online local metadata privacy scanner and cleaner supporting Word, Excel, and PDF files."
+  let ogTitle = "MetaDocu"
   let ogDescription = description
-  let ogImageAlt = "Office Metadata Editor"
+  let ogImageAlt = "MetaDocu"
   let twitterTitle = ogTitle
   let twitterDescription = ogDescription
-  let appleWebAppTitle = "Office Metadata Editor"
-  let titleTemplate = "%s | Office Metadata Editor"
+  let appleWebAppTitle = "MetaDocu"
+  let titleTemplate = "%s | MetaDocu"
 
   try {
     const t = await getTranslations("common")
@@ -59,8 +59,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description,
     keywords: [
-      "Office metadata editor",
-      "edit document properties",
+      "MetaDocu",
+      "metadata privacy scanner",
       "remove metadata online",
       "Word author editor",
       "PDF properties editor",
@@ -147,9 +147,9 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
   const resolvedParams = await params
   const locale = resolvedParams.locale || "en"
   let messages: Record<string, unknown> = {}
-  let jsonLdOrgName = "Office Metadata Editor"
-  let jsonLdOrgDesc = "A professional online Office metadata editor."
-  let jsonLdWebSiteName = "Office Metadata Editor"
+  let jsonLdOrgName = "MetaDocu"
+  let jsonLdOrgDesc = "A professional browser-local metadata privacy scanner."
+  let jsonLdWebSiteName = "MetaDocu"
 
   try {
     messages = (await getMessages()) as Record<string, unknown>

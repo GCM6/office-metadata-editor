@@ -1,8 +1,8 @@
 {
-  "name": "office-metadata-editor",
+  "name": "metadocu",
   "private": true,
   "version": "0.1.0",
-  "description": "Office 元数据编辑器",
+  "description": "MetaDocu 免费本地隐私元数据扫描器",
   "type": "module",
   "author": "m",
   "license": "SEE LICENSE IN LICENSE FILE",
