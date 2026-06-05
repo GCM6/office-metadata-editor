@@ -35,7 +35,7 @@ export default async function BlogPostPage(props: {
   const isEn = locale === "en"
   const seo = pageCode ? seoMap[pageCode] : undefined
   const h1 = isEn ? (seo?.en?.h1 ?? seo?.h1) : seo?.h1
-  const jsonLdData = pageCode ? generateJsonLd(pageCode) : []
+  const jsonLdData = pageCode ? generateJsonLd(pageCode, locale) : []
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-8">

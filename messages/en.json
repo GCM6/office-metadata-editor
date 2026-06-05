@@ -1,7 +1,7 @@
 {
   "common": {
     "appName": "MetaDocu",
-    "appTitle": "MetaDocu Free Local Metadata Privacy Scanner",
+    "appTitle": "Remove Hidden Metadata from Office and PDF Files",
     "appLogo": "MetaDocu Logo",
     "theme": "Theme",
     "light": "Light",
@@ -40,7 +40,7 @@
   },
   "home": {
     "enterWorkState": "100% Browser Local Sandbox Running · Zero Network Upload",
-    "description": "Before sharing PDF, Word, Excel, or image files online, deeply scan and clean hidden author names, company info, local development absolute paths, revision histories (RSID), and media EXIF details. Everything runs locally in your browser sandbox.",
+    "description": "Scan, clean, and verify hidden document metadata from Word, Excel, PowerPoint, and PDF files — locally in your browser, without uploading your files.",
     "featureLocal": "100% Local Run",
     "featureDragDrop": "No File Upload",
     "featureBatch": "Privacy Risk Scan",

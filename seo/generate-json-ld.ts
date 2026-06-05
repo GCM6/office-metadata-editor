@@ -1,7 +1,15 @@
 import { seoMap } from "./seo-map"
+import { questionToKey } from "./faq-keys"
+import zhMessages from "../messages/zh-CN.json"
+import enMessages from "../messages/en.json"
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://metadocu.com"
 const SITE_NAME = "Office元数据编辑器"
+
+const messagesMap: Record<string, typeof zhMessages> = {
+  "zh-CN": zhMessages,
+  en: enMessages as unknown as typeof zhMessages,
+}
 
 export interface JsonLdData {
   "@context": string
@@ -9,7 +17,7 @@ export interface JsonLdData {
   [key: string]: unknown
 }
 
-export function generateJsonLd(pageCode: string): JsonLdData[] {
+export function generateJsonLd(pageCode: string, locale: string = "zh-CN"): JsonLdData[] {
   const seo = seoMap[pageCode]
 
   if (!seo || seo.status !== "published") {
@@ -17,6 +25,8 @@ export function generateJsonLd(pageCode: string): JsonLdData[] {
   }
 
   const result: JsonLdData[] = []
+
+  const messages = messagesMap[locale] || messagesMap["zh-CN"]
 
   if (seo.schemaTypes?.includes("Organization")) {
     result.push({
@@ -47,23 +57,48 @@ export function generateJsonLd(pageCode: string): JsonLdData[] {
     result.push(buildBreadcrumbList(seo.parentPageCode, seo.path, seo.h1))
   }
 
-  if (
-    seo.schemaTypes?.includes("FAQPage") &&
-    seo.paaQuestions &&
-    seo.paaQuestions.length > 0
-  ) {
-    result.push({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: seo.paaQuestions.map((question) => ({
-        "@type": "Question",
-        name: question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: question,
-        },
-      })),
-    })
+  if (seo.schemaTypes?.includes("FAQPage")) {
+    if (pageCode === "home") {
+      const homeFaqItems = messages.home?.faqItems || []
+      if (homeFaqItems.length > 0) {
+        result.push({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: homeFaqItems.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.a,
+            },
+          })),
+        })
+      }
+    } else {
+      const questions = (locale === "en" && seo.en?.paaQuestions) ? seo.en.paaQuestions : seo.paaQuestions
+      if (questions && questions.length > 0) {
+        const faqQuestions = (messages.seo?.faqQuestions as Record<string, string>) || {}
+        const faqAnswers = (messages.seo?.faqAnswers as Record<string, string>) || {}
+
+        result.push({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: questions.map((question) => {
+            const key = questionToKey(question)
+            const qText = faqQuestions[key] || question
+            const aText = faqAnswers[key] || ""
+            return {
+              "@type": "Question",
+              name: qText,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: aText,
+              },
+            }
+          }),
+        })
+      }
+    }
   }
 
   if (seo.schemaTypes?.includes("Article") && seo.pageType === "blog-post") {

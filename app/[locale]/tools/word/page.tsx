@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server"
+import { getTranslations, getLocale } from "next-intl/server"
 import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 import { SeoContent } from "@/seo/components/SeoContent"
@@ -6,7 +6,8 @@ import { OmBreadcrumbs } from "@/components/om/om-breadcrumbs"
 
 export default async function ToolWordPage() {
   const t = await getTranslations("tools")
-  const jsonLdData = generateJsonLd("tool.word")
+  const locale = await getLocale()
+  const jsonLdData = generateJsonLd("tool.word", locale)
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-8">

@@ -38,6 +38,8 @@ import { APP_NAME } from "@/lib/app-config"
 import BlankLayout from "@/components/layouts/blank-layout"
 import { OmAuditReport } from "@/components/om/om-audit-report"
 import { useLocale } from "next-intl"
+import { JsonLd } from "@/seo/json-ld"
+import { generateJsonLd } from "@/seo/generate-json-ld"
 
 export default function HomePage() {
   const router = useRouter()
@@ -55,6 +57,7 @@ export default function HomePage() {
   
   const faqItems = t.raw("faqItems") as Array<{ q: string; a: string }>
   const quickLinks = t.raw("quickLinks") as Array<{ label: string; href: string }>
+  const jsonLdData = generateJsonLd("home", locale)
 
   useEffect(() => {
     setMounted(true)
@@ -94,6 +97,7 @@ export default function HomePage() {
 
   return (
     <BlankLayout>
+      <JsonLd data={jsonLdData} />
       <div className="relative h-full w-full overflow-y-auto">
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_14%_12%,oklch(0.9_0.11_245/0.18),transparent_48%),radial-gradient(circle_at_86%_78%,oklch(0.88_0.1_162/0.16),transparent_46%)] dark:bg-[radial-gradient(circle_at_14%_12%,oklch(0.4_0.11_245/0.24),transparent_48%),radial-gradient(circle_at_86%_78%,oklch(0.4_0.08_162/0.22),transparent_46%)]" />
 

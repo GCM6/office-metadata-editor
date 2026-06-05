@@ -3,6 +3,7 @@ import { seoMap } from "@/seo/seo-map"
 import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 import { SeoContent } from "@/seo/components/SeoContent"
+import { getLocale } from "next-intl/server"
 
 const blogPosts = [
   {
@@ -11,9 +12,10 @@ const blogPosts = [
   },
 ]
 
-export default function BlogPage() {
+export default async function BlogPage() {
   const seo = seoMap["blog"]
-  const jsonLdData = generateJsonLd("blog")
+  const locale = await getLocale()
+  const jsonLdData = generateJsonLd("blog", locale)
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-8">

@@ -42,7 +42,7 @@ export const seoMap: Record<string, SeoPageContract> = {
         "在线编辑Word、Excel、PDF元数据，无需上传服务器，保护文档隐私安全。支持批量处理，一键清除敏感信息。",
       image: "/og-default.png",
     },
-    schemaTypes: ["Organization", "WebSite"],
+    schemaTypes: ["Organization", "WebSite", "FAQPage"],
     internalLinksTo: [],
     paaQuestions: [
       "如何在线修改Word文档的作者信息？",

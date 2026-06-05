@@ -1,7 +1,7 @@
 {
   "common": {
     "appName": "MetaDocu",
-    "appTitle": "MetaDocu 免费本地隐私元数据扫描器",
+    "appTitle": "清除 Office 和 PDF 文件中的隐藏元数据",
     "appLogo": "MetaDocu Logo",
     "theme": "主题",
     "light": "白天",
@@ -40,7 +40,7 @@
   },
   "home": {
     "enterWorkState": "100% 浏览器本地沙箱安全运行 · 零网络上传",
-    "description": "在网络分享或提交 PDF、Word、Excel 和图片之前，深度扫描并一键清理其中隐藏的作者姓名、公司、本地开发文件路径、修改时间、修订历史 (RSID) 等隐私风险。一切处理纯本地化，杜绝泄露隐患。",
+    "description": "在浏览器本地扫描、清理并验证 Word、Excel、PowerPoint 和 PDF 文件中的隐藏元数据，无需上传。",
     "featureLocal": "100% 本地运行",
     "featureDragDrop": "零文件上传",
     "featureBatch": "隐私风险扫描",
