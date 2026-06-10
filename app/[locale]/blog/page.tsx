@@ -3,6 +3,7 @@ import { seoMap } from "@/seo/seo-map"
 import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 import { SeoContent } from "@/seo/components/SeoContent"
+import BlankLayout from "@/components/layouts/blank-layout"
 import { getLocale } from "next-intl/server"
 
 const blogPosts = [
@@ -14,11 +15,14 @@ const blogPosts = [
 
 export default async function BlogPage() {
   const seo = seoMap["blog"]
+  const researchSeo = seoMap["research.metadata-leak"]
   const locale = await getLocale()
   const jsonLdData = generateJsonLd("blog", locale)
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-8">
+    <BlankLayout>
+      <div className="h-full w-full overflow-y-auto">
+        <main className="mx-auto max-w-4xl px-4 py-8">
       <JsonLd data={jsonLdData} />
 
       <h1 className="mb-2 text-2xl sm:text-3xl font-bold text-foreground">
@@ -49,7 +53,25 @@ export default async function BlogPage() {
         })}
       </section>
 
+      {researchSeo && (
+        <section className="mb-10">
+          <Link
+            href="/metadata-leak-study"
+            className="block rounded-lg border border-primary/30 bg-primary/5 p-6 transition-colors hover:bg-primary/10"
+          >
+            <h2 className="mb-2 text-lg font-semibold text-foreground">
+              {locale === "en" ? (researchSeo.en?.h1 ?? researchSeo.h1) : researchSeo.h1}
+            </h2>
+            <p className="text-sm text-muted-foreground line-clamp-2">
+              {locale === "en" ? (researchSeo.en?.description ?? researchSeo.description) : researchSeo.description}
+            </p>
+          </Link>
+        </section>
+      )}
+
       <SeoContent pageCode="blog" />
-    </main>
+        </main>
+      </div>
+    </BlankLayout>
   )
 }

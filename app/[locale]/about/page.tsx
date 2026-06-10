@@ -2,40 +2,45 @@
 
 import React from "react"
 import { useTranslations, useLocale } from "next-intl"
-import { Link } from "@/i18n/navigation"
-import { ArrowLeft, ShieldCheck, Layers, Sparkles, FileStack, Mail } from "lucide-react"
+import { ShieldCheck, Layers, Sparkles, FileStack, Mail } from "lucide-react"
 import BlankLayout from "@/components/layouts/blank-layout"
-import { LanguageSwitcher } from "@/i18n/language-switcher"
-import { APP_NAME } from "@/lib/app-config"
+import { SITE_NAME, SITE_URL } from "@/lib/app-config"
+import { JsonLd } from "@/seo/json-ld"
+import { generateJsonLd } from "@/seo/generate-json-ld"
 
 export default function AboutPage() {
   const t = useTranslations("about")
   const locale = useLocale()
   const whyItems = t.raw("whyItems") as Array<{ title: string; desc: string }>
 
+  const jsonLdData = [
+    ...generateJsonLd("about", locale),
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      name: t("heroTitle"),
+      url: `${SITE_URL}/about`,
+      description: t("heroSubtitle"),
+      mainEntity: {
+        "@type": "Organization",
+        name: SITE_NAME,
+        url: SITE_URL,
+        logo: `${SITE_URL}/logo.svg`,
+        email: "mingicelucky@gmail.com",
+      },
+    },
+  ]
+
   const icons = [ShieldCheck, Layers, Sparkles, FileStack]
 
   return (
     <BlankLayout>
+      <JsonLd data={jsonLdData} />
       <div className="relative h-full w-full overflow-y-auto">
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_30%_20%,oklch(0.9_0.08_280/0.14),transparent_50%),radial-gradient(circle_at_70%_80%,oklch(0.88_0.06_180/0.12),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_20%,oklch(0.35_0.08_280/0.2),transparent_50%),radial-gradient(circle_at_70%_80%,oklch(0.35_0.06_180/0.18),transparent_50%)]" />
 
         <div className="relative flex flex-col px-5 py-6 sm:px-8 sm:py-8">
-          {/* Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Link
-                href="/"
-                className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card/75 px-3 py-1.5 text-xs text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
-              >
-                <ArrowLeft className="h-3.5 w-3.5" />
-                {APP_NAME}
-              </Link>
-            </div>
-            <LanguageSwitcher />
-          </div>
-
-          <article className="mx-auto mt-8 w-full max-w-3xl">
+          <article className="mx-auto w-full max-w-3xl">
             {/* Hero */}
             <header className="mb-10">
               <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">

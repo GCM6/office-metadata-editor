@@ -4,12 +4,12 @@ export interface WebFileEntry {
   fileType: string
 }
 
-export async function openWebFilePicker(): Promise<WebFileEntry[]> {
+export async function openWebFilePicker(accept?: string): Promise<WebFileEntry[]> {
   return new Promise((resolve, reject) => {
     const input = document.createElement("input")
     input.type = "file"
     input.multiple = true
-    input.accept = ".docx,.doc,.xlsx,.pdf"
+    input.accept = accept ?? ".docx,.doc,.xlsx,.pdf"
 
     input.onchange = async () => {
       const {files} = input
@@ -32,6 +32,10 @@ export async function openWebFilePicker(): Promise<WebFileEntry[]> {
       }
 
       resolve(entries)
+    }
+
+    input.oncancel = () => {
+      resolve([])
     }
 
     input.onerror = () => {

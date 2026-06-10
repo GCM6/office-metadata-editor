@@ -138,6 +138,10 @@ declare module "react" {
   }
 }
 
+// 在首屏绘制前同步应用主题类，避免深色偏好用户看到浅色闪动（FOUC）。
+// 逻辑必须与 components/theme-provider.tsx 保持一致：同样的 storageKey / system 解析 / 值校验。
+const THEME_INIT_SCRIPT = `(function(){try{var k="theme",v=localStorage.getItem(k);if(v!=="dark"&&v!=="light"&&v!=="system"){v="system"}var r=v==="system"?(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):v;var e=document.documentElement;e.classList.remove("light","dark");e.classList.add(r);e.style.colorScheme=r}catch(_){}})();`
+
 interface RootLayoutProps {
   children: React.ReactNode
   params: Promise<{ locale: string }>
@@ -164,6 +168,7 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <link rel="icon" type="image/svg+xml" href="/logo.svg" />
         <link rel="apple-touch-icon" href="/logo.svg" />
         <meta name="baidu-site-verification" content="" />
@@ -175,7 +180,14 @@ export default async function RootLayout({ children, params }: RootLayoutProps) 
               "@type": "Organization",
               name: jsonLdOrgName,
               url: SITE_URL,
+              logo: `${SITE_URL}/logo.svg`,
               description: jsonLdOrgDesc,
+              email: "mingicelucky@gmail.com",
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "mingicelucky@gmail.com",
+                contactType: "customer support",
+              },
             }),
           }}
         />

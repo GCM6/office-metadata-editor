@@ -2,97 +2,45 @@
 
 
 
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Link, useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
-import { LanguageSwitcher } from "@/i18n/language-switcher"
 import { useFileContext } from "@/contexts/file-context"
-import { useTheme } from "@/components/theme-provider"
-import { OmFileUploadZone } from "@/components/om/om-file-upload-zone"
+import { OmWorkbench } from "@/components/om/om-workbench"
 import { Button } from "@/components/ui/button"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
   ArrowRight,
-  CloudSun,
   Layers3,
-  Moon,
   ShieldCheck,
   Sparkles,
-  Sun,
   Upload,
   Zap,
   FileText,
   FileSpreadsheet,
   FileType,
 } from "lucide-react"
-import { SUPPORTED_FILE_EXTENSIONS } from "@/lib/documents/supported-formats"
-import { APP_NAME } from "@/lib/app-config"
 import BlankLayout from "@/components/layouts/blank-layout"
-import { OmAuditReport } from "@/components/om/om-audit-report"
 import { useLocale } from "next-intl"
 import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 
 export default function HomePage() {
   const router = useRouter()
-  const { files, openFiles, isLoading, clearFiles } = useFileContext()
-  const { theme, resolvedTheme, setTheme } = useTheme()
+  const { openFiles } = useFileContext()
   const t = useTranslations("home")
   const tc = useTranslations("common")
   const locale = useLocale()
-  const isZh = locale === "zh-CN"
-  const [mounted, setMounted] = useState(false)
-  const [activeTab, setActiveTab] = useState<"scan" | "edit" | "batch">("scan")
-  const [auditFile, setAuditFile] = useState<{ id: string; filePath: string; fileName: string } | null>(null)
-  
-  const [isInitialClearDone, setIsInitialClearDone] = useState(false)
-  
+
   const faqItems = t.raw("faqItems") as Array<{ q: string; a: string }>
   const quickLinks = t.raw("quickLinks") as Array<{ label: string; href: string }>
   const jsonLdData = generateJsonLd("home", locale)
 
-  useEffect(() => {
-    setMounted(true)
-    clearFiles()
-    setIsInitialClearDone(true)
-  }, [clearFiles])
-
-  // 监听 Scan 模式下的新增文件，自动拦截并注入 3D 扫描状态
-  useEffect(() => {
-    if (activeTab === "scan" && isInitialClearDone && files.length > 0 && !auditFile) {
-      const latest = files[files.length - 1]
-      if (latest && (latest.status === "idle" || latest.status === "reading" || latest.status === "ready")) {
-        setAuditFile({
-          id: latest.id,
-          filePath: latest.filePath,
-          fileName: latest.fileName,
-        })
-      }
-    }
-  }, [files, activeTab, auditFile, isInitialClearDone])
-
-  const handleOpenFiles = async () => {
+  // Open the file picker straight from the hero CTA, then jump into the editor.
+  const handleStartEditing = async () => {
     const added = await openFiles()
-    if (added === 0) return
-
-    if (activeTab === "batch") {
-      router.push("/batch")
-    } else if (activeTab === "edit") {
+    if (added > 0) {
       router.push("/editor")
     }
-  }
-
-  const handleCloseAudit = () => {
-    setAuditFile(null)
-    clearFiles()
   }
 
   return (
@@ -102,46 +50,6 @@ export default function HomePage() {
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_14%_12%,oklch(0.9_0.11_245/0.18),transparent_48%),radial-gradient(circle_at_86%_78%,oklch(0.88_0.1_162/0.16),transparent_46%)] dark:bg-[radial-gradient(circle_at_14%_12%,oklch(0.4_0.11_245/0.24),transparent_48%),radial-gradient(circle_at_86%_78%,oklch(0.4_0.08_162/0.22),transparent_46%)]" />
 
         <div className="relative flex flex-col px-5 py-6 sm:px-8 sm:py-8">
-          <div className="flex items-center justify-between">
-            <div className="rounded-full border border-border/70 bg-card/75 px-3 py-1 text-xs text-muted-foreground backdrop-blur-sm select-none">
-              {APP_NAME}
-            </div>
-            <div className="flex items-center gap-2">
-              <LanguageSwitcher />
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="gap-2 rounded-full bg-card/75 backdrop-blur-sm"
-                >
-                  {!mounted ? (
-                    <Sun className="h-4 w-4" />
-                  ) : theme === "system" ? (
-                    <CloudSun className="h-4 w-4" />
-                  ) : resolvedTheme === "dark" ? (
-                    <Moon className="h-4 w-4" />
-                  ) : (
-                    <Sun className="h-4 w-4" />
-                  )}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-44">
-                <DropdownMenuLabel>{tc("theme")}</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuRadioGroup
-                  value={theme}
-                  onValueChange={value => setTheme(value as "dark" | "light" | "system")}
-                >
-                  <DropdownMenuRadioItem value="light">{tc("light")}</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="dark">{tc("dark")}</DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem value="system">{tc("systemFollow")}</DropdownMenuRadioItem>
-                </DropdownMenuRadioGroup>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-          </div>
-
           <div className="mx-auto w-full max-w-6xl">
             <div className="grid grid-cols-1 items-center gap-6 py-4 lg:grid-cols-[1.05fr_0.95fr]">
               <section className="rounded-xl border border-border/70 bg-card/72 p-6 shadow-xl backdrop-blur-sm sm:p-9">
@@ -177,7 +85,7 @@ export default function HomePage() {
                   <Button
                     variant="secondary"
                     className="rounded-xl"
-                    onClick={() => void handleOpenFiles()}
+                    onClick={() => void handleStartEditing()}
                   >
                     {t("startEditing")}
                   </Button>
@@ -187,83 +95,7 @@ export default function HomePage() {
               </section>
 
               <div className="mx-auto w-full max-w-125">
-                {/* 药丸滑块 segmented control */}
-                {!auditFile && (
-                  <div className="flex items-center justify-center mb-5">
-                    <div className="flex p-1 bg-card/65 border border-border/60 rounded-full select-none shadow-sm backdrop-blur-sm">
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab("scan")}
-                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
-                          activeTab === "scan"
-                            ? "bg-primary text-primary-foreground shadow-sm scale-102"
-                            : "text-muted-foreground hover:text-foreground"
-                        }`}
-                      >
-                        {isZh ? "隐私风险审计" : "Scan Risks"}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab("edit")}
-                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
-                          activeTab === "edit"
-                            ? "bg-primary text-primary-foreground shadow-sm scale-102"
-                            : "text-muted-foreground hover:text-foreground"
-                        }`}
-                      >
-                        {isZh ? "属性编辑器" : "Edit Metadata"}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setActiveTab("batch")}
-                        className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
-                          activeTab === "batch"
-                            ? "bg-primary text-primary-foreground shadow-sm scale-102"
-                            : "text-muted-foreground hover:text-foreground"
-                        }`}
-                      >
-                        {isZh ? "批量工作台" : "Batch Clean"}
-                      </button>
-                    </div>
-                  </div>
-                )}
-
-                {auditFile ? (
-                  <OmAuditReport
-                    fileId={auditFile.id}
-                    filePath={auditFile.filePath}
-                    fileName={auditFile.fileName}
-                    onClose={handleCloseAudit}
-                  />
-                ) : (
-                  <section className="rounded-xl border border-border/70 bg-card/82 p-5 shadow-xl backdrop-blur-sm sm:p-6 transition-all duration-500">
-                    <div className="mb-4 flex items-center justify-between gap-3 select-none">
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">
-                          {activeTab === "scan"
-                            ? (isZh ? "开始本地隐私风险审计" : "Audit Local Metadata Risks")
-                            : t("dragUploadStart")}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-0.5">
-                          {activeTab === "scan"
-                            ? (isZh ? "直接在下方拖入文件，100% 本地沙箱无痕扫描报告" : "Drag files below to generate offline privacy audit report")
-                            : t("singleOrBatchDesc")}
-                        </p>
-                      </div>
-                    </div>
-
-                    <OmFileUploadZone onOpenFiles={handleOpenFiles} isLoading={isLoading} />
-
-                    <div className="mt-8">
-                      <p className="mb-2 text-xs font-medium text-muted-foreground select-none">{t("supportedFileTypes")}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {SUPPORTED_FILE_EXTENSIONS.map(type => (
-                          <OmFileTypeBadge key={type} type={type} supported />
-                        ))}
-                      </div>
-                    </div>
-                  </section>
-                )}
+                <OmWorkbench scope="all" />
               </div>
             </div>
 
@@ -376,25 +208,6 @@ const OmFeatureItem: React.FC<OmFeatureItemProps> = ({ icon: Icon, text }) => {
       <Icon className="h-4 w-4 text-primary" />
       <span className="text-xs font-medium select-none">{text}</span>
     </div>
-  )
-}
-
-interface OmFileTypeBadgeProps {
-  type: string
-  supported: boolean
-}
-
-const OmFileTypeBadge: React.FC<OmFileTypeBadgeProps> = ({ type, supported }) => {
-  return (
-    <span
-      className={`rounded-md px-2 py-1 text-xs font-medium ${
-        supported
-          ? "bg-primary/10 text-primary"
-          : "bg-muted text-muted-foreground line-through opacity-50"
-      }`}
-    >
-      .{type}
-    </span>
   )
 }
 

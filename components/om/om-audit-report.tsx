@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react"
-import { useTranslations, useLocale } from "next-intl"
+import { useTranslations } from "next-intl"
 import { useWasmWorker } from "@/hooks/useWasmWorker"
 import { getFileData, setFileData } from "@/lib/resources/file-store"
 import { normalizeDocumentFileType } from "@/lib/documents/file-type"
@@ -38,7 +38,6 @@ export interface OmAuditReportProps {
 }
 
 export const OmAuditReport: React.FC<OmAuditReportProps> = ({
-  fileId,
   filePath,
   fileName,
   onClose,
@@ -46,8 +45,6 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
   const router = useRouter()
   const t = useTranslations("audit")
   const tf = useTranslations("fields")
-  const locale = useLocale()
-  const isZh = locale === "zh-CN"
 
   // 1. Worker 与文件字节准备
   const { worker, ready } = useWasmWorker()
@@ -129,7 +126,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
         id: "creator",
         key: "creator",
         category: "identity",
-        label: tf("labels.creator", { defaultValue: "作者" }),
+        label: tf("labels.creator", { defaultValue: "Creator" }),
         value: creator,
         riskLevel: "medium",
       })
@@ -140,7 +137,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
         id: "lastModifiedBy",
         key: "lastModifiedBy",
         category: "identity",
-        label: tf("labels.lastModifiedBy", { defaultValue: "最后修改者" }),
+        label: tf("labels.lastModifiedBy", { defaultValue: "Last Modified By" }),
         value: lastModifier,
         riskLevel: "medium",
       })
@@ -151,7 +148,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
         id: "manager",
         key: "manager",
         category: "identity",
-        label: tf("labels.manager", { defaultValue: "管理者" }),
+        label: tf("labels.manager", { defaultValue: "Manager" }),
         value: manager,
         riskLevel: "medium",
       })
@@ -164,7 +161,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
         id: "company",
         key: "company",
         category: "organization",
-        label: tf("labels.company", { defaultValue: "公司" }),
+        label: tf("labels.company", { defaultValue: "Company" }),
         value: company,
         riskLevel: "medium",
       })
@@ -184,7 +181,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
           id: "template",
           key: "template",
           category: "path",
-          label: tf("labels.template", { defaultValue: "模板绝对路径" }),
+          label: tf("labels.template", { defaultValue: "Template Absolute Path" }),
           value: template,
           riskLevel: "high",
         })
@@ -198,8 +195,8 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
         id: "application",
         key: "application",
         category: "software",
-        label: tf("labels.application", { defaultValue: "所用软件指纹" }),
-        value: `${application} (v${appProps.appVersion || "未知"})`,
+        label: tf("labels.application", { defaultValue: "Software Fingerprint" }),
+        value: `${application} (v${appProps.appVersion || t("unknownVersion")})`,
         riskLevel: "low",
       })
     }
@@ -211,8 +208,8 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
         id: "revision",
         key: "revision",
         category: "history",
-        label: tf("labels.revision", { defaultValue: "协作修订次数" }),
-        value: `${revision} 次修改痕迹 (可能暗藏 RSID 段落协作 Session ID)`,
+        label: tf("labels.revision", { defaultValue: "Revision Count" }),
+        value: t("revisionValue", { count: revision }),
         riskLevel: "medium",
       })
     }
@@ -223,14 +220,14 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
         id: "embedded_media",
         key: "embedded_media",
         category: "media",
-        label: "嵌套图片 EXIF/GPS 数据",
-        value: "文档中插入的图片可能带有相机型号、快门时间及拍照地理定位坐标 (GPS)",
+        label: t("mediaLabel"),
+        value: t("mediaValue"),
         riskLevel: "medium",
       })
     }
 
     return fields
-  }, [metadata, tf, fileExt])
+  }, [metadata, t, tf, fileExt])
 
   // 5. 计算总体风险等级
   const overallRisk = useMemo<"high" | "medium" | "low">(() => {
@@ -439,7 +436,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
                 <div className="max-h-55 overflow-y-auto space-y-3 pr-1.5 scrollbar-thin select-text">
                   {sensitiveFields.length === 0 ? (
                     <div className="py-8 text-center text-xs text-muted-foreground">
-                      未发现明显的隐私泄漏痕迹，文件非常纯净。
+                      {t("noRisksFound")}
                     </div>
                   ) : (
                     sensitiveFields.map(field => {
@@ -503,7 +500,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
                   </Button>
                   <Button variant="outline" className="rounded-xl flex-1 gap-1.5 text-xs font-semibold" onClick={() => router.push("/editor")}>
                     <FileText className="h-4 w-4" />
-                    {isZh ? "精细属性编辑" : "Manual Edit"}
+                    {t("manualEdit")}
                   </Button>
                   <Button
                     className="rounded-xl flex-1 bg-primary hover:bg-primary/90 text-primary-foreground relative overflow-hidden"
@@ -513,7 +510,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
                     {isCleaning ? (
                       <span className="flex items-center gap-1.5 justify-center">
                         <RotateCw className="h-4 w-4 animate-spin" />
-                        一键脱敏中...
+                        {t("cleaningInProgress")}
                       </span>
                     ) : (
                       <span className="flex items-center gap-1.5 justify-center">
@@ -568,7 +565,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
                       {t("riskLevel")}: {t("riskLow")}
                     </p>
                     <p className="text-[10px] text-muted-foreground mt-0.5 select-none">
-                      Wasm 沙箱自检：通过 (0 警告)
+                      {t("sandboxSelfCheck")}
                     </p>
                   </div>
                   <div className="text-[10px] font-mono text-muted-foreground bg-background/60 p-2 rounded-md">
@@ -595,11 +592,11 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
                     }, 350)
                   }}>
                     <ArrowLeft className="h-4 w-4 mr-1.5" />
-                    扫描新文件
+                    {t("scanAnother")}
                   </Button>
                 </div>
                 <p className="text-center text-[10px] text-muted-foreground mt-3 select-none">
-                  🔒 所有计算 100% 在本地沙箱中闭环运行，文件安全无网络交互
+                  {t("localClosedLoop")}
                 </p>
               </div>
             </div>

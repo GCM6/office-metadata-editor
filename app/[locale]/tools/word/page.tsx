@@ -3,6 +3,8 @@ import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 import { SeoContent } from "@/seo/components/SeoContent"
 import { OmBreadcrumbs } from "@/components/om/om-breadcrumbs"
+import { OmWorkbench } from "@/components/om/om-workbench"
+import BlankLayout from "@/components/layouts/blank-layout"
 
 export default async function ToolWordPage() {
   const t = await getTranslations("tools")
@@ -10,22 +12,26 @@ export default async function ToolWordPage() {
   const jsonLdData = generateJsonLd("tool.word", locale)
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-8">
-      <JsonLd data={jsonLdData} />
-      
-      <OmBreadcrumbs pageCode="tool.word" />
+    <BlankLayout>
+      <div className="h-full w-full overflow-y-auto">
+        <main className="mx-auto max-w-4xl px-4 py-8">
+          <JsonLd data={jsonLdData} />
 
-      <h1 className="mb-6 text-2xl sm:text-3xl font-bold text-foreground">
-        {t("wordTitle")}
-      </h1>
+          <OmBreadcrumbs pageCode="tool.word" />
 
-      <section className="mb-10 rounded-lg border border-dashed border-border/60 bg-muted/30 p-8 text-center">
-        <p className="text-muted-foreground">
-          {t("wordComingSoon")}
-        </p>
-      </section>
+          <h1 className="mb-6 text-2xl sm:text-3xl font-bold text-foreground">
+            {t("wordTitle")}
+          </h1>
 
-      <SeoContent pageCode="tool.word" />
-    </main>
+          <div className="mb-12 flex justify-center">
+            <div className="w-full max-w-xl">
+              <OmWorkbench scope="word" />
+            </div>
+          </div>
+
+          <SeoContent pageCode="tool.word" />
+        </main>
+      </div>
+    </BlankLayout>
   )
 }

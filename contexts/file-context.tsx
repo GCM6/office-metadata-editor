@@ -21,11 +21,16 @@ export interface FileContextValue {
   files: FileEntry[]
   activeFileId: string | null
   isLoading: boolean
-  openFiles(): Promise<number>
+  openFiles(options?: OpenFilesOptions): Promise<number>
   selectFile(fileId: string): void
   removeFile(fileId: string): void
   clearFiles(): void
   updateFileStatus(fileId: string, patch: Partial<Omit<FileEntry, "id" | "filePath">>): void
+}
+
+export interface OpenFilesOptions {
+  /** Restrict the picker (and accepted results) to these extensions, e.g. ["docx", "doc"]. */
+  extensions?: readonly string[]
 }
 
 const FileContext = createContext<FileContextValue | null>(null)
@@ -36,11 +41,18 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   const [isLoading, setIsLoading] = useState(false)
   const tp = useTranslations("progress")
 
-  const openFiles = useCallback(async (): Promise<number> => {
+  const openFiles = useCallback(async (options?: OpenFilesOptions): Promise<number> => {
+    const allowedExtensions = options?.extensions
+      ? new Set(options.extensions.map(ext => ext.toLowerCase()))
+      : null
+    const acceptAttr = options?.extensions
+      ? options.extensions.map(ext => `.${ext}`).join(",")
+      : undefined
+
     setIsLoading(true)
     try {
       if (!isTauri()) {
-        const entries = await openWebFilePicker()
+        const entries = await openWebFilePicker(acceptAttr)
         if (entries.length === 0) return 0
 
         const existingNameSet = new Set(files.map(item => item.fileName))
@@ -48,6 +60,10 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
 
         for (const entry of entries) {
           if (existingNameSet.has(entry.fileName)) continue
+          if (allowedExtensions) {
+            const ext = entry.fileName.split(".").pop()?.toLowerCase() ?? ""
+            if (!allowedExtensions.has(ext)) continue
+          }
           existingNameSet.add(entry.fileName)
 
           const id = crypto.randomUUID()
@@ -77,7 +93,11 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
 
       const selected = await open({
         multiple: true,
-        filters: [OPEN_FILE_DIALOG_FILTER],
+        filters: [
+          allowedExtensions
+            ? { name: OPEN_FILE_DIALOG_FILTER.name, extensions: [...allowedExtensions] }
+            : OPEN_FILE_DIALOG_FILTER,
+        ],
       })
 
       if (!selected) return 0
@@ -85,7 +105,14 @@ export const FileProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
       if (selectedPaths.length === 0) return 0
 
       const existingPathSet = new Set(files.map(item => item.filePath))
-      const pathsToLoad = selectedPaths.filter(path => !existingPathSet.has(path))
+      const pathsToLoad = selectedPaths.filter(path => {
+        if (existingPathSet.has(path)) return false
+        if (allowedExtensions) {
+          const ext = path.split(".").pop()?.toLowerCase() ?? ""
+          if (!allowedExtensions.has(ext)) return false
+        }
+        return true
+      })
       if (pathsToLoad.length === 0) {
         if (!activeFileId && files[0]) {
           setActiveFileId(files[0].id)

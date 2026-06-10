@@ -65,6 +65,8 @@ export interface SeoPageContract {
     | "FAQPage"
     | "Article"
     | "ItemList"
+    | "SoftwareApplication"
+    | "HowTo"
   >
 
   internalLinksTo: string[]

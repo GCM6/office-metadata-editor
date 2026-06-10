@@ -15,6 +15,7 @@ export const OmFooter: React.FC = () => {
         {/* 左侧链接 */}
         <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground" aria-label="Footer navigation">
           <FooterLink href="/about">{t("linkAbout")}</FooterLink>
+          <FooterLink href="/is-it-safe">{t("linkSafe")}</FooterLink>
           <FooterLink href="/privacy">{t("linkPrivacy")}</FooterLink>
           <FooterLink href="/terms">{t("linkTerms")}</FooterLink>
           <span className="hidden h-3 w-px bg-border/60 sm:inline-block" />

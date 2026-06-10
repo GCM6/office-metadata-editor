@@ -1,7 +1,7 @@
 {
   "common": {
     "appName": "MetaDocu",
-    "appTitle": "清除 Office 和 PDF 文件中的隐藏元数据",
+    "appTitle": "发送文档前，清除其中的隐藏数据",
     "appLogo": "MetaDocu Logo",
     "theme": "主题",
     "light": "白天",
@@ -15,7 +15,7 @@
     "notFoundDescription": "您请求的页面不存在，可能已被移除或地址输入有误。",
     "notFoundBackHome": "返回首页",
     "footerCopyright": "© {year} MetaDocu",
-    "layoutDescription": "免费、超安全的在线 PDF、Word、Excel 及图片隐私元数据扫描与一键清理工具。MetaDocu 100% 基于浏览器本地沙箱环境计算，文件永不上传服务器，深度剥离作者姓名、公司名称、本地路径、随机协作历史(RSID)、以及多媒体嵌套图片 EXIF/GPS 轨迹。",
+    "layoutDescription": "在发送或分享前，清除 Word、Excel、PDF 文档中的隐藏元数据。MetaDocu 扫描、清除并验证作者姓名、公司信息、本地路径与修订历史——全程在浏览器内运行，文件零上传。",
     "layoutKeywords": [
       "PDF元数据清理",
       "Word作者修改",
@@ -27,20 +27,20 @@
       "本地文件处理",
       "Word修订历史净化"
     ],
-    "layoutOgTitle": "MetaDocu 免费本地隐私元数据扫描器 - 100% 本地浏览器沙箱运行",
-    "layoutOgDescription": "免费在线扫描并一键清理 Word/Excel/PDF/图片的隐私元数据，全本地沙箱环境安全处理，文档不上传服务器，物理重组交叉引用表并进行嵌套 EXIF/RSID 深度净化。",
-    "layoutOgImageAlt": "MetaDocu 隐私元数据扫描器",
-    "layoutTwitterTitle": "MetaDocu 免费本地隐私元数据扫描器 - 保护文档隐私，文件不离设备",
-    "layoutTwitterDescription": "免费在线扫描并一键清理 Word/Excel/PDF/图片的隐私元数据，全本地沙箱环境安全处理，文档不上传服务器，物理重组交叉引用表并进行嵌套 EXIF/RSID 深度净化。",
-    "layoutJsonLdOrgName": "MetaDocu 隐私扫描器",
-    "layoutJsonLdOrgDesc": "免费、超安全的在线 PDF、Word、Excel 及图片隐私元数据扫描与一键清理工具。100% 本地浏览器沙箱运行，守护您的信息安全。",
-    "layoutJsonLdWebSiteName": "MetaDocu 隐私元数据扫描器",
-    "layoutAppleWebAppTitle": "MetaDocu 隐私扫描",
-    "layoutTitleTemplate": "%s | MetaDocu 隐私元数据扫描器"
+    "layoutOgTitle": "MetaDocu — 发送文档前清除其中的隐藏数据",
+    "layoutOgDescription": "在发送或分享前，扫描、清除并验证 Word、Excel、PDF 文件中的隐藏元数据——全程浏览器本地运行，文件零上传。无需注册，完全免费。",
+    "layoutOgImageAlt": "MetaDocu — 文档隐私扫描器",
+    "layoutTwitterTitle": "MetaDocu — 发送文档前清除隐藏数据",
+    "layoutTwitterDescription": "在发送或分享前，扫描、清除并验证 Word、Excel、PDF 文件中的隐藏元数据——全程浏览器本地运行，文件零上传。无需注册，完全免费。",
+    "layoutJsonLdOrgName": "MetaDocu",
+    "layoutJsonLdOrgDesc": "一款注重隐私的文档元数据扫描与清理工具。MetaDocu 100% 在浏览器本地沙箱中运行，文件永不离开您的设备——让您在分享前清除作者姓名、公司信息、本地路径与修订历史。",
+    "layoutJsonLdWebSiteName": "MetaDocu",
+    "layoutAppleWebAppTitle": "MetaDocu",
+    "layoutTitleTemplate": "%s | MetaDocu"
   },
   "home": {
     "enterWorkState": "100% 浏览器本地沙箱安全运行 · 零网络上传",
-    "description": "在浏览器本地扫描、清理并验证 Word、Excel、PowerPoint 和 PDF 文件中的隐藏元数据，无需上传。",
+    "description": "在发送或分享前，扫描、清除并验证 Word、Excel、PDF 文件中的隐藏元数据——全程在浏览器内运行，文件零上传。专为投递简历的求职者、法务合规、记者，以及经常给客户发文件的自由职业者打造。",
     "featureLocal": "100% 本地运行",
     "featureDragDrop": "零文件上传",
     "featureBatch": "隐私风险扫描",
@@ -115,6 +115,14 @@
       {
         "label": "批量清除Excel元数据",
         "href": "/batch"
+      },
+      {
+        "label": "在线去除元数据安全吗？",
+        "href": "/is-it-safe"
+      },
+      {
+        "label": "专注文档的 MetadataKit 替代方案",
+        "href": "/metadatakit-alternative"
       }
     ]
   },
@@ -212,7 +220,16 @@
       "batch-edit-excel-properties": "如何批量修改多个Excel文件的属性？",
       "excel-formula-impact": "Excel属性修改后会影响公式和图表吗？",
       "clear-pdf-hidden-info": "如何彻底清除PDF中的所有隐藏信息？",
-      "online-pdf-upload": "在线修改PDF属性需要上传文件吗？"
+      "online-pdf-upload": "在线修改PDF属性需要上传文件吗？",
+      "safe-no-upload": "在线去除元数据安全吗？文件会被上传吗？",
+      "how-in-browser-works": "MetaDocu 的浏览器本地处理是如何工作的？",
+      "local-vs-upload-safer": "为什么本地处理比上传式工具更安全？",
+      "verify-file-clean": "清理后如何确认文件已经干净？",
+      "local-preserves-content": "本地处理会改变我的文件内容或格式吗？",
+      "compare-metadocu-vs-metadatakit": "MetaDocu 和 MetadataKit 有什么区别？",
+      "metadatakit-alternative-documents": "有没有专注文档（Word/Excel/PDF）的 MetadataKit 替代品？",
+      "both-local-no-upload": "MetaDocu 和 MetadataKit 都是本地处理、不上传吗？",
+      "when-metadocu-vs-metadatakit": "什么时候该用 MetaDocu，什么时候用 MetadataKit？"
     },
     "faqAnswers": {
       "edit-word-author": "打开 MetaDocu 隐私元数据扫描器，上传Word文档，在报告中清理或修改作者字段并保存下载即可。整个过程在浏览器本地完成，文档不会上传到任何服务器。",
@@ -232,9 +249,98 @@
       "batch-edit-excel-properties": "通过批量处理功能，一次导入多个Excel文件，统一编辑或清除属性信息。支持批量设置作者、公司等通用字段。",
       "excel-formula-impact": "不会。元数据修改仅针对文档属性信息（如作者、标题等），不会触及工作簿内的数据、公式、图表或格式设置。",
       "clear-pdf-hidden-info": "上传PDF文件后，在编辑器中清空所有属性字段，保存下载即可。工具使用pdf-lib库直接操作PDF结构，确保信息被完整移除。",
-      "online-pdf-upload": "不需要上传到服务器。本工具在您的浏览器中本地运行，使用Web技术直接在客户端处理PDF文件，文件始终留在您的设备上。"
+      "online-pdf-upload": "不需要上传到服务器。本工具在您的浏览器中本地运行，使用Web技术直接在客户端处理PDF文件，文件始终留在您的设备上。",
+      "safe-no-upload": "安全，且文件绝不会被上传。MetaDocu 完全通过 WebAssembly 在你的浏览器内运行。打开文档时，文件被读入设备本地内存，在本地完成扫描与清理，再以下载形式存回。没有任何文件字节被发往服务器——因此没有可被拦截的上传、没有云端副本会泄漏，也无需注册账户。唯一的网络请求只是加载页面本身，之后即便断网你仍能清理文件。这与上传式在线工具有本质区别：后者会把你的合同、简历或表格传到你无法掌控的远程服务器。",
+      "how-in-browser-works": "MetaDocu 使用 WebAssembly——一种在浏览器沙箱内以接近原生速度运行的编译代码。当你拖入 Word、Excel 或 PDF 文件时，浏览器把它的字节读入本地内存。WebAssembly 引擎随后直接解析文档结构：解压 OOXML 部件（或遍历 PDF 对象树），定位每一个元数据字段——作者、公司、时间戳、RSID、XMP、嵌入图片 EXIF——并重建一个不含它们的文件。清理后的字节以普通下载交还给你。每一步都在你的机器上完成，文件从不接触服务器，因此处理瞬时完成，页面加载后即便离线也可用。",
+      "local-vs-upload-safer": "本地处理更安全，因为文件从不离开你的设备，整类服务器端风险随之消失。上传式工具必须把你的文档传到远程服务器，在那里它可能被缓存、记录、留存、由第三方处理，或在数据泄露中暴露——全部超出你的掌控。而 MetaDocu 的浏览器内处理没有传输、没有服务器副本、也没有需要你去信任的留存政策：清理在浏览器沙箱中完成，唯一存在的文件就是你硬盘上的那一份。对于合同、简历、法律披露、财务表格这类敏感文档，这个差别就是关键所在。",
+      "verify-file-clean": "清理后，MetaDocu 会给出一份验证报告，确认移除了哪些项、以及不再残留敏感元数据，你无需凭空相信。你也可以自行核验：打开下载的文件查看其属性——Word/Excel 在「文件 → 信息 → 属性」，PDF 在阅读器的「文档属性」——作者、公司、时间戳等字段都应为空。由于 MetaDocu 是从文件内部的 XML/PDF 结构中剥离字段，而非在界面上隐藏，这些值是被物理移除，而不只是屏幕上置空。",
+      "local-preserves-content": "不会——清理元数据不会改变文档的可见内容、格式或排版。MetaDocu 只编辑与内容并存的元数据字段（作者、公司、时间戳、修订 ID、嵌入图片 EXIF、PDF Info/XMP），不触碰文字、表格、公式、图片或样式。你的 Word 文档阅读效果完全一致，Excel 公式和图表照常工作，PDF 页面渲染如初。唯一的有意例外，是你要求移除的隐藏数据——修订痕迹、批注与元数据字段——它们会被剥离。输出文件的外观与行为与原件完全相同，只是少了隐私风险。",
+      "compare-metadocu-vs-metadatakit": "MetaDocu 与 MetadataKit 都是免费、100% 在浏览器内运行、绝不上传文件的元数据工具（均基于 WebAssembly）——在隐私与价格上不分伯仲。真正的区别在于重心。MetadataKit 是支持 500+ 格式的通用检视工具，最擅长照片（含 RAW）、音频（ID3 标签）与视频，还有快门数检测、GB 级大文件处理等能力。MetaDocu 则为文档隐私而生：针对 Word、Excel、PDF 进行扫描、清理，并给出一份清理后验证报告，整个体验围绕「发送前」这一时刻设计。要在发送前清理一份文档，选 MetaDocu；要覆盖广泛的媒体格式，选 MetadataKit。",
+      "metadatakit-alternative-documents": "有——MetaDocu 就是一个专为文档打造的 MetadataKit 替代品。MetadataKit 横跨 500+ 格式与各类媒体，而 MetaDocu 专注 Word（.docx/.doc）、Excel（.xlsx）与 PDF，外加嵌入图片里的 EXIF/GPS。它围绕「发送前」流程组织：扫描文档中暴露的作者姓名、公司信息、本地路径、修订历史与 RSID，在浏览器内移除，并给出验证报告确认文件已干净。如果你的需求是文档隐私而非检视照片或音频，这种更窄的专注意味着更快、更清晰地拿到一份可安全分享的文件。",
+      "both-local-no-upload": "是的。两款工具都完全在浏览器内通过 WebAssembly 运行，按各自官网描述均不会把文件上传到服务器——MetadataKit 声明「100% 客户端处理……绝不上传到任何服务器」，MetaDocu 则在你的本地浏览器沙箱中完成全部处理。两者都无需账户，都免费且无广告。所以如果你唯一的标准是「不上传」，两者都满足。决定因素是契合度：MetaDocu 适合发送前清理文档并带验证步骤；MetadataKit 适合检视更广泛的文件类型，包括 RAW 照片、音频与视频。",
+      "when-metadocu-vs-metadatakit": "当你的任务是文档隐私时选 MetaDocu——在发送或发布前，从 Word、Excel 或 PDF 中移除作者姓名、公司信息、本地路径、修订痕迹与 RSID，并用验证报告确认已清理干净。当你需要广度时选 MetadataKit——跨 500+ 格式检视或编辑元数据、RAW 相机文件、音频 ID3 标签、视频或超大文件，以及快门数检测、并排对比等功能。两者在 PDF 与 Office 基础上有重叠；除此之外，MetaDocu 在「文档分享」场景上更深，MetadataKit 在格式覆盖上更广。"
     },
     "relatedToolsTitle": "相关工具推荐"
+  },
+  "trustSafe": {
+    "backToApp": "MetaDocu",
+    "badge": "隐私与安全",
+    "answerLead": "不会——你的文件绝不离开设备。MetaDocu 100% 在你的浏览器内清除隐藏元数据。当你打开 Word、Excel 或 PDF 文件时，它被读入本地内存，由 WebAssembly 引擎扫描并清理，再以下载形式存回。没有任何内容被上传到服务器，没有云端副本，也无需注册——页面加载后，你甚至可以断网继续清理文件。这让它在上传式工具无法企及的层面上更安全：没有可被拦截的传输、没有需要信任的服务器留存、也没有泄露面。下面我们讲清浏览器内处理的原理、对比本地 vs 上传式清理，并展示每种格式会泄露哪些隐藏字段——以及 MetaDocu 如何移除它们。",
+    "howTitle": "浏览器内清理如何工作",
+    "howIntro": "四个步骤，全部在你的机器上完成——服务器从不接触你的文件。",
+    "howSteps": [
+      { "title": "文件在本地载入", "desc": "当你拖入文档，浏览器把它的字节读入设备内存，不发起任何上传请求。" },
+      { "title": "WebAssembly 在内存中解析", "desc": "编译后的 WebAssembly 引擎在浏览器沙箱中以接近原生的速度解压 OOXML 部件或遍历 PDF 对象树。" },
+      { "title": "剥离元数据字段", "desc": "定位并从文件结构中物理移除作者、公司、时间戳、RSID、批注、XMP，以及嵌入图片的 EXIF/GPS。" },
+      { "title": "下载干净文件", "desc": "重建后的、按字节干净的文件以普通下载交还给你，并附一份「移除了哪些项」的验证报告。" }
+    ],
+    "compareTitle": "本地处理 vs 上传式工具",
+    "compareIntro": "为什么浏览器内清理能消除整类服务器端风险。",
+    "compareHeaderAspect": "对比项",
+    "compareHeaderLocal": "MetaDocu（浏览器内）",
+    "compareHeaderUpload": "上传式在线工具",
+    "compareRows": [
+      { "aspect": "文件去向", "local": "留在浏览器内存中", "upload": "传输到远程服务器" },
+      { "aspect": "文件的网络传输", "local": "无", "upload": "必需（文件被发送）" },
+      { "aspect": "服务器副本 / 留存", "local": "从不产生", "upload": "可能被缓存、记录或留存" },
+      { "aspect": "泄露 / 拦截面", "local": "无——没有任何传输中数据", "upload": "存在于上传、存储与处理环节" },
+      { "aspect": "可离线使用", "local": "可以，页面加载后即可", "upload": "不可" },
+      { "aspect": "是否需要账户", "local": "不需要", "upload": "通常需要" }
+    ],
+    "exposureTitle": "每种格式会泄露哪些隐藏元数据",
+    "exposureIntro": "Office 和 PDF 文件携带的远不止可见内容。下面是每种格式可能泄露的敏感数据——以及 MetaDocu 如何在本地移除它们。",
+    "exposureColField": "隐藏字段",
+    "exposureColFormats": "适用格式",
+    "exposureColExposes": "会暴露什么",
+    "exposureColRisk": "风险",
+    "exposureColRemoval": "MetaDocu 如何移除",
+    "riskHigh": "高",
+    "riskMedium": "中",
+    "riskLow": "低",
+    "ctaTitle": "发送文档前先把它清理干净",
+    "ctaDesc": "100% 在浏览器内扫描、清除并验证隐藏元数据——零上传。",
+    "ctaWord": "Word 工具",
+    "ctaExcel": "Excel 工具",
+    "ctaPdf": "PDF 工具"
+  },
+  "compareKit": {
+    "backToApp": "MetaDocu",
+    "badge": "客观对比",
+    "answerLead": "MetadataKit 与 MetaDocu 都是免费、100% 在浏览器内运行的元数据工具——都不上传文件，都没有广告。区别在于重心。MetadataKit 是支持 500+ 格式的通用检视工具，最擅长照片（含 RAW）、音频（ID3 标签）与视频，还有快门数检测、GB 级大文件处理、并排对比等能力。MetaDocu 则为文档隐私而生：针对 Word、Excel、PDF 进行扫描、清理，并给出清理后验证报告，整个体验围绕「发送前」这一时刻设计。如果你要在发送前清理一份简历、合同或 PDF，MetaDocu 更专注、更契合；如果你要检视 RAW 照片、音频标签或视频，MetadataKit 覆盖的格式远多于我们。下面是一份客观的并排对比。",
+    "tableTitle": "MetaDocu 与 MetadataKit 一览对比",
+    "tableIntro": "哪里相同，哪里不同。竞品信息依据 MetadataKit 官网自述。",
+    "tableHeaderFeature": "对比项",
+    "tableHeaderMetadocu": "MetaDocu",
+    "tableHeaderMetadatakit": "MetadataKit",
+    "tableRows": [
+      { "feature": "处理方式", "metadocu": "100% 本地（WebAssembly），不上传", "metadatakit": "100% 本地（WebAssembly），不上传" },
+      { "feature": "价格与广告", "metadocu": "免费、无广告、无需账户", "metadatakit": "免费、无广告、无需账户" },
+      { "feature": "核心重心", "metadocu": "Word、Excel、PDF 文档隐私", "metadatakit": "全部文件类型——强于照片、音频、视频" },
+      { "feature": "支持格式", "metadocu": "DOCX、DOC、XLSX、PDF（+嵌入图片 EXIF）", "metadatakit": "500+，含 RAW 照片、MP3/FLAC 音频、MP4 视频、压缩包" },
+      { "feature": "发送前流程", "metadocu": "扫描 → 清理 → 验证报告", "metadatakit": "通用 检视 / 编辑 / 移除" },
+      { "feature": "音频(ID3)、RAW 照片、视频元数据", "metadocu": "不支持", "metadatakit": "支持" },
+      { "feature": "GB 级大文件与并排对比", "metadocu": "非重点", "metadatakit": "支持" },
+      { "feature": "场景与教育内容", "metadocu": "简历、合同、法律 PDF 等指南", "metadatakit": "几乎没有" }
+    ],
+    "chooseTitle": "你该用哪一个？",
+    "chooseKitTitle": "选 MetadataKit，如果你……",
+    "chooseKitItems": [
+      "需要检视或编辑 RAW 相机文件、音频 ID3 标签或视频元数据",
+      "处理多种文件类型，想要 500+ 格式覆盖",
+      "需要快门数检测、GB 级大文件或并排对比"
+    ],
+    "chooseDocuTitle": "选 MetaDocu，如果你……",
+    "chooseDocuItems": [
+      "主要在发送或发布前清理 Word、Excel 或 PDF 文档",
+      "想要一份确认文件已干净的验证报告",
+      "偏好专注、按场景组织的流程（简历、合同、披露 PDF）"
+    ],
+    "honestNote": "我们认为 MetadataKit 是一款真正优秀、尊重隐私的工具，格式支持远比我们广。这一页不是为了贬低它，而是帮你选对工具。如果你的场景是「发送前清理文档」，MetaDocu 正是为此而生。",
+    "ctaTitle": "发送文档前先把它清理干净",
+    "ctaDesc": "100% 在浏览器内扫描、清除并验证隐藏元数据——零上传。",
+    "ctaWord": "Word 工具",
+    "ctaPdf": "PDF 工具",
+    "ctaSafe": "安全吗？"
   },
   "tools": {
     "excelTitle": "Excel 工作簿元数据在线编辑器",
@@ -243,6 +349,13 @@
     "wordComingSoon": "工具交互区域 — Word 文档元数据编辑功能即将上线",
     "pdfTitle": "PDF 文档元数据在线编辑器",
     "pdfComingSoon": "工具交互区域 — PDF 文档元数据编辑功能即将上线"
+  },
+  "workbench": {
+    "tabScan": "隐私风险审计",
+    "tabEdit": "属性编辑器",
+    "tabBatch": "批量工作台",
+    "scanHeading": "开始本地隐私风险审计",
+    "scanDesc": "直接在下方拖入文件，100% 本地沙箱无痕扫描报告"
   },
   "fields": {
     "sections": {
@@ -370,6 +483,17 @@
       "pdfPages": "总页数"
     }
   },
+  "nav": {
+    "word": "Word",
+    "excel": "Excel",
+    "pdf": "PDF",
+    "isItSafe": "是否安全",
+    "compare": "竞品对比",
+    "blog": "博客",
+    "about": "关于",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单"
+  },
   "footer": {
     "aboutTitle": "关于 MetaDocu",
     "aboutDesc": "MetaDocu 是一款免费、专业级的隐私元数据扫描器。所有文件处理 100% 在浏览器本地 WebAssembly 沙箱中运行，您的文档永远不会离开设备。",
@@ -381,6 +505,7 @@
     "linkPdf": "PDF 元数据",
     "legalTitle": "法律信息",
     "linkAbout": "关于我们",
+    "linkSafe": "安全吗？",
     "linkPrivacy": "隐私政策",
     "linkTerms": "服务条款",
     "contactTitle": "联系我们",
@@ -535,6 +660,15 @@
     "cleanSuccess": "一键本地脱敏成功！",
     "cleanSuccessDesc": "所有隐私敏感的元数据（包括作者姓名、公司、本地绝对路径、RSID 协作标记以及图片嵌套 EXIF/GPS 等）已在您的浏览器中安全抹除。文件已重构为零风险状态，现在可以放心在网络上分享了！",
     "redactedAlert": "此敏感值已自动脱敏，且仅在您浏览器本地内存中显示，绝不产生网络上报。",
+    "unknownVersion": "未知",
+    "revisionValue": "{count} 次修改痕迹（可能暗藏 RSID 段落协作 Session ID）",
+    "mediaLabel": "嵌套图片 EXIF/GPS 数据",
+    "mediaValue": "文档中插入的图片可能带有相机型号、快门时间及拍照地理定位坐标 (GPS)",
+    "noRisksFound": "未发现明显的隐私泄漏痕迹，文件非常纯净。",
+    "manualEdit": "精细属性编辑",
+    "cleaningInProgress": "一键脱敏中...",
+    "sandboxSelfCheck": "Wasm 沙箱自检：通过 (0 警告)",
+    "localClosedLoop": "🔒 所有计算 100% 在本地沙箱中闭环运行，文件安全无网络交互",
     "steps": {
       "reading": "本地读取并校验文件二进制",
       "extracting": "正在解包并提取元数据结构...",

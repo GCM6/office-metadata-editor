@@ -23,6 +23,15 @@ const faqKeyMap: Record<string, string> = {
   "Excel属性修改后会影响公式和图表吗？": "excel-formula-impact",
   "如何彻底清除PDF中的所有隐藏信息？": "clear-pdf-hidden-info",
   "在线修改PDF属性需要上传文件吗？": "online-pdf-upload",
+  "在线去除元数据安全吗？文件会被上传吗？": "safe-no-upload",
+  "MetaDocu 的浏览器本地处理是如何工作的？": "how-in-browser-works",
+  "为什么本地处理比上传式工具更安全？": "local-vs-upload-safer",
+  "清理后如何确认文件已经干净？": "verify-file-clean",
+  "本地处理会改变我的文件内容或格式吗？": "local-preserves-content",
+  "MetaDocu 和 MetadataKit 有什么区别？": "compare-metadocu-vs-metadatakit",
+  "有没有专注文档（Word/Excel/PDF）的 MetadataKit 替代品？": "metadatakit-alternative-documents",
+  "MetaDocu 和 MetadataKit 都是本地处理、不上传吗？": "both-local-no-upload",
+  "什么时候该用 MetaDocu，什么时候用 MetadataKit？": "when-metadocu-vs-metadatakit",
 
   // English Questions
   "How to edit the author information of a Word document online?": "edit-word-author",
@@ -43,6 +52,15 @@ const faqKeyMap: Record<string, string> = {
   "Will Excel formulas and charts be affected after modifying properties?": "excel-formula-impact",
   "How to completely clear all hidden information in a PDF?": "clear-pdf-hidden-info",
   "Do I need to upload files to edit PDF properties online?": "online-pdf-upload",
+  "Is it safe to remove metadata online? Are my files uploaded?": "safe-no-upload",
+  "How does MetaDocu's in-browser processing work?": "how-in-browser-works",
+  "Why is local processing safer than upload-based tools?": "local-vs-upload-safer",
+  "How can I verify my file is clean after removing metadata?": "verify-file-clean",
+  "Does local processing change my file's content or formatting?": "local-preserves-content",
+  "What's the difference between MetaDocu and MetadataKit?": "compare-metadocu-vs-metadatakit",
+  "Is there a MetadataKit alternative focused on documents?": "metadatakit-alternative-documents",
+  "Do both MetaDocu and MetadataKit process locally without uploading?": "both-local-no-upload",
+  "When should I use MetaDocu vs MetadataKit?": "when-metadocu-vs-metadatakit",
 }
 
 export function questionToKey(question: string): string {

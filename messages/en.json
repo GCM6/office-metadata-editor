@@ -1,7 +1,7 @@
 {
   "common": {
     "appName": "MetaDocu",
-    "appTitle": "Remove Hidden Metadata from Office and PDF Files",
+    "appTitle": "Clean Hidden Data From Your Documents Before You Share",
     "appLogo": "MetaDocu Logo",
     "theme": "Theme",
     "light": "Light",
@@ -15,7 +15,7 @@
     "notFoundDescription": "The page you requested does not exist. It may have been removed or the address may be incorrect.",
     "notFoundBackHome": "Back to Home",
     "footerCopyright": "© {year} MetaDocu",
-    "layoutDescription": "Free and ultra-secure online PDF, Word, Excel, and image privacy metadata scanner & one-click cleaner. MetaDocu runs 100% locally in your browser sandbox — your files never leave your device. Deeply strip author names, company names, local file paths, comments, random revision history (RSIDs), and embedded EXIF/GPS photos.",
+    "layoutDescription": "Clean hidden metadata from Word, Excel, and PDF documents before you share them. MetaDocu scans, removes, and verifies author names, company info, file paths, and revision history — 100% in your browser, nothing uploaded.",
     "layoutKeywords": [
       "PDF metadata cleaner",
       "Word author editor",
@@ -27,20 +27,20 @@
       "local file processing",
       "Word RSID cleanup"
     ],
-    "layoutOgTitle": "MetaDocu Free Local Metadata Privacy Scanner — 100% Browser Local Sandbox",
-    "layoutOgDescription": "Scan and clean Word/Excel/PDF/image privacy metadata online for free — 100% local sandbox processing, no server upload. Deeply purge random revision history (RSID), physical Xref table reconstruction, and nested EXIF media metadata.",
-    "layoutOgImageAlt": "MetaDocu Privacy Scanner",
-    "layoutTwitterTitle": "MetaDocu Free Local Metadata Privacy Scanner — Protect Privacy, Files Stay on Device",
-    "layoutTwitterDescription": "Scan and clean Word/Excel/PDF/image privacy metadata online for free — 100% local sandbox processing, no server upload. Deeply purge random revision history (RSID), physical Xref table reconstruction, and nested EXIF media metadata.",
-    "layoutJsonLdOrgName": "MetaDocu Privacy Scanner",
-    "layoutJsonLdOrgDesc": "Free and ultra-secure online PDF, Word, Excel, and image privacy metadata scanner & one-click cleaner. 100% browser local sandbox execution to protect your business documents.",
-    "layoutJsonLdWebSiteName": "MetaDocu Privacy Scanner",
-    "layoutAppleWebAppTitle": "MetaDocu Privacy Scan",
-    "layoutTitleTemplate": "%s | MetaDocu Privacy Scanner"
+    "layoutOgTitle": "MetaDocu — Clean Hidden Data From Documents Before You Share",
+    "layoutOgDescription": "Scan, remove, and verify hidden metadata in Word, Excel, and PDF files before you share — 100% local in your browser, nothing uploaded. No accounts, completely free.",
+    "layoutOgImageAlt": "MetaDocu — document privacy scanner",
+    "layoutTwitterTitle": "MetaDocu — Clean Hidden Document Data Before You Share",
+    "layoutTwitterDescription": "Scan, remove, and verify hidden metadata in Word, Excel, and PDF files before you share — 100% local in your browser, nothing uploaded. No accounts, completely free.",
+    "layoutJsonLdOrgName": "MetaDocu",
+    "layoutJsonLdOrgDesc": "A free, privacy-first document metadata scanner and cleaner. MetaDocu runs 100% locally in your browser sandbox — files never leave your device — so you can strip author names, company info, file paths, and revision history before sharing.",
+    "layoutJsonLdWebSiteName": "MetaDocu",
+    "layoutAppleWebAppTitle": "MetaDocu",
+    "layoutTitleTemplate": "%s | MetaDocu"
   },
   "home": {
     "enterWorkState": "100% Browser Local Sandbox Running · Zero Network Upload",
-    "description": "Scan, clean, and verify hidden document metadata from Word, Excel, PowerPoint, and PDF files — locally in your browser, without uploading your files.",
+    "description": "Scan, remove, and verify hidden metadata in Word, Excel, and PDF files before you share them — 100% in your browser, nothing uploaded. Built for job seekers, legal and compliance teams, journalists, and freelancers sending sensitive files.",
     "featureLocal": "100% Local Run",
     "featureDragDrop": "No File Upload",
     "featureBatch": "Privacy Risk Scan",
@@ -115,6 +115,14 @@
       {
         "label": "Batch Clear Excel Metadata",
         "href": "/batch"
+      },
+      {
+        "label": "Is It Safe to Remove Metadata Online?",
+        "href": "/is-it-safe"
+      },
+      {
+        "label": "MetadataKit Alternative for Documents",
+        "href": "/metadatakit-alternative"
       }
     ]
   },
@@ -212,7 +220,16 @@
       "batch-edit-excel-properties": "How to batch edit the properties of multiple Excel files?",
       "excel-formula-impact": "Will Excel formulas and charts be affected after modifying properties?",
       "clear-pdf-hidden-info": "How to completely clear all hidden information in a PDF?",
-      "online-pdf-upload": "Do I need to upload files to edit PDF properties online?"
+      "online-pdf-upload": "Do I need to upload files to edit PDF properties online?",
+      "safe-no-upload": "Is it safe to remove metadata online? Are my files uploaded?",
+      "how-in-browser-works": "How does MetaDocu's in-browser processing work?",
+      "local-vs-upload-safer": "Why is local processing safer than upload-based tools?",
+      "verify-file-clean": "How can I verify my file is clean after removing metadata?",
+      "local-preserves-content": "Does local processing change my file's content or formatting?",
+      "compare-metadocu-vs-metadatakit": "What's the difference between MetaDocu and MetadataKit?",
+      "metadatakit-alternative-documents": "Is there a MetadataKit alternative focused on documents?",
+      "both-local-no-upload": "Do both MetaDocu and MetadataKit process locally without uploading?",
+      "when-metadocu-vs-metadatakit": "When should I use MetaDocu vs MetadataKit?"
     },
     "faqAnswers": {
       "edit-word-author": "Open the MetaDocu Privacy Scanner, upload your Word document, locate the author field in the scanner report interface, clean or modify it, and save. The entire process is done locally in your browser — your document is never uploaded to any server.",
@@ -232,9 +249,98 @@
       "batch-edit-excel-properties": "Through the batch processing feature, import multiple Excel files at once and edit or clear property information uniformly. Supports batch setting of common fields such as author and company.",
       "excel-formula-impact": "No. Metadata editing only affects document property information (such as author, title, etc.) and does not touch the data, formulas, charts, or formatting within the workbook.",
       "clear-pdf-hidden-info": "Upload your PDF file, clear all property fields in the editor, save and download. The tool uses the pdf-lib library to directly manipulate the PDF structure, ensuring information is completely removed.",
-      "online-pdf-upload": "No upload to any server is required. This tool runs locally in your browser, using web technologies to process PDF files directly on the client — your files remain on your device at all times."
+      "online-pdf-upload": "No upload to any server is required. This tool runs locally in your browser, using web technologies to process PDF files directly on the client — your files remain on your device at all times.",
+      "safe-no-upload": "Yes, it's safe — and no, your files are never uploaded. MetaDocu runs entirely in your browser using WebAssembly. When you open a document, it's read into your device's local memory, scanned and cleaned there, and saved back as a download. No file bytes are ever sent to a server, so there's no upload to intercept, no cloud copy to leak, and no account required. The only network request is loading the page itself — after that you could disconnect from the internet and still clean a file. That's fundamentally different from upload-based online tools, which transmit your contract, resume, or spreadsheet to a remote server you don't control.",
+      "how-in-browser-works": "MetaDocu uses WebAssembly — compiled code that runs at near-native speed inside your browser's sandbox. When you drop in a Word, Excel, or PDF file, the browser reads its bytes into local memory. A WebAssembly engine then parses the document structure directly: it unzips the OOXML parts (or walks the PDF object tree), locates every metadata field — author, company, timestamps, RSIDs, XMP, embedded-image EXIF — and rewrites the file without them. The cleaned bytes are handed back as a normal download. Every step happens on your machine; the file never touches a server, so it's instant and works offline once the page has loaded.",
+      "local-vs-upload-safer": "Local processing is safer because your file never leaves your device, so the entire category of server-side risk disappears. Upload-based tools must transmit your document to a remote server, where it may be cached, logged, retained, processed by third parties, or exposed in a breach — all outside your control. With MetaDocu's in-browser approach there's no transmission, no server copy, and no retention policy to trust: the cleaning happens in your browser's sandbox and the only file that exists is the one on your disk. For sensitive documents — contracts, resumes, legal disclosures, financial spreadsheets — that difference is the whole point.",
+      "verify-file-clean": "After cleaning, MetaDocu shows a verification report confirming what was removed and that no sensitive metadata remains, so you don't have to take it on faith. You can also verify independently: open the downloaded file and check its properties — in Word or Excel via File → Info → Properties, or in a PDF viewer via Document Properties — and the author, company, timestamps, and other fields should be empty. Because MetaDocu strips the fields from the file's internal XML/PDF structure rather than hiding them in the interface, the values are physically gone, not just blanked on screen.",
+      "local-preserves-content": "No — cleaning metadata doesn't change your document's visible content, formatting, or layout. MetaDocu only edits the metadata fields (author, company, timestamps, revision IDs, embedded-image EXIF, PDF Info/XMP) that live alongside your content, not the text, tables, formulas, images, or styles. Your Word document reads identically, your Excel formulas and charts keep working, and your PDF pages render the same. The one intentional exception is the hidden data you asked to remove — tracked-change history, comments, and metadata fields — which are stripped. The output looks and behaves exactly like the original, minus the privacy risks.",
+      "compare-metadocu-vs-metadatakit": "Both MetaDocu and MetadataKit are free, 100% in-browser metadata tools that process files locally with WebAssembly and never upload them — so on privacy and price they're evenly matched. The real difference is focus. MetadataKit is a broad inspector for 500+ formats, strongest on photos (including RAW), audio (ID3 tags) and video, with features like shutter-count checks and gigabyte-scale handling. MetaDocu is purpose-built for document privacy: it scans, cleans, and then shows a verification report for Word, Excel and PDF files, framed around the moment before you share them. Pick MetaDocu to scrub a document before sending; pick MetadataKit when you need wide media-format coverage.",
+      "metadatakit-alternative-documents": "Yes — MetaDocu is a MetadataKit alternative built specifically for documents. Where MetadataKit spreads across 500+ formats and media types, MetaDocu concentrates on Word (.docx/.doc), Excel (.xlsx) and PDF, plus the EXIF/GPS hidden inside embedded images. It's organized around a before-sharing workflow: scan the document for exposed author names, company info, file paths, revision history and RSIDs, remove them in your browser, and get a verification report confirming the file is clean. If your need is document privacy rather than inspecting photos or audio, the narrower focus means a faster, clearer path to a shareable file.",
+      "both-local-no-upload": "Yes. Both tools run entirely in your browser using WebAssembly and, by their own descriptions, never upload your files to a server — MetadataKit states \"100% Client-Side Processing… never uploaded to any server,\" and MetaDocu processes everything in your local browser sandbox. Neither requires an account, and both are free without ads. So if avoiding uploads is your only criterion, either works. The deciding factor is fit: MetaDocu for cleaning documents before sharing with a verification step; MetadataKit for inspecting a much wider range of file types, including RAW photos, audio and video.",
+      "when-metadocu-vs-metadatakit": "Choose MetaDocu when your task is document privacy — removing author names, company info, file paths, tracked changes and RSIDs from a Word, Excel or PDF file before you send or publish it, and confirming it's clean with a verification report. Choose MetadataKit when you need breadth: inspecting or editing metadata across 500+ formats, RAW camera files, audio ID3 tags, video, or very large files, and features like shutter-count checks and side-by-side comparison. They overlap on PDF and Office basics; beyond that, MetaDocu goes deeper on the document-sharing scenario while MetadataKit goes wider on formats."
     },
     "relatedToolsTitle": "Related Tools"
+  },
+  "trustSafe": {
+    "backToApp": "MetaDocu",
+    "badge": "Privacy & security",
+    "answerLead": "No — your files never leave your device. MetaDocu removes hidden metadata 100% inside your browser. When you open a Word, Excel, or PDF file, it's read into local memory, scanned and cleaned by a WebAssembly engine, and saved back as a download. Nothing is uploaded to any server, there's no cloud copy, and no account is required — once the page has loaded you could even go offline and still clean a file. That makes it safe in a way upload-based tools can't match: there's no transmission to intercept, no server-side retention to trust, and no breach surface. Below we explain exactly how the in-browser processing works, compare local vs. upload-based cleaning, and show which hidden fields each format leaks — and how MetaDocu removes them.",
+    "howTitle": "How in-browser cleaning works",
+    "howIntro": "Four steps, all on your machine — no server ever sees your file.",
+    "howSteps": [
+      { "title": "Your file loads locally", "desc": "When you drop in a document, the browser reads its bytes into your device's memory. No upload request is made." },
+      { "title": "WebAssembly parses it in memory", "desc": "A compiled WebAssembly engine unzips the OOXML parts or walks the PDF object tree at near-native speed, right in the browser sandbox." },
+      { "title": "Metadata fields are stripped", "desc": "Author, company, timestamps, RSIDs, comments, XMP, and embedded-image EXIF/GPS are located and physically removed from the file structure." },
+      { "title": "You download the clean file", "desc": "The rebuilt, byte-clean file is handed back to you as a normal download, plus a verification report of what was removed." }
+    ],
+    "compareTitle": "Local processing vs. upload-based tools",
+    "compareIntro": "Why in-browser cleaning removes the whole category of server-side risk.",
+    "compareHeaderAspect": "Aspect",
+    "compareHeaderLocal": "MetaDocu (in-browser)",
+    "compareHeaderUpload": "Upload-based online tools",
+    "compareRows": [
+      { "aspect": "Where your file goes", "local": "Stays in your browser's memory", "upload": "Transmitted to a remote server" },
+      { "aspect": "Network transfer of file", "local": "None", "upload": "Required (your file is sent)" },
+      { "aspect": "Server copy / retention", "local": "Never created", "upload": "May be cached, logged, or retained" },
+      { "aspect": "Breach / interception surface", "local": "None — nothing in transit", "upload": "Exists at upload, storage, and processing" },
+      { "aspect": "Works offline", "local": "Yes, after the page loads", "upload": "No" },
+      { "aspect": "Account required", "local": "No", "upload": "Often yes" }
+    ],
+    "exposureTitle": "What hidden metadata each format exposes",
+    "exposureIntro": "Office and PDF files carry far more than their visible content. Here is the sensitive data each format can leak — and how MetaDocu removes it, locally.",
+    "exposureColField": "Hidden field",
+    "exposureColFormats": "Formats",
+    "exposureColExposes": "What it exposes",
+    "exposureColRisk": "Risk",
+    "exposureColRemoval": "How MetaDocu removes it",
+    "riskHigh": "High",
+    "riskMedium": "Medium",
+    "riskLow": "Low",
+    "ctaTitle": "Clean your document before you share it",
+    "ctaDesc": "Scan, remove, and verify hidden metadata 100% in your browser — nothing uploaded.",
+    "ctaWord": "Word tool",
+    "ctaExcel": "Excel tool",
+    "ctaPdf": "PDF tool"
+  },
+  "compareKit": {
+    "backToApp": "MetaDocu",
+    "badge": "Honest comparison",
+    "answerLead": "MetadataKit and MetaDocu are both free, 100% in-browser metadata tools — neither uploads your files, neither shows ads. The difference is focus. MetadataKit is a broad inspector for 500+ formats and is strongest on photos (including RAW), audio (ID3 tags) and video, with extras like shutter-count checks, gigabyte-scale handling and side-by-side comparison. MetaDocu is purpose-built for document privacy: it scans, cleans, and shows a verification report for Word, Excel and PDF files, designed around the moment before you share them. If your job is to scrub a resume, contract or PDF before sending it, MetaDocu is the more focused fit. If you need to inspect RAW photos, audio tags or video, MetadataKit covers far more formats. Below is an honest side-by-side.",
+    "tableTitle": "MetaDocu vs. MetadataKit at a glance",
+    "tableIntro": "Where they match, and where they differ. Competitor details are as described on MetadataKit's own site.",
+    "tableHeaderFeature": "Aspect",
+    "tableHeaderMetadocu": "MetaDocu",
+    "tableHeaderMetadatakit": "MetadataKit",
+    "tableRows": [
+      { "feature": "Processing", "metadocu": "100% local (WebAssembly), no upload", "metadatakit": "100% local (WebAssembly), no upload" },
+      { "feature": "Price & ads", "metadocu": "Free, no ads, no account", "metadatakit": "Free, no ads, no account" },
+      { "feature": "Primary focus", "metadocu": "Word, Excel & PDF document privacy", "metadatakit": "All file types — strong on photos, audio, video" },
+      { "feature": "Supported formats", "metadocu": "DOCX, DOC, XLSX, PDF (+ embedded-image EXIF)", "metadatakit": "500+ incl. RAW photos, MP3/FLAC audio, MP4 video, archives" },
+      { "feature": "Before-sharing workflow", "metadocu": "Scan → clean → verification report", "metadatakit": "General Viewer / Editor / Remover" },
+      { "feature": "Audio (ID3), RAW photo, video metadata", "metadocu": "Not supported", "metadatakit": "Supported" },
+      { "feature": "Gigabyte files & side-by-side compare", "metadocu": "Not a focus", "metadatakit": "Supported" },
+      { "feature": "Scenario & education content", "metadocu": "Guides for resumes, contracts, legal PDFs", "metadatakit": "Minimal" }
+    ],
+    "chooseTitle": "Which one should you use?",
+    "chooseKitTitle": "Choose MetadataKit if you…",
+    "chooseKitItems": [
+      "Need to inspect or edit RAW camera files, audio ID3 tags, or video metadata",
+      "Work with many file types and want 500+ format coverage",
+      "Want shutter-count checks, gigabyte-scale files, or side-by-side comparison"
+    ],
+    "chooseDocuTitle": "Choose MetaDocu if you…",
+    "chooseDocuItems": [
+      "Mainly clean Word, Excel or PDF documents before sending or publishing",
+      "Want a verification report confirming the file is clean",
+      "Prefer a focused, scenario-driven flow (resume, contract, disclosure PDF)"
+    ],
+    "honestNote": "We think MetadataKit is a genuinely good, privacy-respecting tool with far broader format support than ours. This page isn't here to put it down — it's here to help you pick the right tool. If documents-before-sharing is your use case, we built MetaDocu for exactly that.",
+    "ctaTitle": "Clean a document before you share it",
+    "ctaDesc": "Scan, remove, and verify hidden metadata 100% in your browser — nothing uploaded.",
+    "ctaWord": "Word tool",
+    "ctaPdf": "PDF tool",
+    "ctaSafe": "Is it safe?"
   },
   "tools": {
     "excelTitle": "Excel Workbook Metadata Online Editor",
@@ -243,6 +349,13 @@
     "wordComingSoon": "Tool Interaction Area — Word document metadata editing coming soon",
     "pdfTitle": "PDF Document Metadata Online Editor",
     "pdfComingSoon": "Tool Interaction Area — PDF document metadata editing coming soon"
+  },
+  "workbench": {
+    "tabScan": "Scan Risks",
+    "tabEdit": "Edit Metadata",
+    "tabBatch": "Batch Clean",
+    "scanHeading": "Audit Local Metadata Risks",
+    "scanDesc": "Drag files below to generate an offline privacy audit report."
   },
   "fields": {
     "sections": {
@@ -370,6 +483,17 @@
       "pdfPages": "Total Pages"
     }
   },
+  "nav": {
+    "word": "Word",
+    "excel": "Excel",
+    "pdf": "PDF",
+    "isItSafe": "Is it safe?",
+    "compare": "Compare",
+    "blog": "Blog",
+    "about": "About",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
   "footer": {
     "aboutTitle": "About MetaDocu",
     "aboutDesc": "MetaDocu is a free, professional-grade privacy metadata scanner. All file processing runs 100% inside your browser's local WebAssembly sandbox — your documents never leave your device.",
@@ -381,6 +505,7 @@
     "linkPdf": "PDF Metadata",
     "legalTitle": "Legal",
     "linkAbout": "About Us",
+    "linkSafe": "Is it safe?",
     "linkPrivacy": "Privacy Policy",
     "linkTerms": "Terms of Service",
     "contactTitle": "Contact",
@@ -535,6 +660,15 @@
     "cleanSuccess": "Metadata Cleaned Successfully!",
     "cleanSuccessDesc": "All sensitive metadata (including creator, company name, local file absolute paths, revision histories (RSID), and nested EXIF/GPS data) has been wiped in your browser. The file is now fully sanitized and safe to share online!",
     "redactedAlert": "This sensitive value is automatically redacted and only rendered locally in your browser memory.",
+    "unknownVersion": "unknown",
+    "revisionValue": "{count} edit traces (may conceal RSID paragraph collaboration session IDs)",
+    "mediaLabel": "Nested Image EXIF / GPS Data",
+    "mediaValue": "Images embedded in the document may carry the camera model, shutter time, and GPS location coordinates.",
+    "noRisksFound": "No obvious privacy leak traces found — this file is very clean.",
+    "manualEdit": "Manual Edit",
+    "cleaningInProgress": "Sanitizing...",
+    "sandboxSelfCheck": "Wasm sandbox self-check: Passed (0 warnings)",
+    "localClosedLoop": "🔒 All computation runs 100% locally in a sandboxed closed loop — your file stays safe with zero network interaction.",
     "steps": {
       "reading": "Reading and verifying file binary locally...",
       "extracting": "Extracting metadata XML trees...",

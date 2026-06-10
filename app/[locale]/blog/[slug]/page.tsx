@@ -5,6 +5,7 @@ import { generateSeoMetadata } from "@/seo/generate-seo-metadata"
 import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 import { SeoContent } from "@/seo/components/SeoContent"
+import BlankLayout from "@/components/layouts/blank-layout"
 
 import { getLocale } from "next-intl/server"
 
@@ -38,7 +39,9 @@ export default async function BlogPostPage(props: {
   const jsonLdData = pageCode ? generateJsonLd(pageCode, locale) : []
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-8">
+    <BlankLayout>
+      <div className="h-full w-full overflow-y-auto">
+        <main className="mx-auto max-w-4xl px-4 py-8">
       <JsonLd data={jsonLdData} />
 
       <article className="prose prose-neutral max-w-none dark:prose-invert">
@@ -106,6 +109,8 @@ export default async function BlogPostPage(props: {
       </div>
 
       {pageCode && <SeoContent pageCode={pageCode} />}
-    </main>
+        </main>
+      </div>
+    </BlankLayout>
   )
 }

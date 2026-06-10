@@ -1,0 +1,35 @@
+# MetaDocu
+
+> MetaDocu (metadocu.com) is a free, privacy-first tool that scans, edits, and removes hidden metadata from Word, Excel, and PDF documents — 100% in your browser with WebAssembly. Nothing is ever uploaded to a server, no account is required, and there are no ads. It is built around the moment before you share a file.
+
+## What it does
+
+- Scans a document and reports every populated metadata field: author/creator, last-modified-by, company, manager, template path, application/version, revision count, total editing time, created/modified timestamps, title/subject/keywords, custom properties, Word RSIDs, tracked changes and comments, the PDF Info dictionary and XMP stream, and EXIF/GPS inside embedded images.
+- Removes those fields from the file's underlying structure (OOXML parts / PDF object tree), not just the visible properties panel, so values are physically gone.
+- Shows an after-clean verification report confirming what was removed.
+- Supported formats: DOCX, DOC, XLSX, PDF (plus EXIF/GPS in images embedded inside those documents). It does not process standalone image files.
+
+## Why it is different
+
+- 100% local processing: the file never leaves the device; there is no upload, no server copy, and it works offline after the page loads.
+- Focused on document privacy (the "clean before you share" scenario) rather than broad media-format inspection.
+
+## Key pages
+
+- Home / scanner: https://metadocu.com/
+- Word metadata tool: https://metadocu.com/tools/word
+- Excel metadata tool: https://metadocu.com/tools/excel
+- PDF metadata tool: https://metadocu.com/tools/pdf
+- Is it safe? Does it upload my files?: https://metadocu.com/is-it-safe
+- Remove metadata before sending a file: https://metadocu.com/remove-metadata-before-sending
+- Remove PDF metadata without Adobe Acrobat: https://metadocu.com/remove-pdf-metadata-without-acrobat
+- Remove author & company from a resume: https://metadocu.com/remove-metadata-from-resume
+- Clean metadata from a contract: https://metadocu.com/remove-metadata-from-contract
+- Remove hidden data from a legal PDF: https://metadocu.com/remove-metadata-from-legal-pdf
+- Remove GPS & EXIF from images in documents: https://metadocu.com/remove-gps-exif-from-document-images
+- Remove revision history & RSIDs from Word: https://metadocu.com/remove-rsid-tracked-changes-word
+- iLovePDF alternative (no upload): https://metadocu.com/ilovepdf-alternative
+- Smallpdf alternative (no upload): https://metadocu.com/smallpdf-alternative
+- MetadataKit alternative (documents): https://metadocu.com/metadatakit-alternative
+- How common is document metadata leakage?: https://metadocu.com/metadata-leak-study
+- About: https://metadocu.com/about

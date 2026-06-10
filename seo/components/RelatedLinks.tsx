@@ -1,12 +1,14 @@
 "use client"
 
 import Link from "next/link"
-import { useTranslations } from "next-intl"
+import { useTranslations, useLocale } from "next-intl"
 import { seoMap } from "../seo-map"
 
 export function RelatedLinks({ currentPageCode }: { currentPageCode: string }) {
   const currentSeo = seoMap[currentPageCode]
   const t = useTranslations("seo")
+  const locale = useLocale()
+  const isEn = locale === "en"
 
   if (!currentSeo || !currentSeo.internalLinksTo.length) return null
 
@@ -30,7 +32,7 @@ export function RelatedLinks({ currentPageCode }: { currentPageCode: string }) {
             href={target.path}
             className="text-sm font-medium text-primary underline decoration-primary/30 underline-offset-4 transition-colors hover:text-primary/80 hover:decoration-primary/60"
           >
-            {target.primaryKeyword}
+            {isEn ? (target.en?.h1 ?? target.primaryKeyword) : target.primaryKeyword}
           </Link>
         ))}
       </div>
