@@ -53,27 +53,38 @@ export const OmWorkbench: React.FC<OmWorkbenchProps> = ({ scope = "all" }) => {
   }, [clearFiles])
 
   // In scan mode, intercept the newly added file and inject the audit state.
+  // If we are in a scoped tool page (scope !== "all"), we immediately redirect to the editor instead of auditing locally.
   useEffect(() => {
-    if (activeTab === "scan" && isInitialClearDone && files.length > 0 && !auditFile) {
-      const latest = files[files.length - 1]
-      if (latest && (latest.status === "idle" || latest.status === "reading" || latest.status === "ready")) {
-        setAuditFile({
-          id: latest.id,
-          filePath: latest.filePath,
-          fileName: latest.fileName,
-        })
+    if (isInitialClearDone && files.length > 0) {
+      if (scope !== "all") {
+        router.push("/editor")
+        return
+      }
+      if (activeTab === "scan" && !auditFile) {
+        const latest = files[files.length - 1]
+        if (latest && (latest.status === "idle" || latest.status === "reading" || latest.status === "ready")) {
+          setAuditFile({
+            id: latest.id,
+            filePath: latest.filePath,
+            fileName: latest.fileName,
+          })
+        }
       }
     }
-  }, [files, activeTab, auditFile, isInitialClearDone])
+  }, [files, activeTab, auditFile, isInitialClearDone, scope, router])
 
   const handleOpenFiles = async () => {
     const added = await openFiles(scopeExtensions ? { extensions: scopeExtensions } : undefined)
     if (added === 0) return
 
-    if (activeTab === "batch") {
-      router.push("/batch")
-    } else if (activeTab === "edit") {
+    if (scope !== "all") {
       router.push("/editor")
+    } else {
+      if (activeTab === "batch") {
+        router.push("/batch")
+      } else if (activeTab === "edit") {
+        router.push("/editor")
+      }
     }
   }
 

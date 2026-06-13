@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { seoMap } from "./seo-map"
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://metadocu.com"
-const SITE_NAME = "Office元数据编辑器"
+const SITE_NAME = "MetaDocu"
 
 export function generateSeoMetadata(pageCode: string, locale?: string): Metadata {
   const seo = seoMap[pageCode]

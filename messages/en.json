@@ -344,11 +344,11 @@
   },
   "tools": {
     "excelTitle": "Excel Workbook Metadata Online Editor",
-    "excelComingSoon": "Tool Interaction Area — Excel workbook metadata editing coming soon",
+    "excelComingSoon": "Excel Workbook Metadata Editor — Clear author, company, and sheet properties locally.",
     "wordTitle": "Word Document Metadata Online Editor",
-    "wordComingSoon": "Tool Interaction Area — Word document metadata editing coming soon",
+    "wordComingSoon": "Word Document Metadata Editor — Strip creator names, edit revision timestamps and RSIDs.",
     "pdfTitle": "PDF Document Metadata Online Editor",
-    "pdfComingSoon": "Tool Interaction Area — PDF document metadata editing coming soon"
+    "pdfComingSoon": "PDF Document Metadata Editor — Remove author, subject, title, and XMP metadata instantly."
   },
   "workbench": {
     "tabScan": "Scan Risks",

@@ -344,11 +344,11 @@
   },
   "tools": {
     "excelTitle": "Excel 工作簿元数据在线编辑器",
-    "excelComingSoon": "工具交互区域 — Excel 工作簿元数据编辑功能即将上线",
+    "excelComingSoon": "Excel 工作簿元数据编辑器 — 在本地清除作者、公司和工作表属性。",
     "wordTitle": "Word 文档元数据在线编辑器",
-    "wordComingSoon": "工具交互区域 — Word 文档元数据编辑功能即将上线",
+    "wordComingSoon": "Word 文档元数据编辑器 — 擦除创建者、编辑修订时间戳和段落 RSID。",
     "pdfTitle": "PDF 文档元数据在线编辑器",
-    "pdfComingSoon": "工具交互区域 — PDF 文档元数据编辑功能即将上线"
+    "pdfComingSoon": "PDF 文档元数据编辑器 — 立即移除作者、主题、标题和 XMP 元数据。"
   },
   "workbench": {
     "tabScan": "隐私风险审计",
