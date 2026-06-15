@@ -12,22 +12,49 @@ import initWasm, {
 
 let isWasmInitialized = false;
 let wasmInstance: any = null;
+let initPromise: Promise<void> | null = null;
 
 const ctx: Worker = self as any;
+
+// 单例惰性初始化，保证 Wasm 模块仅在 Worker 线程内初始化一次
+function ensureWasm(): Promise<void> {
+  if (isWasmInitialized) return Promise.resolve();
+  if (!initPromise) {
+    initPromise = (async () => {
+      // @ts-ignore
+      wasmInstance = await initWasm();
+      isWasmInitialized = true;
+    })();
+  }
+  return initPromise;
+}
+
+// 在 Worker 启动时主动初始化 Wasm，并向主线程回报“真正就绪”或初始化失败，
+// 让主线程的 ready 状态反映实际情况，而不是仅凭 Worker 构造成功就当作就绪。
+ensureWasm().then(
+  () => ctx.postMessage({ success: true, type: "WASM_READY" }),
+  err =>
+    ctx.postMessage({
+      success: false,
+      type: "WASM_INIT_ERROR",
+      error: "Wasm 本地沙箱环境加载失败: " + String(err),
+    }),
+);
 
 ctx.onmessage = async (e: MessageEvent) => {
   const { type, fileBytes, fileName, password } = e.data;
 
-  // 1. 惰性单例初始化，保证 Wasm 模块仅在 Worker 线程内初始化一次
-  if (!isWasmInitialized) {
-    try {
-      // @ts-ignore
-      wasmInstance = await initWasm();
-      isWasmInitialized = true;
-    } catch (err) {
-      ctx.postMessage({ success: false, error: "Wasm 本地沙箱环境加载失败: " + String(err) });
-      return;
-    }
+  // 确保 Wasm 已初始化；若失败，明确回报初始化错误，避免主线程无限等待
+  try {
+    await ensureWasm();
+  } catch (err) {
+    ctx.postMessage({
+      success: false,
+      type: "WASM_INIT_ERROR",
+      error: "Wasm 本地沙箱环境加载失败: " + String(err),
+      fileName,
+    });
+    return;
   }
 
   try {

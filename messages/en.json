@@ -669,6 +669,12 @@
     "cleaningInProgress": "Sanitizing...",
     "sandboxSelfCheck": "Wasm sandbox self-check: Passed (0 warnings)",
     "localClosedLoop": "🔒 All computation runs 100% locally in a sandboxed closed loop — your file stays safe with zero network interaction.",
+    "errorTitle": "Local Scan Failed",
+    "errorNoFile": "File data was not loaded. Please pick the file again.",
+    "errorEngine": "Failed to start the local privacy engine (WebAssembly). Try refreshing the page.",
+    "errorScanFailed": "Could not parse this file's metadata locally.",
+    "errorTimeout": "The local scan timed out and did not return a result. Try refreshing the page or using the manual editor.",
+    "retry": "Retry Scan",
     "steps": {
       "reading": "Reading and verifying file binary locally...",
       "extracting": "Extracting metadata XML trees...",

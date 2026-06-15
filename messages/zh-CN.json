@@ -669,6 +669,12 @@
     "cleaningInProgress": "一键脱敏中...",
     "sandboxSelfCheck": "Wasm 沙箱自检：通过 (0 警告)",
     "localClosedLoop": "🔒 所有计算 100% 在本地沙箱中闭环运行，文件安全无网络交互",
+    "errorTitle": "本地扫描失败",
+    "errorNoFile": "文件数据未加载，请重新选择文件。",
+    "errorEngine": "本地隐私引擎 (WebAssembly) 启动失败，请尝试刷新页面。",
+    "errorScanFailed": "无法在本地解析该文件的元数据。",
+    "errorTimeout": "本地扫描超时，未返回结果，请刷新页面或改用精细编辑器。",
+    "retry": "重新扫描",
     "steps": {
       "reading": "本地读取并校验文件二进制",
       "extracting": "正在解包并提取元数据结构...",

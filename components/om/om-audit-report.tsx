@@ -47,12 +47,14 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
   const tf = useTranslations("fields")
 
   // 1. Worker 与文件字节准备
-  const { worker, ready } = useWasmWorker()
+  const { worker, ready, error: workerError } = useWasmWorker()
   const originalBytes = useMemo(() => getFileData(filePath), [filePath])
 
   // 2. 状态机管理
   const [activeStep, setActiveStep] = useState(0)
   const [isScanning, setIsScanning] = useState(true)
+  const [scanError, setScanError] = useState<string | null>(null)
+  const [retryKey, setRetryKey] = useState(0)
   const [metadata, setMetadata] = useState<any>(null)
   const [isFlipped, setIsFlipped] = useState(false)
   const [isCleaning, setIsCleaning] = useState(false)
@@ -66,50 +68,91 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
 
   // 3. 4步骤渐进打勾扫描动画
   useEffect(() => {
-    if (!ready || !worker || !originalBytes) return
+    // 文件字节缺失：直接进入错误态，避免无限 loading
+    if (!originalBytes) {
+      setIsScanning(false)
+      setScanError(t("errorNoFile"))
+      return
+    }
+    // Worker / Wasm 初始化失败：冒泡错误并结束 loading
+    if (workerError) {
+      setIsScanning(false)
+      setScanError(t("errorEngine"))
+      return
+    }
+    // 仍在初始化（尚未收到 WASM_READY 握手）：继续等待，但加超时兜底。
+    // workerError 分支已覆盖“显式失败”；这里再覆盖“引擎初始化挂死”
+    // （initWasm 既不 resolve 也不 reject、worker 也不报 error）的极端情况，
+    // 确保 ready 永不到来时也能结束 loading，而不是无限转圈。
+    if (!ready || !worker) {
+      const readyTimeoutId = setTimeout(() => {
+        setScanError(t("errorEngine"))
+        setIsScanning(false)
+      }, 15000)
+      return () => clearTimeout(readyTimeoutId)
+    }
 
     let currentStep = 0
+    let startTime = 0
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
     setActiveStep(0)
     setIsScanning(true)
+    setScanError(null)
+
+    const handleWorkerMessage = (e: MessageEvent) => {
+      const { success, type, data, error } = e.data || {}
+      if (success && type === "PARSE_SUCCESS") {
+        const duration = ((performance.now() - startTime) / 1000).toFixed(2)
+        setScanTime(Number(duration) || 0.6)
+        setMetadata(data)
+        cleanup()
+        setTimeout(() => {
+          setIsScanning(false)
+        }, 300)
+      } else if (success === false) {
+        console.error("Wasm 解析失败:", error)
+        cleanup()
+        setScanError(type === "WASM_INIT_ERROR" ? t("errorEngine") : t("errorScanFailed"))
+        setIsScanning(false)
+      }
+      // 其他类型的消息（如启动时的 WASM_READY）忽略
+    }
+
+    const cleanup = () => {
+      if (timeoutId) clearTimeout(timeoutId)
+      worker.removeEventListener("message", handleWorkerMessage)
+    }
 
     const interval = setInterval(() => {
       currentStep += 1
       setActiveStep(currentStep)
       if (currentStep >= 4) {
         clearInterval(interval)
-        
+
         // 扫描完成，向 Worker 发送解析请求
-        const startTime = performance.now()
+        startTime = performance.now()
+        worker.addEventListener("message", handleWorkerMessage)
         worker.postMessage({
           type: "PARSE",
           fileBytes: originalBytes,
           fileName,
         })
 
-        const handleWorkerMessage = (e: MessageEvent) => {
-          const { success, type, data, error } = e.data
-          if (success && type === "PARSE_SUCCESS") {
-            const duration = ((performance.now() - startTime) / 1000).toFixed(2)
-            setScanTime(Number(duration) || 0.6)
-            setMetadata(data)
-            setTimeout(() => {
-              setIsScanning(false)
-            }, 300)
-          } else {
-            console.error("Wasm 解析失败:", error)
-            setTimeout(() => {
-              setIsScanning(false)
-            }, 300)
-          }
+        // 超时兜底：Worker 永不回消息（脚本崩溃 / wasm 卡死）时也能结束 loading
+        timeoutId = setTimeout(() => {
           worker.removeEventListener("message", handleWorkerMessage)
-        }
-
-        worker.addEventListener("message", handleWorkerMessage)
+          setScanError(t("errorTimeout"))
+          setIsScanning(false)
+        }, 15000)
       }
     }, 600) // 步长 600ms 营造扎实的沙箱审计质感
 
-    return () => clearInterval(interval)
-  }, [ready, worker, originalBytes, fileName])
+    return () => {
+      clearInterval(interval)
+      if (timeoutId) clearTimeout(timeoutId)
+      worker.removeEventListener("message", handleWorkerMessage)
+    }
+  }, [ready, worker, originalBytes, fileName, workerError, retryKey, t])
 
   // 4. 分析提取敏感审计字段
   const sensitiveFields = useMemo<SensitiveField[]>(() => {
@@ -269,17 +312,14 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
     if (!worker || !originalBytes || isCleaning) return
 
     setIsCleaning(true)
-    
-    // 向 Worker 线程投递清理指令
-    worker.postMessage({
-      type: "CLEAN",
-      fileBytes: originalBytes,
-      fileName,
-    })
+
+    const timers: { clean?: ReturnType<typeof setTimeout> } = {}
 
     const handleCleanMessage = (e: MessageEvent) => {
-      const { success, type, data, error } = e.data
+      const { success, type, data, error } = e.data || {}
       if (success && type === "CLEAN_SUCCESS") {
+        if (timers.clean) clearTimeout(timers.clean)
+        worker.removeEventListener("message", handleCleanMessage)
         const cleaned: Uint8Array = data
         setCleanedBytes(cleaned)
         // 将清理后的文件存回内存中，同步更新状态
@@ -288,18 +328,35 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
         setTimeout(() => {
           setIsCleaning(false)
           setIsFlipped(true) // 3D 翻转卡片到背面！
-          
+
           // 自动触发无网络安全下载
           triggerFileDownload(cleaned)
         }, 600)
-      } else {
+      } else if (success === false) {
         console.error("Wasm 清理失败:", error)
+        if (timers.clean) clearTimeout(timers.clean)
+        worker.removeEventListener("message", handleCleanMessage)
+        setScanError(type === "WASM_INIT_ERROR" ? t("errorEngine") : t("errorScanFailed"))
         setIsCleaning(false)
       }
-      worker.removeEventListener("message", handleCleanMessage)
+      // 其他类型的消息忽略
     }
 
     worker.addEventListener("message", handleCleanMessage)
+
+    // 向 Worker 线程投递清理指令
+    worker.postMessage({
+      type: "CLEAN",
+      fileBytes: originalBytes,
+      fileName,
+    })
+
+    // 超时兜底：避免清理无回应时按钮永久转圈
+    timers.clean = setTimeout(() => {
+      worker.removeEventListener("message", handleCleanMessage)
+      setScanError(t("errorTimeout"))
+      setIsCleaning(false)
+    }, 15000)
   }
 
   // 8. 触发无网络前端 Blob 下载
@@ -339,6 +396,15 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
     }))
   }
 
+  // 10. 重新扫描（错误态下手动重试）
+  const handleRetryScan = () => {
+    setScanError(null)
+    setMetadata(null)
+    setActiveStep(0)
+    setIsScanning(true)
+    setRetryKey(prev => prev + 1)
+  }
+
   return (
     <div className="flex flex-col items-center justify-center py-4 w-full select-none">
       {/* 3D 动画翻转效果专有 inline style */}
@@ -355,8 +421,35 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
         }
       `}} />
 
-      {/* 扫描进行中的极客分步动画 */}
-      {isScanning ? (
+      {/* 扫描失败错误态：明确报错 + 重试 / 返回，避免无限 loading 无结果 */}
+      {scanError ? (
+        <Card className="w-full max-w-xl bg-card/85 border border-red-500/30 p-8 shadow-2xl rounded-2xl backdrop-blur-md">
+          <div className="flex flex-col items-center justify-center py-6 text-center">
+            <div className="relative mb-4 flex items-center justify-center">
+              <div className="absolute inset-0 bg-red-500/10 rounded-full blur-xl" />
+              <div className="relative border-4 border-red-500/60 bg-red-500/10 rounded-full p-4">
+                <ShieldAlert className="h-12 w-12 text-red-500" />
+              </div>
+            </div>
+            <h3 className="text-base font-bold text-foreground mb-1">{t("errorTitle")}</h3>
+            <p className="text-xs text-muted-foreground max-w-sm leading-relaxed mb-6">{scanError}</p>
+            <div className="flex gap-2">
+              <Button variant="outline" className="rounded-xl gap-1.5" onClick={onClose}>
+                <ArrowLeft className="h-4 w-4" />
+                {t("scanAnother")}
+              </Button>
+              <Button variant="outline" className="rounded-xl gap-1.5" onClick={() => router.push("/editor")}>
+                <FileText className="h-4 w-4" />
+                {t("manualEdit")}
+              </Button>
+              <Button className="rounded-xl gap-1.5" onClick={handleRetryScan}>
+                <RotateCw className="h-4 w-4" />
+                {t("retry")}
+              </Button>
+            </div>
+          </div>
+        </Card>
+      ) : isScanning ? (
         <Card className="w-full max-w-xl bg-card/85 border border-border/80 p-8 shadow-2xl rounded-2xl backdrop-blur-md">
           <div className="flex flex-col items-center justify-center py-6">
             <RotateCw className="h-10 w-10 text-primary animate-spin mb-4" />
