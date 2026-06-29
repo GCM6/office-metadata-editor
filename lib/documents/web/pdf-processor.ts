@@ -1,4 +1,4 @@
-import { PDFDocument } from "pdf-lib"
+import { PDFDocument, PDFName } from "pdf-lib"
 import type { DocumentMetadata } from "@/types/metadata"
 import { getFileData } from "@/lib/resources/file-store"
 
@@ -94,11 +94,28 @@ export async function clearPdf(filePath: string, fileName: string): Promise<stri
     throw new Error(`文件数据未找到: ${fileName}`)
   }
 
-  const doc = await PDFDocument.load(data, { ignoreEncryption: true })
+  const doc = await PDFDocument.load(data, { ignoreEncryption: true, updateMetadata: false })
   doc.setTitle("")
   doc.setSubject("")
   doc.setAuthor("")
   doc.setKeywords([])
+  doc.setProducer("")
+  doc.setCreator("")
+
+  // 从 Info 字典中移除日期，避免泄露文档创建/修改时间
+  try {
+    const infoRef = doc.context.trailerInfo.Info
+    if (infoRef) {
+      const infoDict = doc.context.lookup(infoRef)
+      if (infoDict && typeof (infoDict as unknown as Record<string, unknown>)["delete"] === "function") {
+        const dictWithDelete = infoDict as unknown as { delete(key: unknown): void }
+        dictWithDelete.delete(PDFName.of("CreationDate"))
+        dictWithDelete.delete(PDFName.of("ModDate"))
+      }
+    }
+  } catch {
+    // 日期清理失败不影响整体清理流程
+  }
 
   const pdfBytes = await doc.save()
   const blob = new Blob([new Uint8Array(pdfBytes)])

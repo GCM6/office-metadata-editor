@@ -127,6 +127,8 @@ export async function writeOoxmlMetadata(
     setTagText(coreDoc, CORE_NS, "language", metadata.documentProperties.language)
     setTagText(coreDoc, CORE_NS, "identifier", metadata.documentProperties.identifier)
     setTagText(coreDoc, CORE_NS, "source", metadata.documentProperties.source)
+    setTagText(coreDoc, DCTERMS_NS, "created", metadata.documentProperties.created)
+    setTagText(coreDoc, DCTERMS_NS, "modified", metadata.documentProperties.modified)
 
     const serializer = new XMLSerializer()
     zip.file(CORE_XML_PATH, serializer.serializeToString(coreDoc))
@@ -141,6 +143,8 @@ export async function writeOoxmlMetadata(
     setTagText(appDoc, APP_NS, "Manager", metadata.appProperties.manager)
     setTagText(appDoc, APP_NS, "Template", metadata.appProperties.template)
     setTagText(appDoc, APP_NS, "TotalTime", metadata.appProperties.totalTime)
+    setTagText(appDoc, APP_NS, "Application", metadata.appProperties.application)
+    setTagText(appDoc, APP_NS, "AppVersion", metadata.appProperties.appVersion)
 
     const serializer = new XMLSerializer()
     zip.file(APP_XML_PATH, serializer.serializeToString(appDoc))

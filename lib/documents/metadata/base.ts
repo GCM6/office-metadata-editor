@@ -35,7 +35,7 @@ export const defaultSyncRules: MetadataSyncRules = {
 export const defaultClearStrategy = {
   preserveDocumentFields: ["created", "modified", "revision"],
   preserveCoreFields: [],
-  clearAppFields: ["company", "manager"],
+  clearAppFields: ["company", "manager", "template", "totalTime"],
 }
 
 export const commonDocumentFieldSchemas: MetadataFieldSchema[] = [
