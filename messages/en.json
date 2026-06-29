@@ -498,6 +498,7 @@
     "aboutTitle": "About MetaDocu",
     "aboutDesc": "MetaDocu is a free, professional-grade privacy metadata scanner. All file processing runs 100% inside your browser's local WebAssembly sandbox — your documents never leave your device.",
     "toolsTitle": "Tools",
+    "guidesTitle": "Guides & scenarios",
     "linkEditor": "Metadata Editor",
     "linkBatch": "Batch Workspace",
     "linkWord": "Word Metadata",

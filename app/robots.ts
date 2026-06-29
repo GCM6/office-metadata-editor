@@ -19,22 +19,23 @@ const AI_CRAWLERS = [
 ]
 
 export default function robots(): MetadataRoute.Robots {
+  const disallowPaths = ["/editor", "/batch", "/api/"]
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: [],
+        disallow: disallowPaths,
       },
       {
         userAgent: "Baiduspider",
         allow: "/",
-        disallow: [],
+        disallow: disallowPaths,
       },
       ...AI_CRAWLERS.map((userAgent) => ({
         userAgent,
         allow: "/",
-        disallow: [],
+        disallow: disallowPaths,
       })),
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,

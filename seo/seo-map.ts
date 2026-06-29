@@ -92,7 +92,7 @@ export const seoMap: Record<string, SeoPageContract> = {
       "免费在线修改Word(.docx)文档属性，轻松删除原始作者、公司名称、修改日期等隐藏信息。无需安装软件，全程本地处理，保护文档隐私。",
     h1: "Word 文档元数据在线编辑器",
     canonical: "/tools/word",
-    internalLinksTo: ["home", "tool.pdf", "tool.excel", "trust.is-it-safe"],
+    internalLinksTo: ["home", "tool.pdf", "tool.excel", "trust.is-it-safe", "scenario.rsid", "scenario.resume", "scenario.contract"],
     schemaTypes: ["FAQPage", "SoftwareApplication"],
     paaQuestions: [
       "Word文档的元数据在哪里查看？",
@@ -130,7 +130,7 @@ export const seoMap: Record<string, SeoPageContract> = {
       "免费在线修改Excel(.xlsx)文档属性，编辑作者、标题、公司等工作簿信息。全程本地处理，无需上传文件，保障数据安全。",
     h1: "Excel 工作簿元数据在线编辑器",
     canonical: "/tools/excel",
-    internalLinksTo: ["home", "tool.word", "tool.pdf", "trust.is-it-safe"],
+    internalLinksTo: ["home", "tool.word", "tool.pdf", "trust.is-it-safe", "guide.before-sending"],
     schemaTypes: ["FAQPage", "SoftwareApplication"],
     paaQuestions: [
       "Excel工作簿的元数据包含哪些信息？",
@@ -166,7 +166,7 @@ export const seoMap: Record<string, SeoPageContract> = {
       "免费在线编辑PDF文档属性，修改作者、标题、主题等元数据信息。无需安装Adobe Acrobat，全程本地处理，安全便捷。",
     h1: "PDF 文档元数据在线编辑器",
     canonical: "/tools/pdf",
-    internalLinksTo: ["home", "tool.word", "tool.excel", "trust.is-it-safe"],
+    internalLinksTo: ["home", "tool.word", "tool.excel", "trust.is-it-safe", "guide.without-acrobat", "scenario.legal-pdf", "scenario.photo-gps"],
     schemaTypes: ["FAQPage", "SoftwareApplication"],
     paaQuestions: [
       "PDF文件的元数据存储在什么地方？",

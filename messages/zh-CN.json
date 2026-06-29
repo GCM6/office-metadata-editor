@@ -498,6 +498,7 @@
     "aboutTitle": "关于 MetaDocu",
     "aboutDesc": "MetaDocu 是一款免费、专业级的隐私元数据扫描器。所有文件处理 100% 在浏览器本地 WebAssembly 沙箱中运行，您的文档永远不会离开设备。",
     "toolsTitle": "工具",
+    "guidesTitle": "指南与场景",
     "linkEditor": "元数据编辑器",
     "linkBatch": "批量处理工作台",
     "linkWord": "Word 元数据",
