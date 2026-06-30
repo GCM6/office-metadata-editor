@@ -93,28 +93,28 @@
     "quickEntry": "快速入口",
     "quickLinks": [
       {
-        "label": "在线编辑Word文档属性",
-        "href": "/editor"
+        "label": "发送文件前删除元数据",
+        "href": "/remove-metadata-before-sending"
       },
       {
-        "label": "修改DOCX作者信息",
-        "href": "/editor"
+        "label": "不用 Acrobat 删除 PDF 元数据",
+        "href": "/remove-pdf-metadata-without-acrobat"
       },
       {
-        "label": "清除Office文档元数据",
-        "href": "/editor"
+        "label": "投简历前清除作者与公司信息",
+        "href": "/remove-metadata-from-resume"
       },
       {
-        "label": "批量修改文档属性",
-        "href": "/batch"
+        "label": "发送合同前清除元数据与修订痕迹",
+        "href": "/remove-metadata-from-contract"
       },
       {
-        "label": "在线PDF属性编辑",
-        "href": "/editor"
+        "label": "披露法律 PDF 前删除隐藏数据",
+        "href": "/remove-metadata-from-legal-pdf"
       },
       {
-        "label": "批量清除Excel元数据",
-        "href": "/batch"
+        "label": "删除 Word 的修订历史与 RSID",
+        "href": "/remove-rsid-tracked-changes-word"
       },
       {
         "label": "在线去除元数据安全吗？",

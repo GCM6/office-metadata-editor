@@ -6,7 +6,7 @@ import React from "react"
 import { Link, useRouter } from "@/i18n/navigation"
 import { useTranslations } from "next-intl"
 import { useFileContext } from "@/contexts/file-context"
-import { OmWorkbench } from "@/components/om/om-workbench"
+import { OmWorkbenchLazy } from "@/components/om/om-workbench-lazy"
 import { Button } from "@/components/ui/button"
 import {
   ArrowRight,
@@ -95,7 +95,7 @@ export default function HomePage() {
               </section>
 
               <div className="mx-auto w-full max-w-125">
-                <OmWorkbench scope="all" />
+                <OmWorkbenchLazy scope="all" />
               </div>
             </div>
 

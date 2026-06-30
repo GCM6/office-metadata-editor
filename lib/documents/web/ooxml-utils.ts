@@ -1,5 +1,8 @@
-import JSZip from "jszip"
 import type { DocumentProperties, CoreProperties, AppProperties } from "@/types/metadata"
+
+// `jszip` (~95KB) is loaded via dynamic import() inside the read/write functions
+// below, so the bundler emits it as a separate async chunk that downloads only
+// when a document is actually parsed — never in a page's first-load bundle.
 
 export interface OoxmlMetadata {
   documentProperties: DocumentProperties
@@ -28,6 +31,7 @@ function setTagText(doc: XMLDocument, ns: string | null, tag: string, value: str
 }
 
 export async function readOoxmlMetadata(data: Uint8Array): Promise<OoxmlMetadata> {
+  const { default: JSZip } = await import("jszip")
   const zip = await JSZip.loadAsync(data)
 
   const defaultDocProps: DocumentProperties = {
@@ -107,6 +111,7 @@ export async function writeOoxmlMetadata(
   data: Uint8Array,
   metadata: OoxmlMetadata,
 ): Promise<Uint8Array> {
+  const { default: JSZip } = await import("jszip")
   const zip = await JSZip.loadAsync(data)
 
   const coreFile = zip.file(CORE_XML_PATH)

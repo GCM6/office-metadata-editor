@@ -102,8 +102,8 @@ export const seoMap: Record<string, SeoPageContract> = {
     ],
     status: "published",
     en: {
-      title: "Edit Word Document Properties Online - Modify Author & Clear Metadata | Office Metadata Editor",
-      description: "Free online Word (.docx) document properties editor. Easily delete original author, company name, modification dates, and other hidden metadata. 100% local, safe and private.",
+      title: "Remove & Edit Word Metadata Online — No Upload | MetaDocu",
+      description: "Remove hidden metadata from Word (.docx) online — original author, company, dates and revision history. 100% in your browser, nothing uploaded. Free.",
       h1: "Word Document Metadata Online Editor",
       paaQuestions: [
         "What hidden metadata is in a Word document?",
@@ -139,8 +139,8 @@ export const seoMap: Record<string, SeoPageContract> = {
     ],
     status: "published",
     en: {
-      title: "Edit Excel Document Properties Online - Clear Workbook Metadata | Office Metadata Editor",
-      description: "Free online Excel (.xlsx) workbook properties editor. Edit author, title, company, and other properties. 100% local, protecting your business data privacy.",
+      title: "Remove & Edit Excel Metadata Online — No Upload | MetaDocu",
+      description: "Remove hidden metadata from Excel (.xlsx) online — author, company and title. 100% in your browser, nothing uploaded. Free, no signup.",
       h1: "Excel Workbook Metadata Online Editor",
       paaQuestions: [
         "What information is included in Excel workbook metadata?",
@@ -176,8 +176,8 @@ export const seoMap: Record<string, SeoPageContract> = {
     ],
     status: "published",
     en: {
-      title: "Edit PDF Document Properties Online - Modify PDF Metadata | Office Metadata Editor",
-      description: "Free online PDF document properties editor. Modify PDF author, title, subject, and other metadata. No Adobe Acrobat required. 100% local, safe and convenient.",
+      title: "Remove PDF Metadata Online — Free, No Upload | MetaDocu",
+      description: "Remove PDF metadata online — author, title, subject, the Info dictionary and XMP. No Adobe Acrobat, 100% in your browser, nothing uploaded.",
       h1: "PDF Document Metadata Online Editor",
       paaQuestions: [
         "Where is PDF file metadata stored?",

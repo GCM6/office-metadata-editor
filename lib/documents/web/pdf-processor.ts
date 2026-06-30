@@ -1,5 +1,8 @@
-import { PDFDocument, PDFName } from "pdf-lib"
 import type { DocumentMetadata } from "@/types/metadata"
+
+// `pdf-lib` (~300KB+) is loaded via dynamic import() inside the functions below,
+// so it is emitted as a separate async chunk that downloads only when a PDF is
+// actually opened/edited — keeping it out of every page's first-load bundle.
 import { getFileData } from "@/lib/resources/file-store"
 
 export async function showPdf(fileId: string, fileName: string): Promise<DocumentMetadata> {
@@ -8,6 +11,7 @@ export async function showPdf(fileId: string, fileName: string): Promise<Documen
     throw new Error(`文件数据未找到: ${fileName}`)
   }
 
+  const { PDFDocument } = await import("pdf-lib")
   const doc = await PDFDocument.load(data, { ignoreEncryption: true })
 
   return {
@@ -68,6 +72,7 @@ export async function replacePdf(
     throw new Error(`文件数据未找到: ${fileName}`)
   }
 
+  const { PDFDocument } = await import("pdf-lib")
   const doc = await PDFDocument.load(data, { ignoreEncryption: true })
 
   doc.setTitle(metadata.documentProperties.title)
@@ -94,6 +99,7 @@ export async function clearPdf(filePath: string, fileName: string): Promise<stri
     throw new Error(`文件数据未找到: ${fileName}`)
   }
 
+  const { PDFDocument, PDFName } = await import("pdf-lib")
   const doc = await PDFDocument.load(data, { ignoreEncryption: true, updateMetadata: false })
   doc.setTitle("")
   doc.setSubject("")

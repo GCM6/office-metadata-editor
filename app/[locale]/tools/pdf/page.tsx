@@ -3,7 +3,7 @@ import { JsonLd } from "@/seo/json-ld"
 import { generateJsonLd } from "@/seo/generate-json-ld"
 import { SeoContent } from "@/seo/components/SeoContent"
 import { OmBreadcrumbs } from "@/components/om/om-breadcrumbs"
-import { OmWorkbench } from "@/components/om/om-workbench"
+import { OmWorkbenchLazy } from "@/components/om/om-workbench-lazy"
 import BlankLayout from "@/components/layouts/blank-layout"
 
 export default async function ToolPdfPage() {
@@ -25,7 +25,7 @@ export default async function ToolPdfPage() {
 
           <div className="mb-12 flex justify-center">
             <div className="w-full max-w-xl">
-              <OmWorkbench scope="pdf" />
+              <OmWorkbenchLazy scope="pdf" />
             </div>
           </div>
 

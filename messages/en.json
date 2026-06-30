@@ -93,28 +93,28 @@
     "quickEntry": "Quick Links",
     "quickLinks": [
       {
-        "label": "Edit Word Document Properties Online",
-        "href": "/editor"
+        "label": "Remove Metadata Before Sending a File",
+        "href": "/remove-metadata-before-sending"
       },
       {
-        "label": "Modify DOCX Author Information",
-        "href": "/editor"
+        "label": "Remove PDF Metadata Without Acrobat",
+        "href": "/remove-pdf-metadata-without-acrobat"
       },
       {
-        "label": "Clear Office Document Metadata",
-        "href": "/editor"
+        "label": "Remove Author & Company From a Resume",
+        "href": "/remove-metadata-from-resume"
       },
       {
-        "label": "Batch Edit Document Properties",
-        "href": "/batch"
+        "label": "Clean Metadata From a Contract",
+        "href": "/remove-metadata-from-contract"
       },
       {
-        "label": "Edit PDF Properties Online",
-        "href": "/editor"
+        "label": "Remove Hidden Data From a Legal PDF",
+        "href": "/remove-metadata-from-legal-pdf"
       },
       {
-        "label": "Batch Clear Excel Metadata",
-        "href": "/batch"
+        "label": "Remove RSID & Tracked Changes From Word",
+        "href": "/remove-rsid-tracked-changes-word"
       },
       {
         "label": "Is It Safe to Remove Metadata Online?",

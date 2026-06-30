@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation"
 import { Check, CheckCircle2, Sparkles } from "lucide-react"
 import BlankLayout from "@/components/layouts/blank-layout"
 import { OmBreadcrumbs } from "@/components/om/om-breadcrumbs"
-import { OmWorkbench } from "@/components/om/om-workbench"
+import { OmWorkbenchLazy } from "@/components/om/om-workbench-lazy"
 import { OmMetadataExposureTable } from "@/components/om/om-metadata-exposure-table"
 import { SeoContent } from "@/seo/components/SeoContent"
 import { JsonLd } from "@/seo/json-ld"
@@ -67,7 +67,7 @@ export async function OmLandingPage({ pageCode }: { pageCode: string }) {
                   <p className="mt-2 mb-6 text-sm text-muted-foreground">{pick(content.toolDesc)}</p>
                 )}
                 <div className={content.toolHeading && !content.toolDesc ? "mt-6" : ""}>
-                  <OmWorkbench scope={content.embedTool} />
+                  <OmWorkbenchLazy scope={content.embedTool} />
                 </div>
               </section>
             )}
