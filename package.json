@@ -17,6 +17,7 @@
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
     "seo:check": "npx tsx seo/validate-seo.ts",
+    "verify:clean": "tsx scripts/verify-clean.selftest.ts",
     "prebuild": "pnpm seo:check",
     "build:wasm": "wasm-pack build ./src-wasm --target web --out-dir ../lib/wasm/office_metadata_parser_wasm"
   },

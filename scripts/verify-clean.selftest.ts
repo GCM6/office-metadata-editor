@@ -79,3 +79,26 @@ assert.equal(fixedZip.file("docProps/custom.xml"), null)
 assert.equal((await verifyCleaned(fixed2, "docx")).verified, true)
 
 console.log("deep-clean self-test passed")
+
+import { cleanAndVerify, MAX_AUTO_RECLEAN } from "../lib/documents/verify/clean-and-verify"
+
+assert.equal(MAX_AUTO_RECLEAN, 1)
+
+// dirty-on-first-pass docx gets auto-deep-cleaned to verified within the cap
+const zc = new JSZip()
+zc.file("docProps/core.xml", `<cp:coreProperties xmlns:cp="x" xmlns:dc="y"><dc:creator>Alice</dc:creator></cp:coreProperties>`)
+const dirty = await zc.generateAsync({ type: "uint8array" })
+const out = await cleanAndVerify(async () => dirty, "docx")
+assert.equal(out.verified, true)
+assert.equal(out.attempts, 2) // first pass dirty + one deepClean
+assert.equal(out.exhausted, false)
+
+// already-clean docx passes on first attempt, no deepClean
+const zclean = new JSZip()
+zclean.file("docProps/core.xml", `<cp:coreProperties xmlns:cp="x" xmlns:dc="y"><dc:creator></dc:creator></cp:coreProperties>`)
+const clean = await zclean.generateAsync({ type: "uint8array" })
+const out2 = await cleanAndVerify(async () => clean, "docx")
+assert.equal(out2.verified, true)
+assert.equal(out2.attempts, 1)
+
+console.log("clean-and-verify self-test passed")
