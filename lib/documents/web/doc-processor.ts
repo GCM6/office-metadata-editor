@@ -1,5 +1,5 @@
 import type { DocumentMetadata } from "@/types/metadata"
-import { getFileData } from "@/lib/resources/file-store"
+import { getFileData, setFileData } from "@/lib/resources/file-store"
 
 export async function showDoc(fileId: string, fileName: string): Promise<DocumentMetadata> {
   const data = getFileData(fileId)
@@ -68,7 +68,7 @@ export async function replaceDoc(
   return fileName
 }
 
-export async function clearDoc(filePath: string, fileName: string): Promise<string> {
+export async function clearDoc(filePath: string, fileName: string): Promise<Uint8Array> {
   const data = getFileData(filePath)
   if (!data) {
     throw new Error(`文件数据未找到: ${fileName}`)
@@ -105,5 +105,7 @@ export async function clearDoc(filePath: string, fileName: string): Promise<stri
   origLink.click()
   URL.revokeObjectURL(origUrl)
 
-  return fileName
+  // doc 无法在浏览器内真正清理:回写原始字节(语义上无操作),下游按 unverifiable 处理。
+  setFileData(filePath, data)
+  return data
 }

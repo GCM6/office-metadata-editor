@@ -1,6 +1,6 @@
 import type { DocumentMetadata } from "@/types/metadata"
 import { createEmptyOoxmlMetadata, readOoxmlMetadata, writeOoxmlMetadata } from "./ooxml-utils"
-import { getFileData } from "@/lib/resources/file-store"
+import { getFileData, setFileData } from "@/lib/resources/file-store"
 
 export async function showDocx(fileId: string, fileName: string): Promise<DocumentMetadata> {
   const data = getFileData(fileId)
@@ -36,7 +36,7 @@ export async function replaceDocx(
   return fileName
 }
 
-export async function clearDocx(filePath: string, fileName: string): Promise<string> {
+export async function clearDocx(filePath: string, fileName: string): Promise<Uint8Array> {
   const data = getFileData(filePath)
   if (!data) {
     throw new Error(`文件数据未找到: ${fileName}`)
@@ -44,15 +44,8 @@ export async function clearDocx(filePath: string, fileName: string): Promise<str
 
   const clearedMetadata = createEmptyOoxmlMetadata()
   const updated = await writeOoxmlMetadata(data, clearedMetadata)
-  const blob = new Blob([new Uint8Array(updated)])
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement("a")
-  a.href = url
-  a.download = fileName
-  a.click()
-  URL.revokeObjectURL(url)
-
-  return fileName
+  setFileData(filePath, updated)
+  return updated
 }
 
 function triggerDownload(data: Uint8Array, fileName: string): void {

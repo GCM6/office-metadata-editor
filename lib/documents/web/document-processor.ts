@@ -8,7 +8,7 @@ export interface WebDocumentResourceApi {
   show(fileId: string, fileName: string): Promise<DocumentMetadata>
   replace(fileId: string, fileName: string, metadata: DocumentMetadata): Promise<string>
   createSavedCopy(fileId: string, fileName: string, metadata: DocumentMetadata): Promise<string | null>
-  clear(filePath: string, fileName: string): Promise<string>
+  clear(filePath: string, fileName: string): Promise<Uint8Array>
 }
 
 function getWebProcessor(fileType: string): WebDocumentResourceApi | null {
