@@ -26,7 +26,7 @@ export default async function IsItSafePage() {
   return (
     <BlankLayout>
       <JsonLd data={jsonLdData} />
-      <div className="relative h-full w-full overflow-y-auto">
+      <div className="relative w-full">
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_15%,oklch(0.9_0.09_162/0.16),transparent_50%),radial-gradient(circle_at_80%_85%,oklch(0.88_0.1_245/0.14),transparent_50%)] dark:bg-[radial-gradient(circle_at_20%_15%,oklch(0.38_0.09_162/0.22),transparent_50%),radial-gradient(circle_at_80%_85%,oklch(0.38_0.1_245/0.2),transparent_50%)]" />
 
         <div className="relative flex flex-col px-5 py-6 sm:px-8 sm:py-8">

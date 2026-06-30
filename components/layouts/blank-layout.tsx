@@ -33,8 +33,25 @@ export const BlankLayout: React.FC<React.PropsWithChildren<BlankLayoutProps>> = 
       <div className="flex h-full flex-col bg-background">
         {header}
         {showSiteHeader && <OmHeader />}
-        <div className="flex min-h-0 flex-1 overflow-hidden">{children}</div>
-        {!hideFooter && <OmFooter />}
+        {showSiteHeader ? (
+          // Content / marketing pages: scroll the page as one natural document with
+          // the footer at the very bottom (sticky-footer for short pages). This stops
+          // the tall "Guides & scenarios" footer from competing for viewport height
+          // and clipping the hero on short mobile screens.
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <div className="flex min-h-full flex-col">
+              <div className="flex-1">{children}</div>
+              {!hideFooter && <OmFooter />}
+            </div>
+          </div>
+        ) : (
+          // App screens (editor / batch via PageLayout): locked viewport, content
+          // scrolls inside its own pane with the footer pinned below.
+          <>
+            <div className="flex min-h-0 flex-1 overflow-hidden">{children}</div>
+            {!hideFooter && <OmFooter />}
+          </>
+        )}
       </div>
     </main>
   )

@@ -40,7 +40,7 @@ export default async function BlogPostPage(props: {
 
   return (
     <BlankLayout>
-      <div className="h-full w-full overflow-y-auto">
+      <div className="w-full">
         <main className="mx-auto max-w-4xl px-4 py-8">
       <JsonLd data={jsonLdData} />
 

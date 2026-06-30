@@ -46,7 +46,7 @@ export default function HomePage() {
   return (
     <BlankLayout>
       <JsonLd data={jsonLdData} />
-      <div className="relative h-full w-full overflow-y-auto">
+      <div className="relative w-full">
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_14%_12%,oklch(0.9_0.11_245/0.18),transparent_48%),radial-gradient(circle_at_86%_78%,oklch(0.88_0.1_162/0.16),transparent_46%)] dark:bg-[radial-gradient(circle_at_14%_12%,oklch(0.4_0.11_245/0.24),transparent_48%),radial-gradient(circle_at_86%_78%,oklch(0.4_0.08_162/0.22),transparent_46%)]" />
 
         <div className="relative flex flex-col px-5 py-6 sm:px-8 sm:py-8">

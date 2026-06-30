@@ -32,7 +32,7 @@ export async function OmLandingPage({ pageCode }: { pageCode: string }) {
   return (
     <BlankLayout>
       <JsonLd data={jsonLdData} />
-      <div className="relative h-full w-full overflow-y-auto">
+      <div className="relative w-full">
         <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_18%_15%,oklch(0.9_0.08_280/0.14),transparent_50%),radial-gradient(circle_at_82%_85%,oklch(0.88_0.09_162/0.14),transparent_50%)] dark:bg-[radial-gradient(circle_at_18%_15%,oklch(0.36_0.08_280/0.2),transparent_50%),radial-gradient(circle_at_82%_85%,oklch(0.36_0.09_162/0.2),transparent_50%)]" />
 
         <div className="relative flex flex-col px-5 py-6 sm:px-8 sm:py-8">

@@ -10,7 +10,7 @@ export default function TermsPage() {
 
   return (
     <BlankLayout>
-      <div className="relative h-full w-full overflow-y-auto">
+      <div className="relative w-full">
         <div className="relative flex flex-col px-5 py-6 sm:px-8 sm:py-8">
           <article className="mx-auto w-full max-w-3xl">
             <header className="mb-8">
