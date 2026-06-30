@@ -662,8 +662,13 @@
     "removeLocally": "Remove Metadata Locally",
     "downloadReport": "Download 100% Safe File",
     "scanAnother": "Scan Another File",
-    "cleanSuccess": "Metadata Cleaned Successfully!",
-    "cleanSuccessDesc": "All sensitive metadata (including creator, company name, local file absolute paths, revision histories (RSID), and nested EXIF/GPS data) has been wiped in your browser. The file is now fully sanitized and safe to share online!",
+    "cleanSuccess": "No residual metadata detected",
+    "cleanSuccessDesc": "The standard document properties (creator, company name, local file paths, dates, and related fields) were cleaned in your browser and independently re-checked — no residual values were detected in the output. Always review especially sensitive files before sharing.",
+    "cleanBadge": "VERIFIED",
+    "verifyAutoNote": "Auto re-cleaned and verified",
+    "verifyResidueTitle": "{count} residual field(s) still detected",
+    "retryClean": "Clean again",
+    "verifyUnverifiable": "Cleaned, but could not fully verify (format limit)",
     "redactedAlert": "This sensitive value is automatically redacted and only rendered locally in your browser memory.",
     "unknownVersion": "unknown",
     "revisionValue": "{count} edit traces (may conceal RSID paragraph collaboration session IDs)",
@@ -684,7 +689,8 @@
       "reading": "Reading and verifying file binary locally...",
       "extracting": "Extracting metadata XML trees...",
       "checking": "Auditing and evaluating privacy exposure risks...",
-      "generating": "Generating local privacy audit report..."
+      "generating": "Generating local privacy audit report...",
+      "verifying": "Verifying removal locally..."
     },
     "categories": {
       "identity": "Identity Exposure Risks",

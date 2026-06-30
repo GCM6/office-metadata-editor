@@ -61,6 +61,9 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
   const [cleanedBytes, setCleanedBytes] = useState<Uint8Array | null>(null)
   const [showFullValues, setShowFullValues] = useState<Record<string, boolean>>({})
   const [scanTime, setScanTime] = useState(0.8)
+  const [verifyResult, setVerifyResult] = useState<
+    import("@/lib/documents/verify/clean-and-verify").CleanVerifyResult | null
+  >(null)
 
   const fileExt = useMemo(() => {
     return normalizeDocumentFileType(fileName.split(".").pop() || "")
@@ -126,7 +129,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
     const interval = setInterval(() => {
       currentStep += 1
       setActiveStep(currentStep)
-      if (currentStep >= 4) {
+      if (currentStep >= 5) {
         clearInterval(interval)
 
         // 扫描完成，向 Worker 发送解析请求
@@ -320,18 +323,21 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
       if (success && type === "CLEAN_SUCCESS") {
         if (timers.clean) clearTimeout(timers.clean)
         worker.removeEventListener("message", handleCleanMessage)
-        const cleaned: Uint8Array = data
-        setCleanedBytes(cleaned)
-        // 将清理后的文件存回内存中，同步更新状态
-        setFileData(filePath, cleaned)
-
-        setTimeout(() => {
+        const workerBytes: Uint8Array = data
+        // 独立校验:重开产物、字节级扫描 docProps / PDF Info,必要时自动补清一次。
+        void (async () => {
+          const { cleanAndVerify } = await import("@/lib/documents/verify/clean-and-verify")
+          const result = await cleanAndVerify(async () => workerBytes, fileExt)
+          setVerifyResult(result)
+          setFileData(filePath, result.bytes)
+          setCleanedBytes(result.bytes)
           setIsCleaning(false)
-          setIsFlipped(true) // 3D 翻转卡片到背面！
-
-          // 自动触发无网络安全下载
-          triggerFileDownload(cleaned)
-        }, 600)
+          if (result.verified) {
+            setIsFlipped(true) // 3D 翻转卡片到背面！
+            triggerFileDownload(result.bytes)
+          }
+          // 残留 / 无法校验:停在正面,渲染残留态(见下方残留面板)。
+        })()
       } else if (success === false) {
         console.error("Wasm 清理失败:", error)
         if (timers.clean) clearTimeout(timers.clean)
@@ -357,6 +363,12 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
       setScanError(t("errorTimeout"))
       setIsCleaning(false)
     }, 15000)
+  }
+
+  // 手动重试清理:绕过自动补清上限,在原始字节上重跑清理 + 校验。
+  const handleRetryClean = () => {
+    setVerifyResult(null)
+    handleRemoveMetadata()
   }
 
   // 8. 触发无网络前端 Blob 下载
@@ -477,6 +489,10 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
                 label={t("steps.generating")}
                 status={activeStep > 3 ? "success" : activeStep === 3 ? "active" : "pending"}
               />
+              <StepItem
+                label={t("steps.verifying")}
+                status={activeStep > 4 ? "success" : activeStep === 4 ? "active" : "pending"}
+              />
             </div>
           </div>
         </Card>
@@ -587,6 +603,46 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
                   <p>{t("localRunning")}</p>
                 </div>
 
+                {/* 校验残留态:自动补清后仍检测到残留,提供手动重试 / 手动编辑 */}
+                {verifyResult && verifyResult.exhausted ? (
+                  <div className="p-4 mb-3 rounded-xl border border-amber-500/30 bg-amber-500/10">
+                    <p className="text-xs font-semibold text-amber-600 dark:text-amber-400">
+                      {t("verifyResidueTitle", { count: verifyResult.residue.length })}
+                    </p>
+                    <ul className="mt-2 space-y-1">
+                      {verifyResult.residue.map(r => (
+                        <li
+                          key={`${r.part}:${r.key}`}
+                          className="text-[11px] font-mono text-foreground break-all"
+                        >
+                          {r.part} · {r.key}:{" "}
+                          {redactValue(
+                            r.value,
+                            r.part === "app.xml" && r.key === "template" ? "path" : "identity",
+                            `${r.part}:${r.key}`,
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="flex gap-2 mt-3">
+                      <Button className="rounded-xl flex-1" onClick={handleRetryClean} disabled={isCleaning}>
+                        <Sparkles className="h-4 w-4 mr-1.5" />
+                        {t("retryClean")}
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="rounded-xl flex-1"
+                        onClick={() => router.push("/editor")}
+                      >
+                        <FileText className="h-4 w-4 mr-1.5" />
+                        {t("manualEdit")}
+                      </Button>
+                    </div>
+                  </div>
+                ) : verifyResult && verifyResult.unverifiable ? (
+                  <p className="text-xs text-muted-foreground mb-3">{t("verifyUnverifiable")}</p>
+                ) : null}
+
                 <div className="flex gap-2">
                   <Button variant="outline" className="rounded-xl px-3" onClick={onClose} title={t("scanAnother")}>
                     <ArrowLeft className="h-4 w-4" />
@@ -630,7 +686,7 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
                     <h3 className="text-base font-bold text-foreground">{t("title")}</h3>
                   </div>
                   <span className="text-[10px] text-emerald-500 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full font-mono font-medium">
-                    100% CLEAN
+                    {t("cleanBadge")}
                   </span>
                 </div>
 
@@ -649,6 +705,11 @@ export const OmAuditReport: React.FC<OmAuditReportProps> = ({
                   <p className="text-xs text-muted-foreground select-none max-w-sm leading-relaxed px-4">
                     {t("cleanSuccessDesc")}
                   </p>
+                  {verifyResult?.attempts && verifyResult.attempts > 1 ? (
+                    <p className="text-[10px] text-emerald-600 dark:text-emerald-400 mt-2 select-none">
+                      {t("verifyAutoNote")}
+                    </p>
+                  ) : null}
                 </div>
 
                 {/* 安全审计概要 */}

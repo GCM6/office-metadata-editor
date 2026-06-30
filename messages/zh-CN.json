@@ -662,8 +662,13 @@
     "removeLocally": "本地一键脱敏清理",
     "downloadReport": "下载 100% 安全文件",
     "scanAnother": "扫描其他文件",
-    "cleanSuccess": "一键本地脱敏成功！",
-    "cleanSuccessDesc": "所有隐私敏感的元数据（包括作者姓名、公司、本地绝对路径、RSID 协作标记以及图片嵌套 EXIF/GPS 等）已在您的浏览器中安全抹除。文件已重构为零风险状态，现在可以放心在网络上分享了！",
+    "cleanSuccess": "未检测到残留元数据",
+    "cleanSuccessDesc": "标准文档属性（作者、公司、本地路径、日期及相关字段）已在您的浏览器中清理，并经独立复核——产物中未检测到残留值。分享尤为敏感的文件前请仍自行复查。",
+    "cleanBadge": "已校验",
+    "verifyAutoNote": "已自动二次清理后校验通过",
+    "verifyResidueTitle": "仍检测到 {count} 项残留字段",
+    "retryClean": "再次清理",
+    "verifyUnverifiable": "已清理,但无法完全校验(格式限制)",
     "redactedAlert": "此敏感值已自动脱敏，且仅在您浏览器本地内存中显示，绝不产生网络上报。",
     "unknownVersion": "未知",
     "revisionValue": "{count} 次修改痕迹（可能暗藏 RSID 段落协作 Session ID）",
@@ -684,7 +689,8 @@
       "reading": "本地读取并校验文件二进制",
       "extracting": "正在解包并提取元数据结构...",
       "checking": "正在审计与评估隐私泄漏风险...",
-      "generating": "正在生成本地隐私审计报告..."
+      "generating": "正在生成本地隐私审计报告...",
+      "verifying": "正在本地校验清除结果..."
     },
     "categories": {
       "identity": "个人身份泄露风险 (Identity Exposure)",
