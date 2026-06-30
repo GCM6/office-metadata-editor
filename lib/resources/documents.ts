@@ -3,12 +3,17 @@ import type { DocumentFileType } from "@/types/metadata"
 import { isTauri, trackedInvoke } from "@/lib/tauri"
 import { resolveFileTypeFromPath } from "@/lib/documents/file-type"
 import { getWebResourceByType } from "@/lib/documents/web/document-processor"
-import { getFileData } from "@/lib/resources/file-store"
+import { getFileData, setFileData } from "@/lib/resources/file-store"
+import type { ResidueField } from "@/lib/documents/verify/residue-rules"
 
 export interface BatchSaveResultItem {
   filePath: string
   success: boolean
   error?: string
+  verified?: boolean
+  residue?: ResidueField[]
+  exhausted?: boolean
+  unverifiable?: boolean
 }
 
 export interface BatchSaveRequestItem {
@@ -136,11 +141,24 @@ function createWebResourceForType(fileType: DocumentFileType): DocumentResourceA
       return results
     },
     async destroyMetadataMany(filePaths: string[]) {
+      const { cleanAndVerify } = await import("@/lib/documents/verify/clean-and-verify")
       const results: BatchSaveResultItem[] = []
       for (const filePath of filePaths) {
         try {
-          await webResource.clear(filePath, filePath)
-          results.push({ filePath, success: true })
+          const result = await cleanAndVerify(
+            () => webResource.clear(filePath, filePath),
+            fileType,
+          )
+          // clear() wrote the first-pass bytes; if deepClean ran, persist the deeper bytes.
+          if (result.attempts > 1) setFileData(filePath, result.bytes)
+          results.push({
+            filePath,
+            success: true,
+            verified: result.verified,
+            residue: result.residue,
+            exhausted: result.exhausted,
+            unverifiable: result.unverifiable,
+          })
         } catch (error) {
           results.push({ filePath, success: false, error: String(error) })
         }

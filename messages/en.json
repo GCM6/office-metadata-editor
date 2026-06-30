@@ -194,7 +194,11 @@
     "clearingAndSaving": "Clearing & saving...",
     "batchClearingAndSaving": "Batch clearing & saving...",
     "batchSaving": "Batch saving...",
-    "processFailed": "Process failed"
+    "processFailed": "Process failed",
+    "verifiedSynced": "Cleaned & verified — no residual metadata detected",
+    "verifyResidue": "Residual metadata remains after auto-reclean",
+    "verifyResidueCount": "{count} residual field(s) — click to retry manually",
+    "verifyUnverifiable": "Cleaned, but could not fully verify (format limit)"
   },
   "utils": {
     "unknownTime": "Unknown time",

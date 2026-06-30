@@ -368,7 +368,8 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
       const resource = getDocumentResourceByPath(target.filePath)
       const results = await resource.destroyMetadataMany([target.filePath])
 
-      if (!results[0]?.success) {
+      const outcome = results[0]
+      if (!outcome?.success) {
         updateFileStatus(documentId, { status: "error", progressMessage: tp("processFailed") })
         return
       }
@@ -385,9 +386,18 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
         },
       }))
 
+      if (outcome.exhausted) {
+        updateFileStatus(documentId, {
+          status: "error",
+          progressMessage: tp("verifyResidue"),
+          error: tp("verifyResidueCount", { count: outcome.residue?.length ?? 0 }),
+        })
+        return
+      }
+
       updateFileStatus(documentId, {
         status: "ready",
-        progressMessage: tp("synced"),
+        progressMessage: outcome.unverifiable ? tp("verifyUnverifiable") : tp("verifiedSynced"),
         error: undefined,
       })
     },
@@ -467,6 +477,23 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
       throw new Error(failedItems.map(item => `${basename(item.filePath)}: ${item.error || "未知错误"}`).join("; ") || "全部清除失败")
     }
 
+    // 校验后仍有残留(已达自动补清上限)的文件单独标红,提示手动重试。
+    const outcomeByPath = new Map(results.map(item => [item.filePath, item]))
+    const residuePathSet = new Set(
+      results.filter(item => item.success && item.exhausted).map(item => item.filePath),
+    )
+    residuePathSet.forEach(filePath => {
+      const doc = documents.find(d => d.filePath === filePath)
+      const outcome = outcomeByPath.get(filePath)
+      if (doc) {
+        updateFileStatus(doc.id, {
+          status: "error",
+          progressMessage: tp("verifyResidue"),
+          error: tp("verifyResidueCount", { count: outcome?.residue?.length ?? 0 }),
+        })
+      }
+    })
+
     const refreshTargets = documents.filter(item => successPathSet.has(item.filePath))
     const refreshed = await Promise.all(
       refreshTargets.map(async item => {
@@ -492,7 +519,14 @@ export const MetadataProvider: React.FC<React.PropsWithChildren> = ({ children }
     })
 
     refreshed.forEach(item => {
-      updateFileStatus(item.id, { status: "ready", progressMessage: tp("synced"), error: undefined })
+      const doc = documents.find(d => d.id === item.id)
+      if (doc && residuePathSet.has(doc.filePath)) return // 残留态已单独标红,保持不变
+      const outcome = doc ? outcomeByPath.get(doc.filePath) : undefined
+      updateFileStatus(item.id, {
+        status: "ready",
+        progressMessage: outcome?.unverifiable ? tp("verifyUnverifiable") : tp("verifiedSynced"),
+        error: undefined,
+      })
     })
   }, [documents, updateFileStatus, tp])
 

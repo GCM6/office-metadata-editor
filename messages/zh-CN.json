@@ -194,7 +194,11 @@
     "clearingAndSaving": "清理并保存中...",
     "batchClearingAndSaving": "批量清理并保存中...",
     "batchSaving": "批量保存中...",
-    "processFailed": "处理失败"
+    "processFailed": "处理失败",
+    "verifiedSynced": "已清理并校验——未检测到残留元数据",
+    "verifyResidue": "自动补清后仍有残留",
+    "verifyResidueCount": "残留 {count} 项——点击手动重试",
+    "verifyUnverifiable": "已清理,但无法完全校验(格式限制)"
   },
   "utils": {
     "unknownTime": "时间未知",
