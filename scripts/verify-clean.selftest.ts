@@ -29,3 +29,29 @@ assert.equal(r3.length, 1)
 assert.equal(r3[0].part, "pdf-info")
 
 console.log("residue-rules self-test passed")
+
+import JSZip from "jszip"
+import { verifyCleaned } from "../lib/documents/verify/verify-clean"
+
+// a docx whose core.xml still has a creator is NOT verified
+const dirtyZip = new JSZip()
+dirtyZip.file("docProps/core.xml", `<cp:coreProperties xmlns:cp="x" xmlns:dc="y"><dc:creator>Alice</dc:creator></cp:coreProperties>`)
+const dirtyBytes = await dirtyZip.generateAsync({ type: "uint8array" })
+const vDirty = await verifyCleaned(dirtyBytes, "docx")
+assert.equal(vDirty.verified, false)
+assert.ok(vDirty.residue.some(r => r.key === "creator"))
+
+// a docx with blanked core.xml IS verified
+const cleanZip = new JSZip()
+cleanZip.file("docProps/core.xml", `<cp:coreProperties xmlns:cp="x" xmlns:dc="y"><dc:creator></dc:creator></cp:coreProperties>`)
+const cleanBytes = await cleanZip.generateAsync({ type: "uint8array" })
+const vClean = await verifyCleaned(cleanBytes, "docx")
+assert.equal(vClean.verified, true)
+assert.equal(vClean.residue.length, 0)
+
+// garbage bytes are unverifiable, never reported as clean-success
+const vBad = await verifyCleaned(new Uint8Array([1, 2, 3]), "docx")
+assert.equal(vBad.verified, false)
+assert.equal(vBad.unverifiable, true)
+
+console.log("verify-clean self-test passed")
